@@ -1,0 +1,81 @@
+% Tema MaU
+\ProvidesPackage{xx}
+
+% Load base theme
+\usetheme{malmoe}
+\usefontheme{serif}
+
+% Define colours
+% Primary color
+\definecolor{malmo-red}{RGB}{228,3,46}
+
+% Secondary colours
+%% Pinks
+\definecolor{malmo-pink-darker}{RGB}{169,17,97}
+\definecolor{malmo-pink-dark}{RGB}{233,106,164}
+\definecolor{malmo-pink-light}{RGB}{245,188,216}
+\definecolor{malmo-pink-lighter}{RGB}{251,224,238}
+%% Turquises
+\definecolor{malmo-turquoise-darker}{RGB}{2,97,91}
+\definecolor{malmo-turquoise-dark}{RGB}{0,174,162}
+\definecolor{malmo-turquoise-light}{RGB}{152,209,201}
+\definecolor{malmo-turquoise-lighter}{RGB}{225,241,239}
+%% Blues
+\definecolor{malmo-blue-darker}{RGB}{30,69,137}
+\definecolor{malmo-blue-dark}{RGB}{145,151,194}
+\definecolor{malmo-blue-light}{RGB}{177,193,223}
+%% Purples
+\definecolor{malmo-purple-darker}{RGB}{69,55,119}
+\definecolor{malmo-purple-dark}{RGB}{150,142,184}
+\definecolor{malmo-purple-light}{RGB}{200,195,220}
+%% Greens
+\definecolor{malmo-green-dark}{RGB}{85,173,75}
+\definecolor{malmo-green-light}{RGB}{182,214,167}
+\definecolor{malmo-green-lighter}{RGB}{222,236,213}
+%% Oranges
+\definecolor{malmo-orange-dark}{RGB}{239,119,72}
+\definecolor{malmo-orange-light}{RGB}{249,192,163}
+\definecolor{malmo-orange-lighter}{RGB}{252,224,210}
+%% Yellows
+\definecolor{malmo-yellow-dark}{RGB}{255,224,0}
+\definecolor{malmo-yellow-light}{RGB}{255,236,131}
+\definecolor{malmo-yellow-lighter}{RGB}{255,247,208}
+
+% Base colours
+\setbeamercolor{title}{bg=white, fg=black}
+\setbeamercolor{author}{bg=white, fg=black}
+\setbeamercolor{institute}{bg=white, fg=black}
+\setbeamercolor{date}{bg=white, fg=black}
+\setbeamercolor{palette primary}{bg=malmo-red, fg=white}
+\setbeamercolor{palette quaternary}{bg=malmo-red, fg=white}
+\setbeamercolor{background canvas}{bg=malmo-yellow-lighter, fg=black}
+\setbeamercolor{section in toc}{fg=black}
+\setbeamercolor{structure}{fg=black}
+
+% Add dividing line
+\addtobeamertemplate{headline}{}{
+  \vskip0pt
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1em]{myseparator}
+  \end{beamercolorbox}
+}
+
+% Alternate colours in sections
+\newcounter{section-number}
+\AtBeginSection[]{
+    \stepcounter{section-number}
+    \ifnum\value{section-number}=1
+        \setbeamercolor{background canvas}{bg=malmo-yellow-lighter}
+    \fi
+    \ifnum\value{section-number}=2
+        \setbeamercolor{background canvas}{bg=malmo-orange-lighter}
+    \fi
+    \ifnum\value{section-number}=3
+        \setbeamercolor{background canvas}{bg=malmo-turquoise-lighter}
+    \fi
+    \ifnum\value{section-number}=4
+        \setbeamercolor{background canvas}{bg=malmo-green-lighter}
+    \fi
+    \ifnum\value{section-number}=5
+        \setbeamercolor{background canvas}{bg=malmo-pink-lighter}
+    \fi
+}

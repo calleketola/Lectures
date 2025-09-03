@@ -1,0 +1,17 @@
+\babel@toc {swedish}{}\relax 
+\beamer@sectionintoc {1}{Repetition}{3}{0}{1}
+\beamer@sectionintoc {2}{Om metoder}{6}{0}{2}
+\beamer@subsectionintoc {2}{1}{Vad är en metod?}{7}{0}{2}
+\beamer@subsectionintoc {2}{2}{Varför använda metoder?}{9}{0}{2}
+\beamer@sectionintoc {3}{Hur man skapar metoder}{10}{0}{3}
+\beamer@subsectionintoc {3}{1}{Skapa och anropa metoder}{11}{0}{3}
+\beamer@subsectionintoc {3}{2}{Parametrar och argument}{14}{0}{3}
+\beamer@subsectionintoc {3}{3}{Metodhuvud}{17}{0}{3}
+\beamer@subsectionintoc {3}{4}{Metodkropp}{20}{0}{3}
+\beamer@subsectionintoc {3}{5}{Return}{24}{0}{3}
+\beamer@sectionintoc {4}{Mer om metoder}{28}{0}{4}
+\beamer@subsectionintoc {4}{1}{Överlagring av metoder}{29}{0}{4}
+\beamer@subsectionintoc {4}{2}{Scope och call stack}{34}{0}{4}
+\beamer@sectionintoc {5}{Sammanfattning}{38}{0}{5}
+\beamer@subsectionintoc {5}{1}{Sammanfattning}{39}{0}{5}
+\beamer@subsectionintoc {5}{2}{Rekommenderad läsning}{41}{0}{5}

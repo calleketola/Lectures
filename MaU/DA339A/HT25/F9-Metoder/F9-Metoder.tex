@@ -1,0 +1,719 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{multicol}
+
+\usepackage[swedish]{babel}
+
+\usepackage{mau}
+
+
+\lstset{style=java}
+
+
+\title{CD339A---F9: Metoder}
+\author{Malmö universitet}
+\date{2024--09--22}
+
+\institute{Institutionen för datavetenskap och medieteknik}
+
+
+\begin{document}
+
+
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+{  % Title page
+    \setbeamertemplate{headline}{}
+    \setbeamertemplate{footline}{}
+    \setbeamercolor{palette primary}{bg=malmo-red, fg=white}
+    \setbeamercolor{background canvas}{bg=malmo-red, fg=black}
+    %\begin{frame}
+    %    \titlepage
+    %\end{frame}
+    \maketitle
+}
+
+\begin{frame}
+    \frametitle{Innehåll}
+
+    \begin{multicols}{2}
+        \tableofcontents
+    \end{multicols}
+
+\end{frame}
+
+\section{Repetition}
+
+\begin{frame}
+    \frametitle{Repetition}
+    \framesubtitle{Inbyggda metoder}
+
+    \textbox{
+    Vi har tidigare använt inbyggda metoder i Java.
+    Exempelvis:}
+
+    \textbox{
+    \begin{itemize}
+        \item \texttt{System.out.println()}
+        \item \texttt{String.length()}
+        \item \texttt{Math.sqrt()}
+        \item \texttt{Integer.parseInt()}
+    \end{itemize}
+    }
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Exempel}
+
+    \textbox{En liten kodsnutt som använder Pythagoras sats}
+
+    \begin{lstlisting}
+public static void Main(String[] args):
+    // a^2+b^2=c^2 (Pythaghoras sats)
+    double a = 3;
+    double b = 4;
+    double c = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+    System.out.println("Om kateterna är " + a + " och " + b + " är hypotenusan " + c);
+    \end{lstlisting}
+
+    \textbox{Här använder vi tre olika metoder: \lstinline!Math.sqrt()!, \lstinline!Math.pow()!, och \lstinline!System.out.println()!}
+
+\end{frame}
+
+\section{Om metoder}
+
+\subsection{Vad är en metod?}
+
+\begin{frame}
+    \frametitle{Metod vs funktion}
+
+    \textbox{Några av er har säkert stött på begreppet 
+    \textit{funktion} i tidigare programmeringsspråk. 
+    När vi pratar om \textit{metoder} i Java så är det 
+    i praktiken samma sak som funktioner.}
+
+    \textbox{Nu i början kommer vi att hantera våra 
+    metoder som om de vore funktioner.}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Vad är en metod?}
+
+    \textbox{En metod är en samling kommandon som man kan exekvera med ett 
+    anrop.}
+
+    \begin{lstlisting}
+public static double max(double a, double b){
+    if (a >= b){
+        double greatest = a;
+    }
+    else{
+        double greatest = b;
+    }
+    return greatest;
+}
+    \end{lstlisting}
+
+    \textbox{
+    Nu hade vi kunnat anropa funktionen med 
+    \lstinline!double c = max(5.2, 7.9)!}
+
+\end{frame}
+
+\subsection{Varför använda metoder?}
+
+\begin{frame}
+    \frametitle{Varför använda metoder?}
+
+    \textbox{Det finns flera anledningar till att vi vill arbeta med metoder}
+
+    \textbox{
+        \begin{itemize}
+            \item Det ökar läsbarheten (detta kan inte överskattas)
+            \item Koden blir lättare att felsöka
+            \item Vi behöver inte upprepa kod i onödan
+            \item Lättare att återanvända kod i andra projekt
+        \end{itemize}
+    }
+
+\end{frame}
+
+\section{Hur man skapar metoder}
+
+\subsection{Skapa och anropa metoder}
+
+\begin{frame}[fragile]
+    \frametitle{Skapa egna metoder}
+
+    \textbox{När du skapar en metod i Java (och flera 
+    andra språk) så är det ett par saker vi behöver ange.}
+
+    \textbox{
+        \begin{itemize}
+            \item Tillgänglighet
+            \item Returvärde
+            \item Metodnamn
+            \item Parametrar
+        \end{itemize}
+    }
+
+    \textbox{Vi kommer att ta upp \textit{returvärde},
+    \textit{metodnamn}, och \textit{parametrar} idag.
+    \textit{Tillgänglighet} tar vi upp när vi pratar objekt.}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Skapa egna metoder}
+
+    %\textbox{En metod kan exempelvis se ut:}
+
+    \begin{lstlisting}
+public static char myMethod(String s){
+        char firstLetter = s.charAt(0);
+        return firstLetter;
+}
+    \end{lstlisting}
+
+    \textbox{
+    \begin{itemize}
+        \item \lstinline!public! anger tillgänglighet
+        \item \lstinline!static! styr vad den får göra
+        \item \lstinline!char! anger vad metoder 
+        \textit{returnerar}
+        \item \lstinline!myMethod! metodens namn
+        \item \lstinline!(String s)! parametrar som 
+        metoden tar emot
+        \item \lstinline!return firstLetter! skickar 
+        tillbaka \lstinline!firstLetter!  
+    \end{itemize}
+    }
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Anropa metoder}
+
+    \begin{lstlisting}
+public static void main(String[] args){
+    String x = "All that is gold does not glitter";
+    char a = myMethod(x); // Anropa metoden, spara svaret i a
+    System.out.println(a);
+}
+public static char myMethod(String s){
+    char firstLetter = s.charAt(0); // Hitta första bokstaven
+    return firstLetter; // Skicka tillbaka första bokstaven
+}
+    \end{lstlisting}
+
+\end{frame}
+
+\subsection{Parametrar och argument}
+
+\begin{frame}[fragile]
+    \frametitle{Parametrar}
+
+    \textbox{En metods \textit{parametrar} är det som 
+    metoden tar emot i metodhuvudet. I exemplet på den 
+    tidigare bilden var det en sträng med namnet 
+    \lstinline!s!. Metoder kan ta emot flera parametrar}
+
+    \begin{lstlisting}
+public static double max(double a, double b){
+    double greatest;
+    if (a > b){
+        greatest = a;
+    }
+    else{
+        greatest = b;
+    }
+    return greatest;
+}
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Parametrar}
+
+    \textbox{Parametrarna kan vara olika datatyper}
+
+    \begin{lstlisting}
+public static String secondMethod(String a, char b){
+    String newString = a+b; // Konkatenerar texten
+    return newString; // Returnerar vår nya sträng
+}
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Argument}
+
+    \textbox{Ett \textit{argument} är värdet vi skickar 
+    in till en metod när vi anropar metoden.}
+
+    \begin{lstlisting}
+public static void main(String[] args){
+    String s = secondMethod("Wow", 'a');
+    System.out.println(s);
+}
+    \end{lstlisting}
+
+    \textbox{Här är \lstinline!\"Wow\"! och 
+    \lstinline!'a'! argument som vi skickar 
+    in till metoden.}
+
+    \textbox{argument $\rightarrow$ parameter}
+
+\end{frame}
+
+\subsection{Metodhuvud}
+
+\begin{frame}[fragile]
+    \frametitle{Returvärde}
+
+    \textbox{Java är ett strikt typat språk, vilket 
+    betyder att man behöver hålla koll på variablers 
+    datatyper. Det gör att vi vill att en metod alltid 
+    returnerar samma datatyp. Detta anger vi i metodhuvudet.}
+
+    \begin{lstlisting}
+public static String secondMethod(String a, char b){
+    String newString = a+b; // Konkatenerar texten
+    return newString; // Returnerar vår nya sträng
+}
+    \end{lstlisting}
+
+    \textbox{Här ser vi att \lstinline!secondMethod! 
+    anger att den skickar tillbaka en sträng.}
+
+    \textbox{I vårt tidigare exmpel \lstinline!myMethod!
+    returnerade vi alltid en \lstinline!double!.}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Void-metoder}
+
+    \textbox{Det finns tillfällen när en funktion inte 
+    ska returnera något. Då anger man detta med 
+    \lstinline!void!}
+
+    \begin{lstlisting}
+public static void greet(String name, int age){
+    System.out.println("Hello "+name+", it's so cool that you are "+age+" years old!")
+}
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Statiska metoder}
+
+    \textbox{Statiska metoder är lite speciella på så vis 
+    att de är kopplade direkt till klassen och inte till 
+    en instans av en klass.}
+
+    \textbox{Vi kommer att använda statiska metoder fram 
+    tills att vi börjar jobba med klasser.}
+
+    \textbox{Läs mer i Deitel på sida 207.}
+
+\end{frame}
+
+\subsection{Metodkropp}
+
+\begin{frame}[fragile]
+    \frametitle{Metodkropp}
+
+    \textbox{Med \textit{metodkropp} menar vi det som 
+    kommer mellan måsvingarna.}
+
+    \textbox{Det är i metodkroppen vi skriver all kod som 
+    ska exekveras.}
+
+    \begin{lstlisting}
+public static String secondMethod(String a, char b){
+    String newString = a+b; // Konkatenerar texten
+    return newString; // Returnerar vår nya sträng
+}
+    \end{lstlisting}
+
+    \textbox{I \lstinline!secondMethod! är det raderna 2 
+    och 3 som utgör metodkroppen.}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Metodkropp}
+
+    \textbox{Metodkroppen kan vara hur lång som helst.
+    Men en rekommendation är att hålla den kort. Skulle 
+    den bli lång kan man fundera på om man kanske ska 
+    bryta ut delar av metodkroppen till egna metoder.}
+
+    \textbox{En tumregel är att man ska kunna se hela 
+    metoden utan att behöva scrolla på skärmen. 
+    \textit{Detta går inte alltid att följa.}}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Kodningsfilosofi}
+
+    \textbox{Försök att skapa metoder som gör en sak.}
+    \textbox{Ge metoderna korta men beskrivande namn. 
+    Om du inte kan ge den ett kort namn fundera på om 
+    det borde vara flera metoder istället.}
+    \textbox{Metoder kan anropa andra metoder}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Metod som anropar andra metoder}
+
+    \textbox{Här har vi ett exempel på en metod 
+    \lstinline!checkSensors! som anropar flera andra metoder.}
+
+    \begin{lstlisting}
+public void checkSensors(){
+    checkDoorSensors();
+    checkStaircaseSensors();
+    checkLobbySensors();
+    checkOfficeSensors();
+}
+    \end{lstlisting}
+
+    \textbox{Genom att dela upp \lstinline!checkSensors()!
+    i flera mindre metoder så är det fortarande tydligt 
+    vad metoden gör.}
+
+    %\textbox{Det kan också vara så att vi någon annanstans 
+    %vill kolla dörrarnas sensorer, då kan vi återanvända
+    %den koden här.}
+
+\end{frame}
+
+\subsection{Return}
+
+\begin{frame}[fragile]
+    \frametitle{Return}
+
+    \textbox{Kommandot \lstinline!return! skickar tillbaka 
+    det värde som kommer direkt efter på samma rad.}
+
+    \begin{lstlisting}
+public static String secondMethod(String a, char b){
+    String newString = a+b; // Konkatenerar texten
+    return newString; // Returnerar vår nya sträng
+}
+    \end{lstlisting}
+
+    \textbox{Här är det \lstinline!newString! som skickas 
+    tillbaka till anropet.}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Flera return}
+
+    \textbox{Tidigare hade vi följande exempel:}
+
+    \begin{lstlisting}
+public static double max(double a, double b){
+    double greatest;
+    if (a > b){
+        greatest = a;
+    }
+    else{
+        greatest = b;
+    }
+    return greatest
+}
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Flera return}
+
+    \textbox{Vi kan korta ner den koden, och göra 
+    den läsligare:}
+
+    \begin{lstlisting}
+ public static double max(double a, double b){
+    if (a > b){
+        return a; // Returnerar a
+    }
+    else{
+        return b; // Returnerar b
+    }
+}   
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Flera return}
+
+    \textbox{När programmet når en return så avslutas 
+    metoden och värdet efter returneras.}
+
+    \textbox{Koden kommer alltså inte att fortsätta och 
+    returnera något mer senare.}
+
+\end{frame}
+
+\section{Mer om metoder}
+
+\subsection{Överlagring av metoder}
+
+\begin{frame}
+    \frametitle{Överlagring av metoder}
+
+    \textbox{Det händer att man har en metod där man 
+    vill att den ska kunna ta emot olika parametrar.
+    Kanske för att man vill kunna ta emot olika mängder av 
+    parametrar eller för att man vill göra lite olika 
+    saker beroende på vad som skickas in.}
+
+    \textbox{Det är möjligt att skapa flera metoder med 
+    samma namn, förutsatt att de alla returnerar samma 
+    datatyp, och att de har olika parameterlistor.}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Överlagring av metoder}
+    \framesubtitle{Exempel}
+
+    \begin{lstlisting}
+public double max(double a, double b){
+    if (a>=b){return a;} // Vertical space is prime real estate
+    else{return b;}
+}
+public double max(double a, double b, double c){
+    if (a>=b && a>=c){return a;}
+    else if (b>=a && b>=c){return b;}
+    else{return c;}
+}
+    \end{lstlisting}
+
+    \textbox{Nu gör kommandona \lstinline!max(1.0,3.0)! och 
+    \lstinline!max(5.0,3.0,7.0)! lite olika saker}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Överlagring av metoder}
+    \framesubtitle{Exempel}
+
+    \begin{lstlisting}
+public double max(double a, double b){
+    if (a>=b){return a;} // Vertical space is prime real estate
+    else{return b;}
+}
+public double max(double a, double b, double c){
+    return max(a, max(b, c));
+}
+    \end{lstlisting}
+
+    \textbox{Hur fungerar det här?}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Överlagring av metoder}
+    \framesubtitle{Exempel}
+
+    \begin{lstlisting}
+public double max(double a, double b){
+    if (a>=b){return a;} // Vertical space is prime real estate
+    else{return b;}
+}
+    \end{lstlisting}
+
+    \textbox{Vad händer om man skickar in två 
+    \lstinline!int! till \lstinline!max()! nu?}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Överlagring av metoder}
+    \framesubtitle{Exempel}
+
+    \textbox{Skulle vi ändra på parametrarna till 
+    \lstinline!int! istället och skicka in två 
+    \lstinline!double! istället, vad händer då?}
+
+    \begin{lstlisting}
+public double max(int a, int b){
+    if (a>=b){return a;} // Vertical space is prime real estate
+    else{return b;}
+}
+    \end{lstlisting}
+
+\end{frame}
+
+\subsection{Scope och call stack}
+
+\begin{frame}
+    \frametitle{Scope}
+    
+    \textbox{Som regel kan en metod inte komma åt 
+    variabler som skapats utanför metoden (detta är 
+    särskilt sant när man använder \lstinline!static!)}
+
+    \textbox{På samma sätt kan andra metoder inte komma 
+    åt variabler som instansierats i en annan metod.}
+
+    \textbox{Detta skapar en sorts inkapsling och 
+    decentralisering som gör att varje metod bara gör sin
+    grej.}
+
+    \textbox{Man säger ibland att variablerna är 
+    \textit{lokala}.}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Call stack}
+
+    \textbox{När du anropar en funktion så skapas något 
+    som kallas för en \textit{stack frame}.}
+
+    \textbox{En \textit{stack frame} håller koll på 
+    initialiserade variabler och vart de pekar i minnet.}
+
+    \textbox{När en metod avslutas så returnas eventuellt 
+    return värde och sen förstörs \textit{stack framen} 
+    och alla lokala variabler glöms bort ur minnet.}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Call stack}
+    \framesubtitle{Lite djupare}
+
+    \textbox{För att förstå hur \textit{call stacken} 
+    fungerar behöver man förstå hur \textit{stackar} 
+    fungerar.}
+
+    \textbox{En stack är en datastruktur som lagrar 
+    data enligt modellen \textit{Last-in-First-out (LiFo)}.}
+
+    \textbox{Vi kommer inte att diskutera stackar på djupet
+    i den här kursen.}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Call stack}
+    \framesubtitle{Lite djupare}
+
+    \textbox{Förenklat kan vi jämföra en stack med en hög 
+    med disk. Du lägger på ny disk överst i högen, och 
+    diskar den översta disken först.}
+
+    \textbox{Likt diskhögen hamnar den senast anropade 
+    metoden överst. När den avslutas så kastas det som är 
+    kvar i \textit{framen} och programmet fortsätter med 
+    den näst översta \textit{framen} i stacken.}
+
+    \textbox{När den sista \textit{framen} är avslutad så 
+    är vår \lstinline!main!-metod avslutad och programmet 
+    stängs ner.}
+
+\end{frame}
+
+\section{Sammanfattning}
+
+\subsection{Sammanfattning}
+
+\begin{frame}
+    \frametitle{Sammanfattning}
+
+    \textbox{
+        \begin{itemize}
+            \item \textbf{metoder ökar läsligheten av 
+            vår kod}
+            \item metoder ska vara specifika och namnade 
+            på ett beskrivande sätt
+            \item metoder returnerar alltid samma typ av 
+            värden
+            \item en metod kan vara void och inte returnera 
+            något alls
+            \item i metodhuvudet anger vi tillgängligheten, 
+            datatyp som returneras, metodnamn och parametrar
+            \item vi anropar metoder genom att skriva 
+            metodnamnet och skicka med argument
+            \item en metod avslutas när den når 
+            \lstinline!return!   
+        \end{itemize}
+    }
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sammanfattning}
+
+    \textbox{
+        \begin{itemize}
+            \item \textbf{metoder ökar läsligheten av 
+            vår kod} (om någon skulle glömt det)
+            \item metoder kan \textit{överskugga} varandra
+            om de har samma namn men olika parameter-listor
+            \item när vi anropar en metod skapas en ny 
+            \textit{stack frame}
+            \item en \textit{stack frame} håller reda på alla 
+            lokala variabler
+        \end{itemize}
+    }
+
+\end{frame}
+
+\subsection{Rekommenderad läsning}
+
+\begin{frame}
+    \frametitle{Rekommenderad läsning}
+
+    \textbox{Deitel \& Deitel, kapitel 5, sidorna 204--236}
+
+    \textbox{
+        \begin{itemize}
+            \item \url{https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html}
+            \item \url{https://docs.oracle.com/javase/tutorial/java/javaOO/arguments.html}
+            \item \url{https://docs.oracle.com/javase/tutorial/java/javaOO/returnvalue.html}
+        \end{itemize}
+    }
+    \textbox{Cornelia Funke, \textit{The Colour of Revenge}}
+\end{frame}
+
+\end{document}
