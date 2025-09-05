@@ -1,0 +1,380 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{multicol}
+
+\usepackage[swedish]{babel}
+
+\usepackage{../../../Common/mau}
+
+
+\lstset{style=python}
+
+
+\title{DA102A---F1: Java vs. Python}
+\author{Malmö universitet}
+\date{2025--??--??}
+
+\institute{Institutionen för datavetenskap och medieteknik}
+
+
+\begin{document}
+
+\begin{frame}
+    \frametitle{Innehåll}
+
+    \begin{multicols}{2}
+        \tableofcontents
+    \end{multicols}
+
+\end{frame}
+
+\section{Repetition}
+
+\begin{frame}
+    \frametitle{Repetition}
+    \framesubtitle{Saker vi har gjort i DA100A}
+
+    \textbox{
+        \begin{itemize}
+            \item Datatyper
+            \item Villkorssatser
+            \item Loopar
+            \item Funktioner
+            \item Listor
+        \end{itemize}
+    }
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Repetition}
+    \framesubtitle{Datatyper}
+
+    \textbox{Vi har använt datatyperna}
+    \textbox{
+        \begin{itemize}
+            \item \lstinline!int! för heltal
+            \item \lstinline!float! för flyttal
+            \item \lstinline!bool! för sant/falskt
+            \item \lstinline!str! för text
+            \item \lstinline!list! för listor (arrayer)
+        \end{itemize}
+    }
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Input/output}
+
+    \begin{lstlisting}
+name = input("Your name: ")
+age = int(input("Your age: ")) # Vi castar till en int
+
+print("Hello,", name, "you are", age, "years old.")
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{Repetition}
+   \framesubtitle{Villkorssatser}
+
+    \textbox{Vi har skapat villkorsatser så att programmet 
+    kan agera utifrån olika situationer}
+    
+    \begin{lstlisting}
+name = input("May I have your name, please?" )
+if len(name) > 6:
+    print("Your name is too long, I do not want it.")
+elif len(name) < 3:
+    print("Your name is too short, not fit for me.")
+else:
+    print("Thank you, your name is now mine.")
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Repetition}
+    \framesubtitle{Loopar}
+
+    \textbox{Vi har gjort upprepningar med \lstinline!while! 
+    och med \lstinline!for!}
+
+    \begin{lstlisting}
+i = 0
+while i < 10:
+    print(i)
+    \end{lstlisting}
+
+    \begin{lstlisting}
+for i in range(10):
+    print(i)
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Repetition}
+    \framesubtitle{Funktioner}
+
+    \textbox{Vi har skapat och anropat funktioner}
+
+    \begin{lstlisting}
+def my_function(par1,par2):
+    # Do stuff
+    res = par1+par2
+    return res
+a = 1
+b = 2
+print(my_function(a,b))
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Repetition}
+    \framesubtitle{Listor}
+
+    \textbox{Vi har skapat listor med flera element}
+
+    \begin{lstlisting}
+hobbits = ["Sam", "Frodo", "Merry", "Pippin", "Fatty"]
+print(hobbits[0])
+    \end{lstlisting}
+
+    \begin{lstlisting}
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+for row in range(len(matrix)):
+    for col in range(len(matrix[row])):
+        print(matrix[row][col])
+    \end{lstlisting}
+
+\end{frame}
+
+\section{Java}
+
+\begin{frame}
+    \frametitle{Vad är Java?}
+
+    \textbox{Innan vi går in på skillnader i syntax, så ska 
+    vi kolla lite på Java som språk.}
+    \textbox{Java är ett kompilerat språk (där Python till 
+    är ett interpreterat språk). Det innebär att Java behöver 
+    översätta källkoden från text till byte-kod innan vi kan 
+    köra programmet. (Python gör detta medans programmet körs)}
+    \textbox{Du kan inte köra ditt program för ens efter att 
+    det är kompilerat.}
+    \textbox{Under kompileringen så görs en felsökning av koden
+    och hittar den fel så misslyckas kompileringen.}
+    \textbox{Java är ett strikt objekt-orienterat språk.}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Var används Java?}
+
+    \textbox{En gång i tiden var Java sexigt.}
+    \textbox{Telefon-appar skrevs i Java.}
+    \textbox{Många system kör Java i sin \textit{back-end} 
+    (särskilt äldre system)}
+    \textbox{\textit{Minecraft} är kodat i Java}
+    
+\end{frame}
+
+\section{Skillnader}
+
+\subsection{Allmänt}
+
+\begin{frame}
+    \frametitle{Skillnader}
+    \framesubtitle{Semikolon}
+
+    \textbox{En viktig skillnad mellan Python och Java är 
+    att man i Java \textbf{måste} markera när en sats är slut.}
+
+    \textbox{I Python görs detta automagiskt när du byter rad.}
+
+    \textbox{I Java (och C) behöver du markera när en sats är 
+    över med ett semikolon '';''}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Skillnader}
+    \framesubtitle{Block}
+
+    \textbox{I Python markerar du block-tillhörighet med 
+    indragningar. (Exempelvis if-satser och loopar)}
+
+    \textbox{I Java markerar du block-tillhörighet med 
+    \textit{måsvingar} \lstinline!\{\}!}
+
+    \textbox{Symbolerna \lstinline!\{\}! har flera olika namn:
+        \begin{itemize}
+            \item Måsvingar (detta är det vedertagna namnet)
+            \item Krullparanteser
+            \item På engelska: \textit{curly brackets}
+            \item På danska: \textit{tuborg-klammer} 
+        \end{itemize}
+    }
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+
+\end{frame}
+
+\subsection{Datatyper}
+
+\begin{frame}[fragile]
+    \frametitle{Datatyper}
+
+    \textbox{I Java deklarerar man datatypen när man initialiserar
+    en variabel.}
+
+    \begin{lstlisting}[style=java]
+int a = 5; // heltal
+float b = 5.5f // flyttal (32 bitar (7 decimaler)) notera f
+double c = 5.5 // decimaltal (64 bitar (15/16 decimaler))
+boolean d = true; // notera liten bokstav
+String e = "Hej"; // notera citattecken och stor bokstav
+char f = 'a'; // notera apostrof
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Datatyper}
+
+    \textbox{Java är ett strikt typat språk. Det innebär att 
+    en variabel har en bestämd datatyp redan när den skapas, 
+    och den variabeln kan inte innehålla några andra dataatyper.}
+
+    \begin{lstlisting}[style=python]
+# Detta är okej Python-kod
+a = 5
+a = 5.5
+a = "Najs"
+    \end{lstlisting}
+
+    \begin{lstlisting}[style=java]
+// Detta är inte okej Java-kod
+int a = 5;
+a = 5.5; // Error
+double a = 5.5; // Error
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \framtitle{Datatyper}
+    \framesubtitle{Float och double}
+
+    \textbox{I Python använder man \lstinline!float! för 
+    decimaltal. Medan }
+
+\end{frame}
+
+\subsection{Input/output}
+
+\begin{frame}[fragile]
+    \frametitle{Input/output}
+
+    \begin{lstlisting}[style=python]
+# Python
+name = input("Name: ")
+age = int(input("Age: "))
+print(name, age)
+    \end{lstlisting}
+
+    \begin{lstlisting}[style=java]
+// Java
+Scanner input = new Scanner(); // Nödvändig rad
+System.out.println("Name: ");
+String name = input.nextLine();
+System.out.println("Age: ")
+int age = input.nextInt();
+System.out.println(name + " " + age);
+    \end{lstlisting}
+
+\end{frame}
+
+\subsection{Villkorssatser}
+
+\begin{frame}[fragile]
+    \frametitle{Villkorssatser}
+    \framesubtitle{Python}
+
+    \begin{lstlisting}[style=python]
+if a == True and b == False:
+    pass
+elif c == True or d == True:
+    pass
+else:
+    pass
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Villkorssatser}
+    \framesubtitle{Java}
+
+    \begin{lstlisting}[style=java]
+if (a == true && b == false){ // Notera paranteserna
+    // Notera att && betyder och
+}
+else if (c == true || d == true){ // Vi skriver ut elif
+    // Notera att || betyder eller
+}
+else{
+    // Notera alla { } som markerar block
+}
+    \end{lstlisting}
+
+\end{frame}
+
+\subsection{Loopar}
+
+\begin{frame}[fragile]
+    \frametitle{Loopar}
+    \framesubtitle{While}
+
+    \begin{lstlisting}[style=python]
+# En while-loop i Python
+i = 0
+while i < 10:
+    print(i)
+    i += 1
+    \end{lstlisting}
+
+    \begin{lstlisting}[style=java]
+// En while-loop i Java
+int i = 0;
+while (i < 10){
+
+}
+    \end{lstlisting}
+
+
+\end{frame}
+
+\subsection{Metoder}
+
+\subsection{}
+
+\section{Sammanfattning}
+
+
+\end{document}
