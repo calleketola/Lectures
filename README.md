@@ -5,13 +5,15 @@ This is a collection of the lectures I have had over the years
 ## Table of Contents
 
 1. [Hedda Anderssongymnasiet](#hedda-andersson)
-    1. [Programmering 1](#prr1)
-    2. [Programmering 2](#prr2)
+    a. [Programmering 1](#prr1)
+    b. [Programmering 2](#prr2)
 2. [Malmö University](#mau)
+    a. [CD102A](#cd102a)
+    b. [DA339A](#da339a)
 
 ## Hedda Anderssongymnasiet <a name="hedda-andersson"></a>
 
-These are my last lectures from Hedda Anderssongymnasiet in Lund. They were made for the school year 24/25.
+These are my last lectures from Hedda Anderssongymnasiet in Lund. They were made for the school year of 24/25.
 
 ### Programmering 1  <a name="prr1"></a>
 
@@ -30,7 +32,7 @@ This is a course in object oriented programming (7.5 points). The language used 
 
 #### HT 25
 
-1. [F1 Java vs. Python]
+1. F1 Java vs. Python
 
 ### DA339A <a name="da339a"></a>
 
@@ -38,5 +40,5 @@ This is a course (15 points) in object oriented programming. The language used i
 
 #### HT 25
 
-1. [F9 Metoder]
+1. F9 Metoder
 
