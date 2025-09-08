@@ -214,9 +214,8 @@ for row in range(len(matrix)):
     \framesubtitle{Block}
 
     \textbox{I Python markerar du block-tillhörighet med 
-    indragningar. (Exempelvis if-satser och loopar)}
-
-    \textbox{I Java markerar du block-tillhörighet med 
+    indragningar. (Exempelvis if-satser och loopar)\\
+    I Java markerar du block-tillhörighet med 
     \textit{måsvingar} \lstinline!\{\}!}
 
     \textbox{Symbolerna \lstinline!\{\}! har flera olika namn:
@@ -232,6 +231,35 @@ for row in range(len(matrix)):
 \end{frame}
 
 \begin{frame}[fragile]
+    \frametitle{Skillnader}
+    \framesubtitle{Kommentarer}
+
+    \begin{lstlisting}[style=python]
+# Detta är en kommentar
+"""
+Detta är en lång kommentar
+"""
+    \end{lstlisting}
+
+    \begin{lstlisting}[style=java]
+// Detta är en kommentar
+/*
+Detta är en lång kommentar
+*/
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Skillnader}
+    \framesubtitle{Namnkonventioner}
+
+    \textbox{I Python använder man ofta understreck i 
+    variabelnamn om det är ett namn som innehåller 
+    flera ord. Exempelvis: \lstinline!my_long_name!}
+
+    \textbox{I Java använder man istället \textit{mixed case}.
+    Exempelvis: \lstinline[style=java]!myLongName!}
 
 \end{frame}
 
@@ -259,7 +287,7 @@ char f = 'a'; // notera apostrof
 
     \textbox{Java är ett strikt typat språk. Det innebär att 
     en variabel har en bestämd datatyp redan när den skapas, 
-    och den variabeln kan inte innehålla några andra dataatyper.}
+    och den variabeln kan inte innehålla några andra datatyper.}
 
     \begin{lstlisting}[style=python]
 # Detta är okej Python-kod
@@ -278,11 +306,20 @@ double a = 5.5; // Error
 \end{frame}
 
 \begin{frame}[fragile]
-    \framtitle{Datatyper}
+    \frametitle{Datatyper}
     \framesubtitle{Float och double}
 
     \textbox{I Python använder man \lstinline!float! för 
-    decimaltal. Medan }
+    decimaltal. Medan Java använder både 
+    \lstinline[style=java]!float! och 
+    \lstinline[style=java]!double!}
+
+    \textbox{En \lstinline!float! i Java är sparad med 32 bitar,
+    medan en \lstinline[style=java]!double! är sparad i 64 bitar. Detta 
+    betyder att du får en högre precision med \lstinline[style=java]!double!}
+
+    \textbox{Som regel kommer vi att använda 
+    \lstinline[style=java]!double! för att lagra decimaltal.}
 
 \end{frame}
 
@@ -332,7 +369,7 @@ else:
     \framesubtitle{Java}
 
     \begin{lstlisting}[style=java]
-if (a == true && b == false){ // Notera paranteserna
+if (a == true && b == false){ // Notera parenteserna
     // Notera att && betyder och
 }
 else if (c == true || d == true){ // Vi skriver ut elif
@@ -362,15 +399,99 @@ while i < 10:
     \begin{lstlisting}[style=java]
 // En while-loop i Java
 int i = 0;
-while (i < 10){
-
+while (i < 10){ // Notera återigen parenteserna runt villkoret
+    System.out.println(i);
+    i++; // Detta motsvarar i += 1
 }
     \end{lstlisting}
 
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Loopar}
+    \framesubtitle{For}
+
+    \begin{lstlisting}[style=python]
+# For-loop i Python
+for i in range(0,10,1): # Start, Stop, Steg
+    print(i)
+    \end{lstlisting}
+
+    \begin{lstlisting}[style=java]
+// For-loop i Java
+for (int i=0; i<10; i++){ // Start, Stop, Steg
+    System.out.println(i); // Notera återigen alla parenteser
+}
+    \end{lstlisting}
 
 \end{frame}
 
-\subsection{Metoder}
+\subsection{Funktioner \& Metoder}
+
+\begin{frame}[fragile]
+    \frametitle{Funktioner}
+    \framesubtitle{Funktioner i Python}
+
+    \begin{lstlisting}[style=python]
+# Funktion i Python
+def my_function(par1, par2):
+    result = par1+par2
+    return result
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Funktioner}
+    \framesubtitle{Metoder i Java}
+
+    \textbox{Java är helt objektorienterat och har istället 
+    för funktioner \textit{metoder} (dessa finns i Python 
+    också---har du läst kursen Programmering 2 känner du till 
+    dem)}
+
+    \textbox{Metoder är i princip samma sak som funktioner,
+    men kopplade till objekt.}
+
+    \begin{lstlisting}[style=java]
+// Metod i Java
+public double myFunction(double par1, double par2){
+    double result = par1+par2;
+    return result;
+}
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Metoder}
+    \framesubtitle{Metodhuvudet}
+
+    \begin{lstlisting}[style=java]
+public double myFunction(double par1, double par2){}
+    \end{lstlisting}
+
+    \textbox{\lstinline[style=java]!public! anger tillgänglighet}
+    \textbox{\lstinline[style=java]!double! (det första) anger returtyp}
+    \textbox{Parametrarna behöver också ha bestämmada datatyper}
+    \textbox{En metod som inte ska returnera något värde har 
+    retur-typen \lstinline[style=java]!void!}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Metoder}
+    \framesubtitle{Överskuggning}
+
+    \textbox{I Python kunde man ange default-parametrar}
+
+    \textbox{I Java behöver vi \textit{överskugga} funktionerna}
+
+    \begin{lstlisting}
+public double myFunction()
+    \end{lstlisting}
+
+\end{frame}
 
 \subsection{}
 
