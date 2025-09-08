@@ -5,11 +5,11 @@ This is a collection of the lectures I have had over the years
 ## Table of Contents
 
 1. [Hedda Anderssongymnasiet](#hedda-andersson)
-    a. [Programmering 1](#prr1)
-    b. [Programmering 2](#prr2)
+    1. [Programmering 1](#prr1)
+    2. [Programmering 2](#prr2)
 2. [Malmö University](#mau)
-    a. [CD102A](#cd102a)
-    b. [DA339A](#da339a)
+    1. [CD102A](#cd102a)
+    2. [DA339A](#da339a)
 
 ## Hedda Anderssongymnasiet <a name="hedda-andersson"></a>
 
