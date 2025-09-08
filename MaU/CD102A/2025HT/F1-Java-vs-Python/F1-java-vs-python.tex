@@ -276,7 +276,7 @@ int a = 5; // heltal
 float b = 5.5f // flyttal (32 bitar (7 decimaler)) notera f
 double c = 5.5 // decimaltal (64 bitar (15/16 decimaler))
 boolean d = true; // notera liten bokstav
-String e = "Hej"; // notera citattecken och stor bokstav
+String e = "hej"; // notera citattecken och stor bokstav
 char f = 'a'; // notera apostrof
     \end{lstlisting}
 
@@ -337,12 +337,24 @@ print(name, age)
 
     \begin{lstlisting}[style=java]
 // Java
-Scanner input = new Scanner(); // Nödvändig rad
+Scanner input = new Scanner(System.in); // Nödvändig rad
 System.out.println("Name: ");
-String name = input.nextLine();
+String name = input.nextLine(); // Ta emot sträng
 System.out.println("Age: ")
-int age = input.nextInt();
+int age = input.nextInt(); // Ta emot heltal
 System.out.println(name + " " + age);
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Input/output}
+
+    \begin{lstlisting}[style=java]
+Scanner input = new Scanner(System.in); // Skapar en läsare
+String text = input.nextLine(); // Tar emot en sträng
+int integer = input.nextInt(); // Tar emot en int
+double number = input.nextDouble(); Tar emot en double
     \end{lstlisting}
 
 \end{frame}
@@ -473,7 +485,7 @@ public double myFunction(double par1, double par2){}
 
     \textbox{\lstinline[style=java]!public! anger tillgänglighet}
     \textbox{\lstinline[style=java]!double! (det första) anger returtyp}
-    \textbox{Parametrarna behöver också ha bestämmada datatyper}
+    \textbox{Parametrarna behöver också ha bestämda datatyper}
     \textbox{En metod som inte ska returnera något värde har 
     retur-typen \lstinline[style=java]!void!}
 
@@ -483,12 +495,19 @@ public double myFunction(double par1, double par2){}
     \frametitle{Metoder}
     \framesubtitle{Överskuggning}
 
-    \textbox{I Python kunde man ange default-parametrar}
+    \textbox{I Python kunde man ange default-parametrar\\
+    I Java behöver vi \textit{överskugga} funktionerna}
 
-    \textbox{I Java behöver vi \textit{överskugga} funktionerna}
-
-    \begin{lstlisting}
-public double myFunction()
+    \begin{lstlisting}[style=java]
+public double myFunction(){
+    return 0.0;
+}
+public double myFunction(double a){
+    return 5*a;
+}
+public double myFunction(double a, double b){
+    return 5*(a+b);
+}
     \end{lstlisting}
 
 \end{frame}
@@ -496,6 +515,34 @@ public double myFunction()
 \subsection{}
 
 \section{Sammanfattning}
+
+\begin{frame}
+    \frametitle{Sammanfattning}
+    
+    \textbox{Java och Python är mer lika än olika.}
+
+    \textbox{I Java avslutar vi varje rad med ;}
+
+    \textbox{I Java behöver vi deklarera datatyper}
+
+    \textbox{I Java markerar man block med \{\}}
+
+    \textbox{I Java har vi parenteser runt villkor}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Rekommenderad läsning}
+
+    \textbox{Boken, sidorna XXX--YYY}
+
+    \textbox{Hemsida}
+
+    \textbox{Oscar Wilde, \textit{The Picture of Dorian Gray}}
+
+\end{frame}
+
+
 
 
 \end{document}
