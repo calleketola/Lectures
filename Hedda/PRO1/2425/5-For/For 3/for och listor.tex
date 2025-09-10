@@ -1,0 +1,277 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=LundaHimmel, fg=StabilaLila}
+\setbeamercolor{palette quaternary}{bg=LundaGroen, fg=MagnoliaRosa}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+    
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+    	\tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{For-loopar och listor}
+\date{ht 23}
+\author{Programmering 1}
+
+\maketitle
+
+\section{Repetition}
+
+\subsection{Listor}
+
+\begin{frame}[fragile]
+	\frametitle{Repetition}
+	\framesubtitle{Listor}
+	
+	\begin{lstlisting}
+djur = ["Apa", "Katt", "Hund", "Lejon", "Mås"]
+print(djur[3]) # Skriver ut "Lejon"
+	\end{lstlisting}
+	
+	\pause
+	
+	\begin{lstlisting}
+djur.pop(2) # Plockar bort "Hund"
+djur.append("Get") # Lägger till "Get" sist
+djur.remove("Apa") # Plockar bort "Apa"
+djur.insert(1, "Val") # Lägger in "Val" på plats 1
+	\end{lstlisting}
+	
+	
+\end{frame}
+
+\subsection{For-loopar}
+
+\begin{frame}[fragile]
+	\frametitle{Repetition}
+	\framesubtitle{For-loopar}
+	
+	\begin{lstlisting}
+for i in range(10):
+    print(i) # Skriver ut talen 0-9
+	\end{lstlisting}
+	
+	\pause
+	
+	\begin{lstlisting}
+for i in range(len(djur)):
+    print(djur[i]) # Skriver ut djuren i ordning	
+	\end{lstlisting}
+	
+	\pause
+	
+	\begin{lstlisting}
+for i in range(-10, 10, 2):
+    print(i) # Skriver ut -10, -8, -6... 8
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{For och listor}
+
+\subsection{Loopa igenom listan}
+
+\begin{frame}[fragile]
+	\frametitle{Loopa genom en lista}
+	\framesubtitle{For och listor}
+	
+	\begin{lstlisting}
+djur = ["Apa", "Katt", "Hund", "Lejon", "Mås"]
+for i in range(len(djur)):
+    print(djur[i])
+	\end{lstlisting}
+	
+	\pause
+	
+	\begin{lstlisting}
+djur = ["Apa", "Katt", "Hund", "Lejon", "Mås"]
+for x in djur:
+    print(x)
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Listor i listor}
+
+\begin{frame}[fragile]
+	\frametitle{Listor i listor}
+	
+	\begin{lstlisting}
+djur = [ ["Katt", "Lejon", "Tiger"], ["Hund",   "Varg", "Räv", "Hyena"]]
+for i in range(len(djur)):
+    print(djur[i]) # Skriver ut vad?
+	\end{lstlisting}
+	
+	\pause
+	
+	\begin{lstlisting}
+djur = [ ["Katt", "Lejon", "Tiger"], ["Hund",   "Varg", "Räv", "Hyena"]]
+for i in range(len(djur)):
+    for j in range(len(djur[i])):
+        print(djur[i][j]) # Skriver ut alla djur
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Listor i listor}
+	
+	\begin{lstlisting}
+djur = [ ["Katt", "Lejon", "Tiger"], ["Hund",   "Varg", "Räv", "Hyena"]]
+for lista in djur:
+    for d in lista:
+        print(d) # Skriver ut alla djur
+	\end{lstlisting}
+
+\end{frame}
+
+\section{Generera listor}
+
+\subsection{Generera listor}
+
+\begin{frame}[fragile]
+	\frametitle{Generera listor}
+	
+	Man kan skapa listor med en rad kod så här:
+	
+	\begin{lstlisting}
+listan = [i for i in range(100)]
+	\end{lstlisting}
+	
+	\pause
+	
+	Om du vill ha flera listor i en lista:
+	
+	\begin{lstlisting}
+x = [[i for i in range(10)] for j in range(10)]
+	\end{lstlisting}
+
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+	\frametitle{Övningar}
+	
+	Ladda ner filen \texttt{forochlistor.py} från Classroom och följ instruktionerna i den.
+	
+\end{frame}
+
+
+%\begin{frame}
+%\frametitle{Övningar}
+%\framesubtitle{Blad 3}
+%
+%Två-dimensionella objekt brukar indexeras på följande vis: \( a_{rad, kolumn} \)
+%
+%\[
+%\left[
+%\begin{array}{ccc}
+%a_{0,0} & a_{0,1} & a_{0,2}\\
+%a_{1,0} & a_{1,1} & a_{1,2}\\
+%a_{2,0} & a_{2,1} & a_{2,2}
+%\end{array}
+%\right]
+%\Rightarrow
+%\left[ \begin{array}{ccc}
+%a_{0} & a_{1} & a_{2}\\
+%a_{3} & a_{4} & a_{5}\\
+%a_{6} & a_{7} & a_{8}
+%\end{array} \right]
+%\]
+% 
+%Skriv en kod som kan identifiera varje element i den tvådimensionella matrisen med ett indextal. Koden ska ta emot ett tal mellan 0 och 8 och spotta ut två tal som motsvarar raden och kolumnen i.e. \( i = 5 \Rightarrow (1,2)\). Få den att klara av \(n\times m\)-objekt ($n$ rader och $m$ kolumner). Gör en kod som går på andra hållet. Från rad och kolumn till i.
+% 
+%\[
+%\left[ \begin{array}{ccc}
+%31 & 14 & 42\\
+%29 & 93 & 77\\
+%55 & 88 & 66
+%\end{array} \right]
+%\begin{split}
+%a_{0,0} = 31 = a_0,\\
+%a_{1,1} = 93 = a_4,\\
+%a_{2,2} = 66 = a_8 
+%\end{split}
+% \]
+%
+%\end{frame}
+
+
+\end{document}

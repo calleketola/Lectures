@@ -1,0 +1,398 @@
+\documentclass{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=LundaHimmel, fg=StabilaLila}
+\setbeamercolor{palette quaternary}{bg=LundaGroen, fg=MagnoliaRosa}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+    
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+    	\tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{Listor}
+\date{ht 23}
+\author{Programmering 1}
+
+\maketitle
+
+\section{Intro}
+
+\subsection{Skapa en lista}
+
+\begin{frame}[fragile]
+	\frametitle{Listor}
+	
+	Ganska ofta vill man hantera flera objekt samtidigt. Till exempel alla domarresultat från en simhopppstävling, eller namnen på alla i en familj. Då kan man använda sig utav \texttt{listor}.
+	
+	\begin{lstlisting}
+poäng = [7.56, 5.3, 9.34, 8.2] # Poäng från domarna
+
+namn = ['Dwalin','Balin','Kili','Fili','Dori',  'Nori','Ori','Oin','Gloin','Bifur','Bofur',  'Bombur','Thorin']
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Listor}
+	
+	\begin{lstlisting}
+lista = [] # En tom lista
+namn = ['Dwalin','Balin','Kili','Fili','Dori',  'Nori','Ori','Oin','Gloin','Bifur','Bofur',  'Bombur','Thorin']
+	\end{lstlisting}
+	
+	En lista känns igen på hakparanteserna, \code{[ ]}. Dessa markerar var listan börjar och slutar. Varje element separeras med ett komma. Så \code{'Dwalin'} är ett element och \code{'Balin'} är ett annat.
+
+\end{frame}
+
+\subsection{Datatyper}
+
+\begin{frame}[fragile]
+\frametitle{Listor}
+
+En lista kan innehålla objekt av olika datatyper.
+
+\begin{lstlisting}
+supercoollista = ['Snövit', 7, 'T-rex', 3.54, False]
+\end{lstlisting}
+
+En lista kan till och med innehålla flera listor:
+
+\begin{lstlisting}
+coolare_lista = [ ['Snövit','Bambi','Fantasia'], 1, 7, ['Dwalin', 'Balin']]
+\end{lstlisting}
+
+Nu innehåller \code{coolare\_lista} de fyra elementen:
+
+\begin{lstlisting}
+['Snövit', 'Bambi', 'Fantasia']
+1
+7
+['Dwalin', 'Balin']
+\end{lstlisting}
+
+\end{frame}
+
+\section{Indexering}
+
+\subsection{Hitta element}
+
+\begin{frame}[fragile]
+	\frametitle{Listor}
+	\frametitle{Indexering}
+
+	Vill man komma åt enskilda objekt i en lista skriver man listans namn, åtföljt av hakparanteser med indexplatsen emellan.
+
+	\begin{lstlisting}
+hober = ['Frodo', 'Sam', 'Merry', 'Pippin']
+
+print(hober[2])
+	\end{lstlisting}
+
+\end{frame}
+
+\subsection{Börjar på 0}
+
+\begin{frame}[fragile]
+\frametitle{Listor}
+\frametitle{Indexering}
+
+För att utnyttja datorns minne till max början man att räkna på 0. (Här är en argumenterande text om detta: \href{https://www.cs.utexas.edu/users/EWD/ewd08xx/EWD831.PDF}{Why numbering should start at zero,  prof. dr. Edsger W. Dijkstra})
+
+\begin{lstlisting}
+platser = [0,1,2,3,4,5,6] # Sju lång
+
+istari = ['Saruman', 'Gandalf', 'Radagast']
+#          Plats 0    Plats 1     Plats 2
+print(istari[0])
+-> 'Saruman'
+print(istari[1])
+-> 'Gandalf'
+print(istari[2])
+-> 'Radagast'
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Listor}
+\frametitle{Indexering}
+
+Man kan också komma åt element i listan genom att räkna baklänges:
+
+\begin{lstlisting}
+istari = ['Saruman', 'Gandalf', 'Radagast']
+#          Plats 0    Plats 1     Plats 2
+#          Plats -3   Plats -2    Plats -1
+print(istari[-1]) # Första elementet bakifrån
+-> 'Radagast'
+print(istari[-2]) # Andra elementet bakifrån
+-> 'Gandalf'
+print(istari[-3]) # Tredje elementet bakifrån
+-> 'Saruman'
+\end{lstlisting}
+
+\end{frame}
+
+\section{Lägg till \& ta bort}
+
+\subsection{append()}
+
+\begin{frame}[fragile]
+\frametitle{Listor}
+\frametitle{append()}
+
+Vill man lägga till ett element i en lista gör man det lättast genom att använda kommandot \code{listan.append(sak)}
+
+\begin{lstlisting}
+tal = [2,4,8,89]
+tal.append(3)
+print(tal)
+-> [2,4,8,89,3] # En trea har lagts till
+tal.append('Hej')
+print(tal)
+-> [2,4,8,89,3,'Hej']
+\end{lstlisting}
+
+Med \code{append} hamnar det nya elementet alltid sist.
+
+\end{frame}
+
+\subsection{insert()}
+
+\begin{frame}[fragile]
+\frametitle{Listor}
+\frametitle{insert()}
+
+Vill man inte att det nya objektet ska hamna sist, utan man vill att det ska hamna på en specifik position kan man använda sig utav \code{listan.insert(index, objekt)}
+
+\begin{lstlisting}
+tal = [2,4,8,89]
+tal.insert(3, 'Hej') # Lägger till 'Hej' på position 3
+print(tal)
+-> [2,4,8,'Hej',89]
+\end{lstlisting}
+
+Kom ihåg att index börjar räkna på 0.
+
+\end{frame}
+
+\subsection{remove()}
+
+\begin{frame}[fragile]
+\frametitle{Listor}
+\frametitle{remove()}
+
+Vill man ta bort ett element ur en lista så kan man använda sig utav kommandot \code{remove}:
+
+\begin{lstlisting}
+istari = ['Saruman', 'Gandalf', 'Radagast']
+istari.remove('Saruman')
+print(istari)
+->['Gandalf', 'Radagast']
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Listor}
+\frametitle{remove()}
+
+Om samma element förekommer flera gånger så tas enbart det första elementet bort:
+
+\begin{lstlisting}
+listan = [1,2,75,6,7,75,6,7,75,6,7]
+listan.remove(75)
+print(listan)
+-> [1,2,6,7,75,6,7,75,6,7]
+namn = ['Knatte', 'Fnatte', 'Tjatte', 'Tjatte', 'Fnatte', 'Knatte']
+namn.remove('Fnatte')
+print(namn)
+-> ['Knatte', 'Tjatte', 'Tjatte', 'Fnatte', 'Knatte']
+\end{lstlisting}
+
+Tänk på att man bara kan ta bort element som finns i listan.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Listor}
+\framesubtitle{remove()}
+
+Man kan försäkra sig om att bara ta bort element som finns i listan på följande vis:
+
+\begin{lstlisting}
+lista = [en lista]
+while 'hej' in lista:
+    lista.remove('hej')
+\end{lstlisting}
+
+Den här loopen håller på så länge elementet \code{'hej'} finns i \code{lista}.
+
+\end{frame}
+
+\subsection{pop()}
+
+\begin{frame}[fragile]
+\frametitle{Listor}
+\framesubtitle{pop()}
+
+Ibland är man mer intresserad av att ta bort element på en särskild plats. Då kan man använda sig utav \code{pop()}. Anger man inget argument i \code{pop()} så plockar man bort det sista elementet. Det som särskilt skiljer \code{pop()} från \code{remove()} är att \code{pop()} \textit{returnerar} det tal som ''poppas''. Man kan alltså skriva \code{a = lista.pop()} så får \code{a} samma värde som sista elementet i listan som försvinner.
+
+\begin{lstlisting}
+lista = ['Aragorn','Boromir','Legolas','Gimli']
+lista.pop()
+print(lista)
+-> ['Aragorn', 'Boromir', 'Legolas']
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Listor}
+\framesubtitle{pop(index)}
+
+Vill man plocka bort ett särskilt element kan man ange dess index.
+
+\begin{lstlisting}
+lista = ['Aragorn','Boromir','Legolas','Gimli']
+lista.pop(1)
+print(lista)
+-> ['Aragorn', 'Legolas', 'Gimli']
+\end{lstlisting}
+\end{frame}
+
+\section{Längden på en lista}
+
+\begin{frame}[fragile]
+\frametitle{Längd på listan}
+
+Om man vill veta längden på en lista så kan man använda sig utav kommandot \code{len(listan)}
+
+\begin{lstlisting}
+lista = ["Frodo", "Sam", "Merry", "Pippin", "Gandalf", "Aragorn", "Boromir", "Legolas", "Gimli"]
+print(len(lista))
+-> 9
+\end{lstlisting}
+
+\end{frame}
+
+\section{Sammanfattning}
+
+\begin{frame}[fragile]
+\frametitle{Listor}
+\framesubtitle{Sammanfattning}
+
+Följande kommandon är inbygda i listor:
+
+\begin{center}
+\begin{tabular}{|lp{6cm}|}
+\hline
+	\textbf{Kommando} & \textbf{Effekt} \\ \hline
+	\code{append(sak)}	& Lägg till \code{sak} i slutet på listan \\ 
+	\code{insert(index, sak)} & Lägg till \code{sak} på plats \code{index} \\ 
+	\code{pop()}			& Tar bort och returnerar det sista elementet\\ 
+	\code{pop(index)}		& Tar bort och returnerar elementet på plats \code{index} \\
+	\code{remove(sak)}	& Tar bort den första förekomsten av \code{sak} i listan. \\ \hline
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+\frametitle{Listor}
+\framesubtitle{Övningar}
+
+Utgå från filen \texttt{listor 1.py}
+
+\begin{enumerate}
+\item Lägg till \code{'Gimli'} i slutet på listan
+\item Lägg till \code{'Merry'} och \code{'Pippin'} mellan \code{'Sam'} och \code{'Aragorn'}
+\item Ta bort \code{'Boromir'} ur listan.
+\item Vänd på listan utan att använda \code{reverse()}
+\item Ta bort alla udda tal ur listan.
+\item Dela upp listan i tre nya listor, en för varje datatyp (\code{int}, \code{float} och \code{str}).
+\item Gör varje element i listan dubbelt så stort.
+\item Räkna hur många gånger varje element förekommer i listan.
+\item Sortera listan utan att använda \code{sort()}
+\end{enumerate}
+
+\end{frame}
+
+\end{document}

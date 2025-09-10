@@ -1,0 +1,250 @@
+\documentclass{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+
+\lstset{language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{orange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4
+    %frame=L
+}
+\lstset{language=Python} 
+
+\usefonttheme{serif}
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\title{Output-fördjupning}
+\date{ht 20}
+\author{Programmering 1}
+
+\maketitle
+
+\begin{frame}
+\frametitle{Input-output}
+\framesubtitle{Input}
+
+\texttt{Input} är all information datorn får utifrån. Det kan tillexempel vara från tangentbordet eller musen. Vi har än så länge bara tittat på funktionen \texttt{input} som stannar programmet och väntar på användar-input från tangentbordet.
+
+\texttt{Input} går att använda på två sätt:
+\begin{center}
+\begin{tabular}{llp{6cm}}
+1. & \texttt{input()} & Pausar programmet och väntar på att användaren trycker \texttt{enter}.\\
+2. & \texttt{input("Text")} & Skriver ut \texttt{text}, pausar programmet och väntar på att användaren trycker \texttt{enter}
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Input-output}
+\framesubtitle{Output}
+
+ \texttt{Output} är den information datorn skickar ut. Än så länge har det varit i form av text i konsolen och i form av färg i Turtle.
+ 
+ För att göra en \texttt{output} använder man \texttt{print()}. Innanför paranteserna markerar man text som ska skrivas med antingen citat-tecken eller appostrofer. Det viktiga är att det börjar och slutar på samma. Man kan även skriva ut värdet på variabler.
+ 
+ \begin{lstlisting}
+ >>> print("Vilket vackert väder")
+ Vilket vackert väder
+ >>> a = 103
+ >>> print(a)
+103
+ \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Input-output}
+\framesubtitle{Output}
+
+Vi kan också skriva ut flera saker i samma \texttt{print}:
+
+\begin{lstlisting}
+>>> a = 5
+>>> print(a, "detta är text", a, a+a, 'mer text', 'ny text')
+5 detta är text 5 10 mer text ny  text
+\end{lstlisting}
+
+Efter ett komma blir det ett mellanslag. Vill man undvika det får man konvertera delarna till strängar och slå ihop dem.
+
+\begin{lstlisting}
+>>> print(str(a)+"detta är text"+'mer text')
+5detta är textmer text
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Input-output}
+\framesubtitle{\textbackslash n}
+
+Vi har pratat om att man kan tvinga fram en radbrytning i en print med hjälp av \texttt{\textbackslash n}
+
+\begin{lstlisting}
+>>> print("En hel\nmening")
+En hel
+mening
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Input-output}
+\framesubtitle{End}
+
+Efter varje \texttt{print()} så gör Python en radbrytning. Detta är för att det finns ett dolt kommando man kan skicka med till \texttt{print()}. I funktionen \texttt{print()} finns en variabel, \texttt{end}, som innehåller vad som händer när \texttt{print}-funktionen har skrivit ut allt.
+
+\begin{lstlisting}
+print("Detta är en mening.", end=" ")
+print("Detta är en ny mening.")
+print("Fin.")
+\end{lstlisting}
+
+\begin{lstlisting}
+Detta är en mening. Detta är en ny mening.
+Fin.
+\end{lstlisting}
+
+I varje \texttt{print}-anrop så återställs variabeln \texttt{end}.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Input-output}
+\framesubtitle{Seperator}
+
+Vill man förändra vad som händer mellan varje del som skrivs ut så får man ändra på den inbyggda variabeln \texttt{sep} i \texttt{print}-funktionen. Som standard är \texttt{sep='' ''}, alltså ett mellanslag. Det är därför det blir mellanslag mellan variabler.
+
+\begin{lstlisting}
+print("Ett ord", "är", "lite.", sep="5")
+print("Hej", "då", "re", sep="\n")
+\end{lstlisting}
+
+\begin{lstlisting}
+Ett ord5är5lite.
+Hej
+då
+re
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Input-output}
+\framesubtitle{Tillsammans}
+
+Man kan använda båda i en och samma \texttt{print}-anrop.
+
+\begin{lstlisting}
+>>> print("Ett litet","slott", sep=":-:", end="!! w00p !!")
+Ett litet:-:slott!! w00p !!
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Input-output}
+\framesubtitle{String interpolation}
+
+\begin{lstlisting}
+>>> a = "Hej"
+>>> b = "Nej"
+>>> c =  3
+>>> print("Lite text", a, "som är helt", b, "Nonsensig", c, "!!")
+Lite text Hej som är helt Nej Nonsensig 3 !!
+\end{lstlisting}
+
+Sedan Python 3.6 kan man skriva så här istället:
+
+\begin{lstlisting}
+>>> a = "Hej"
+>>> b = "Nej"
+>>> c =  3
+>>> print(f"Lite text {a} som är helt {b} Nonsensig {c} !!")
+Lite text Hej som är helt Nej Nonsensig 3 !!
+\end{lstlisting}
+
+Notera \texttt{f}:et som är före strängen.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Input-output}
+\framesubtitle{Tab}
+
+Tabbar formaterar saker vackert i utskrifter:
+
+\begin{lstlisting}
+print("1 \t 2 \t 3")
+print("Ord \t är \t fina")
+\end{lstlisting}
+
+\begin{lstlisting}
+1	2	3
+Ord	är	fina
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Övningar}
+\framesubtitle{Input-Output}
+% Alla blir förvirrade av uppgift 1 och 2. Fixa!
+\begin{enumerate}
+\item Skriv ett program som tar emot ett namn och hälsar med String interpolation
+\item Skriv ett program som tar emot ett par ''ord'' och skriver ut dem på en rad med :) mellan varje ''ord''.
+\item Skriv ett program som skriver ut en rad med en *, sen två *, sen tre och upp till tolv stjärnor
+\begin{lstlisting}
+*
+**
+***
+\end{lstlisting}
+\item Centrera stjärnorna (det är okej att ändra till 1,3,5,... stjärnor av estetiska skäl):
+\begin{lstlisting}
+  *
+ ***
+*****
+\end{lstlisting}
+\end{enumerate}
+
+\end{frame}
+
+\end{document}

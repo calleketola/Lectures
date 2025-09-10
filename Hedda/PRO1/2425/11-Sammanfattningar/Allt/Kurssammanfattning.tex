@@ -1,0 +1,369 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=LundaHimmel, fg=StabilaLila}
+\setbeamercolor{palette quaternary}{bg=LundaGroen, fg=MagnoliaRosa}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+    
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+    	\tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{Sammanfattning}
+\date{ht 22}
+\author{Programmering 1}
+
+\maketitle
+
+\section{Datatyper och variabler}
+
+\begin{frame}[fragile]
+	\frametitle{Datatyper och variabler}
+	
+	\begin{itemize}
+		\item \code{int}
+		\item \code{float}
+		\item \code{bool}
+		\item \code{str}/\code{string}
+		\item \code{list}
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Datatyper}
+	\framesubtitle{int}
+	
+	När man ska sparaett heltal så sparas det som en \code{int}
+	
+	\begin{lstlisting}
+a = 5 # Ett heltal
+a = a + 3
+a += 2
+print(a) # Vad skrivs ut?
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Datatyper}
+	\framesubtitle{float}
+	
+	\code{float} lagrar lite förenklat decimaltal.
+	
+	\begin{lstlisting}
+b = 3.5
+b = b*2
+print(b) # Vad blir utskriften?
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Datatyper}
+	\framesubtitle{bool}
+	
+	Datatypen \code{bool} lagrar antingen \code{True} eller \code{False}. Detta är användbart vid if-satser och while-loopar.
+	
+	\begin{lstlisting}
+do = True
+
+while do:
+    # Kör kod
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Datatyper}
+	\framesubtitle{String}
+	
+	Alla variabler med text är strängar.
+	
+	\begin{lstlisting}
+a = "Hejsan"
+a = a + " " + "Svejsan"
+print(a) # Vad skrivs ut?
+	\end{lstlisting}
+	
+	När man tar emot värden med \code{input()} så tolkar Python det alltid som strängar.
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Datatyper}
+	\framesubtitle{Listor}
+	
+	När man vill spara flera värden i en variabel kan man använda sig av en \code{list}.
+	
+	\begin{lstlisting}
+a = [3,4,8]
+print(a[1]) # Vad skrivs ut?
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Datatyper}
+	\framesubtitle{Typkonvertering}
+	
+	Om du vill konvertera en variabel till en annan datatyp så gör man det så här:
+	
+	\begin{lstlisting}
+a = int(7.5)
+b = float('3.2')
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{If-satser}
+
+\begin{frame}[fragile]
+	\frametitle{If-satser}
+	
+	Om något gör något
+	
+	\begin{lstlisting}
+svar = input("Skriv ett tal: ")
+svar = int (svar) # Konverterar till ett heltal
+if svar == 3:
+    print("Bra svar")
+elif svar == 1:
+    print("Intressant")
+elif svar == 2:
+    print("!")
+else:
+    print("??")
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{While-loopar}
+
+\begin{frame}[fragile]
+	\frametitle{While}
+	
+	Så länge något gör något:
+	
+	\begin{lstlisting}
+svar = "ja"
+while svar == "ja":
+    svar = input("Vill du fortsätta? ")
+	\end{lstlisting}
+	
+	Det är viktigt att man uppdaterar variabeln i villkoret.
+	
+\end{frame}
+
+\section{For-loopar}
+
+\begin{frame}[fragile]
+	\frametitle{For-loopar}
+	\framesubtitle{range()}
+	
+	\begin{lstlisting}
+for i in range(start, slut, steg):
+    # Kod
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{For-loopar}
+	\framesubtitle{Lista}
+	
+	\begin{lstlisting}
+lista = [5,3,8,1,4]
+for x in lista:
+     print(x)
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{Listor}
+
+\begin{frame}[fragile]
+	\frametitle{Listor}
+	\framesubtitle{Kommandon}
+	
+	När man vill spara flera värden i en variabel kan man använda sig av en \code{list}.
+	
+	\begin{lstlisting}
+a = [2,4,6] # Skapar listan
+a.append(10) # Lägger till en 10 i slutet
+a.insert(3, 8) # Lägger in talet 8 på plats 3
+print(a) # Vad skrivs ut?
+
+a.pop() # Tar bort sista talet
+a.pop(1) # Tar bort talet på plats 1
+a.remove(6) # Tar bort sexan
+print(a) # Vad skrivs ut?
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Listor}
+	\framesubtitle{Iteration}
+	
+	För att komma åt ett element i listan skriver man \code{variabelnamn[position]}
+	
+	\begin{lstlisting}
+min_lista = [0,1,2,3,4,5,6,7,8,9]
+summa = 0
+for i in range(len(min_lista)):
+    summa += min_lista[i]
+print(summa)
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Listor}
+	\framesubtitle{Listor i listor}
+
+	En lista kan innehålla andra listor. Då kommer du åt ett element i den inre listan med \code{variabel[position_i_yttre_listan][position_i_inre_listan]}
+	
+	\begin{lstlisting}
+min_lista = [[1,2,3],[4,5,6],[7,8,9]]
+for row in range(len(min_lista)):
+    for col in range(len(min_lista[row])):
+        print(min_lista[row][col])
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Listor}
+	\framesubtitle{Listor i listor}
+
+	Om du har en lista med listor som innehåller tal kan du rita det som ett ''rutnät'' med tal (en matris). Det hjälper ofta med att navigera rätt
+	
+	\begin{lstlisting}
+min_lista = [[1,2,3],[4,5,6],[7,8,9]]
+	\end{lstlisting}
+	
+	Den listan kan ses som:
+	
+	\begin{lstlisting}
+[[1,2,3],
+ [4,5,6],
+ [7,8,9]]
+	\end{lstlisting}
+	
+	Då kan man navigera listan genom att tänka sig rader och kolumner
+
+\end{frame}
+
+\section{Funktioner}
+
+\begin{frame}[fragile]
+	\frametitle{Funktioner}
+	
+	\begin{lstlisting}
+def min_funktion(var1, var2):
+    print(var1)
+    print(var2)
+    return var1+var2
+    
+print(min_funktion(2,3))
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{Pseudokod}
+
+\begin{frame}[fragile]
+	\frametitle{Pseudokod}
+	
+	Kod som ligger mellan vanligt språk och programkod.
+	
+	\begin{lstlisting}
+SET x TO 5
+WHILE x LESS THAN 10
+    SET x TO x+1
+END WHILE
+	\end{lstlisting}
+	
+	Det här är ett exempel på strukturerad engelska, som typ är pseudokod.
+	
+\end{frame}
+
+
+\end{document}

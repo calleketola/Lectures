@@ -1,0 +1,255 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{Input/Output}
+\author{Programmering 1}
+\date{2024/2025}
+
+\maketitle
+
+\section{input}
+
+\subsection{Ta emot text}
+
+\begin{frame}[fragile]
+	\frametitle{Input}
+	\framesubtitle{Att ta emot användarvärden}
+	
+	\begin{itemize}
+		\item För att göra ett program \textit{interaktivt} behöver användaren kunna ge \textit{input}
+	\end{itemize}
+	
+	\begin{lstlisting}
+namn = input("Skriv ditt namn")
+print("Hej", namn)
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Ta emot heltal}
+
+\begin{frame}[fragile]
+	\frametitle{Input}
+	\framesubtitle{Att ta emot tal}
+	
+	\begin{itemize}
+		\item Testa att skriva följande bit kod, kör den och se vad som händer
+	\end{itemize}
+	
+	\begin{lstlisting}
+tal = input("Skriv ett tal: ")
+nytt_tal = tal*2
+print("Om man dubblar ditt tal får man:", nytt_tal)
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Input}
+	\framesubtitle{Att ta emot tal}
+	
+	\begin{itemize}
+		\item Python antar \textbf{alltid} att man ger text
+		\item För att konvertera från text till ett heltal:
+	\end{itemize}
+	
+	\begin{lstlisting}
+tal = input("Skriv ett tal: ")
+tal = int(tal)
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item Nu kan du använda det som ett heltal
+		\item \texttt{int} är en förkortning av \textit{integer} som är engelska för heltal
+	\end{itemize}
+	
+\end{frame}
+
+\subsection{Att ta emot decimaltal}
+
+\begin{frame}[fragile]
+	\frametitle{Input}
+	\framesubtitle{Att ta emot decimaltal}
+	
+	\begin{itemize}
+		\item Testa ditt program igen, med förändringen att du \textit{konverterar} till ett heltal
+		\item Testa nu att skriva in talet 1.2
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Input}
+	\framesubtitle{Att ta emot tal}
+	
+	\begin{itemize}
+		\item \texttt{int} klarar bara av att konvertera text som bara innehåller siffror till tal
+		\item För att konvertera från text till ett decimaltal (flyttal):
+	\end{itemize}
+	
+	\begin{lstlisting}
+tal = input("Skriv ett tal: ")
+tal = float(tal)
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item Nu kan du använda det som ett decimaltal
+	\end{itemize}
+	
+\end{frame}
+
+\section{Output}
+
+\subsection{print}
+
+\begin{frame}[fragile]
+	\frametitle{Output}
+	\framesubtitle{print}
+	
+	\begin{itemize}
+		\item För att skriva ut saker använder du \lstinline{print()}
+		\item För att skriva ut flera saker kan du skriva \lstinline{print(a, b, c)}
+	\end{itemize}
+	
+\end{frame}
+
+\subsection{sep}
+
+\begin{frame}[fragile]
+	\frametitle{Output}
+	\framesubtitle{sep}
+	
+	\begin{itemize}
+		\item När du skriver ut flera saker kan du påverka vad som ska hända mellan bitarna.
+		\item Du kan styra vad kommatecknena ska visas som. Standard är ett mellanslag
+		\item Du lägger till \lstinline{, sep="..."} innan den avslutande parantesen
+	\end{itemize}
+	
+	\begin{lstlisting}
+print("Hej", "på", "dig", sep="!")
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{end}
+
+\begin{frame}[fragile]
+	\frametitle{Output}
+	\framesubtitle{end}
+	
+	\begin{itemize}
+		\item Ibland vill du inte att det ska göras en radbrytning efter en \lstinline{print()}
+		\item Då kan du lägga till \lstinline{, end="..."} innan den avslutande parantesen
+	\end{itemize}
+	
+	\begin{lstlisting}
+print("Hej", end=" ")
+print("på", end="?")
+print("dig", end="!")
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{f-strängar}
+
+\begin{frame}[fragile]
+	\frametitle{f-strängar}
+	\framesubtitle{Formatera strängar}
+	
+	\begin{itemize}
+		\item När du vill göra en utskrift som ska innehålla mycket text och variabler kan du använda en f-sträng
+		\item Det är viktigt att sätta ett \lstinline{f} framför det första citattecknet.
+		\item Sen markerar du varje variabel med måsvingar.
+	\end{itemize}	
+	
+	\begin{lstlisting}
+a = 12
+b = 6
+print(f"Det finns {b} positiva heltalsdelare till talet {a}")
+	\end{lstlisting}
+	
+\end{frame}
+
+\end{document}

@@ -1,0 +1,413 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Outline}
+	\begin{multicols}{2}
+		\tableofcontents[currentsection]
+	\end{multicols}
+\end{frame}
+}
+
+
+\title{Sköldpaddsprogrammering}
+\date{2024/2025}
+
+\maketitle
+
+\section{Kommandon}
+
+\subsection{Förflyttning}
+
+\begin{frame}
+	\frametitle{Kommandon}
+	\framesubtitle{Förflyttning}
+	
+	Här är en lista med kommandon som flyttar på paddan:
+	
+	\begin{tabular}{ll}
+		\lstinline{forward(x)} & Går x steg framåt\\
+		\lstinline{back(x)} & Går x steg bakåt\\
+		\lstinline{right(x)} & Roterar x grader medurs\\
+		\lstinline{left(x)} & Roterar x grader moturs\\
+		\lstinline{setposition((x,y))} & Placerar paddan i position (x,y)\\
+		\lstinline{setheading(x)} & Roterar paddan till x grader
+	\end{tabular}
+	
+\end{frame}
+
+\subsection{Andra kommandon}
+
+\begin{frame}
+	\frametitle{Kommandon}
+	\framesubtitle{Andra kommandon}
+	
+	\begin{tabular}{ll}
+		\lstinline{penup()} & Slutar rita\\
+		\lstinline{pendown()} & Börjar rita\\
+		\lstinline{color("färg")} & Ändrar färgen\\
+		\lstinline{begin_fill()} & \\
+		\lstinline{end_fill()} & \\
+		\lstinline{fillcolor('färg')} & Ändrar den inre färgen\\
+		\lstinline{shape('turtle')} & Ändrar formen till en padda\\
+		\lstinline{clear()} & Tömmer skärmen
+	\end{tabular}
+	
+\end{frame}
+
+\section{Interaktivitet}
+
+\subsection{Här är vi}
+
+\begin{frame}[fragile]
+	\frametitle{Interaktivitet}
+	\framesubtitle{Statiskt program}
+	
+	Än så länge har vi gjort våra program \textit{statiska} --- det gör alltid samma sak när vi kör dem. Om vi vill kunna ändra hur det beter sig under körning så måste vi ta emot \textit{input} från användaren.
+	
+	Exempel med en stjärna:
+	
+	\begin{lstlisting}
+spetsar = 0
+totala_spetsar = 5
+while spetsar < totala_spetsar:
+    forward(50)
+    left(180-180/totala_spetsar)
+    spetsar = spetsar+1
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Mål}
+
+\begin{frame}[fragile]
+	\frametitle{Interaktivitet}
+	\frametitle{Anändarinput}
+	
+	Nu vill vi göra något sånt här:
+	
+	\begin{lstlisting}
+spetsar = 0
+totala_spetsar = # ANVÄNDAR INPUT
+while spetsar < totala_spetsar:
+    forward(50)
+    left(180-180/totala_spetsar)
+    spetsar = spetsar+1
+	\end{lstlisting}
+	
+	\pause
+	
+	Här kan vi märka att vi kommer långt på att använda variabler istället för att \textit{hårdkoda}.
+	
+\end{frame}
+
+\section{Input}
+
+\subsection{Ta emot text}
+
+\begin{frame}[fragile]
+	\frametitle{Input}
+	\framesubtitle{Ta emot text}
+	
+	Om man vill ta emot text från användaren använder vi oss utav \textit{funktionen} \texttt{input()}.
+	
+	\begin{lstlisting}
+namn = input("Vad heter du? ") # Tar emot text
+print("Hej", namn) # Skriver ut
+	\end{lstlisting}
+	
+	\pause
+	
+	\begin{lstlisting}
+Vad heter du? Calle
+Hej Calle
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Input}
+	\frametitle{input-kommandot}
+	
+	\begin{lstlisting}
+namn = input("Vad heter du? ") # Tar emot text
+print("Hej", namn) # Skriver ut
+	\end{lstlisting}
+	
+	\texttt{input(x)} fungerar som att den skriver ut \texttt{x} i \textit{konsolen} och pausar programmet tills användaren trycker på \texttt{Enter}. Då sparas texten man skrivit i en variabel. I det här fallet \texttt{namn}.
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Input}
+	\frametitle{input-kommandot}
+	
+	\begin{lstlisting}
+namn = input("Vad heter du? ") # Tar emot text
+ålder = input("Hur gammal är du? ")
+print("Hej", namn, ålder) # Skriver ut namn + ålder
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+Vad heter du? Calle
+Hur gammal är du? 32
+Hej Calle 32
+	\end{lstlisting}
+
+\end{frame}
+
+\section{Datatyper}
+
+\subsection{Varför olika datatyper}
+
+\begin{frame}[fragile]
+	\frametitle{Datatyper}
+	\framesubtitle{Varför datatyper?}
+	
+	\begin{itemize}
+		\item Python gör skillnad på talet 3 och siffran 3 eftersom Python inte kan veta om du menar ett tal eller om du faktiskt vill skriva text. Därför måste man hålla koll på vad man vill ge sina variabler för sorts värden.
+	
+		\item När vi ritade ville vi att alla våra variabler skulle innehålla \textbf{tal}. När vi frågar efter någons namn vill vi spara det som text.
+	
+		\item Text och tal vill man kunna hantera olika. Vi vill kunna räkna med tal och vi vill kunna formatera text.
+	\end{itemize}
+	
+\end{frame}
+
+\subsection{Tre datatyper}
+
+\begin{frame}
+	\frametitle{Datatyper}
+	\frametitle{Tre datatyper}
+	
+	\begin{tabular}{ll}
+		\texttt{int} & Heltal, \textit{integer}\\
+		\texttt{float} & Flyttal/decimaltal\\
+		\texttt{string} & Text		
+	\end{tabular}
+	
+	Sen finns det fler som vi kommer till senare.
+	
+\end{frame}
+
+\subsection{Växla mellan datatyper}
+
+\begin{frame}[fragile]
+	\frametitle{Datatyper}
+	\framesubtitle{Växla mellan datatyper}
+	
+	Om man vill ändra ett objekts datatyp skriver man så här:
+	
+	\begin{lstlisting}
+a = 3 # En int
+b = float(a) # Blir en float
+c = str(a) # Blir en sträng
+d = int(c) # Blir en int
+	\end{lstlisting}
+	
+	Om man vill kontrollera ett objekts datatyp skriver man så här:
+	
+	\begin{lstlisting}
+type(a)
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Ta emot tal}
+
+\begin{frame}[fragile]
+	\frametitle{Ta emot tal med input}
+	
+	När man använder \texttt{input()} så sparar Python alltid värdet man skickar in som en text-sträng. För att göra om det till ett tal (\texttt{int} eller \texttt{float}) kan vi göra så här:
+	
+	\begin{lstlisting}
+ålder = input("Hur gammal är du? ") # Sparar som str
+ålder = int(ålder) # Konverterar till int
+print("Din ålder är", ålder)
+	\end{lstlisting}	
+
+\end{frame}
+
+\section{Interaktivitet}
+
+\subsection{Vi var här}
+
+\begin{frame}[fragile]
+	\frametitle{Interaktivitet}
+	\framesubtitle{Vi var här}
+	
+	\begin{lstlisting}
+spetsar = 0
+totala_spetsar = 5
+while spetsar < totala_spetsar:
+    forward(50)
+    left(180-180/totala_spetsar)
+    spetsar = spetsar+1
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Användarinput}
+
+\begin{frame}[fragile]
+	\frametitle{Interaktivitet}
+	\framesubtitle{Användarinput}
+	
+	\begin{lstlisting}
+spetsar = 0
+totala_spetsar = input("Hur många spetsar på stjärnan? ")
+totala_spetsar = int(totala_spetsar)
+while spetsar < totala_spetsar:
+    forward(50)
+    left(180-180/totala_spetsar)
+    spetsar = spetsar+1
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{Övningar}
+
+\subsection{Blad 1}
+
+\begin{frame}
+	\frametitle{Övningar}
+	\framesubtitle{Blad 1}
+	
+	\begin{enumerate}
+		\item Fortsätt med \texttt{turtle2.py} från förra lektionen.
+		\item Justera den så att användaren anger antalet hörn på månghörningen.
+		\item Justera den så att användaren anger antalet spetsar på stjärnan.
+		\item Skriv ett nytt program som tar emot din ålder skriver hur många månader och hur många dagar du har levt.
+		\item Utveckla ditt program så att det skriver ut vilket år du är född. (Det är ok om man får fel på ett år med folk födda sent på året)
+		\item Utveckla ditt program så att det tar emot din grannes ålder och räknar ut er gemensamma ålder.
+		\item Utveckla programmet så att det tar emot en tredje ålder och skriver ut när du fyller/fyllde så mycket.
+	\end{enumerate}
+
+\end{frame}
+
+\subsection{Interaktivitet x2}
+
+\begin{frame}[fragile]
+	\frametitle{Övningar}
+	\framesubtitle{Tangent-input}
+	
+	\begin{lstlisting}
+listen()
+onkey(fram, 'Up')
+onkey(bak, 'Down')
+onkey(vänster, 'Left')
+onkey(höger, 'Right')
+mainloop()
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Övningar}
+	\framesubtitle{Tangent-input}
+	
+	\begin{lstlisting}
+def fram():
+    forward(10)
+def bak():
+    back(10)
+def vänster():
+    left(15)
+def höger():
+    right(15)
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Övningar}
+	\framesubtitle{Blad 2}
+	
+	\begin{itemize}
+		\item Lägg till att du kan styra sköldpaddan med piltangenterna
+		\item Lägg till att sköldpaddan kan ''hoppa'' framåt när man trycker på space
+	\end{itemize}
+	
+\end{frame}
+
+
+
+\end{document}
+
+

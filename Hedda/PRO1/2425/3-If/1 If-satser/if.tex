@@ -1,0 +1,349 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=LundaHimmel, fg=StabilaLila}
+\setbeamercolor{palette quaternary}{bg=LundaGroen, fg=MagnoliaRosa}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+	\begin{multicols}{2}
+    		\tableofcontents[currentsection]
+	\end{multicols}
+\end{frame}
+}
+
+\title{if-satser}
+\author{Programmering 1}
+\date{2024/2025}
+
+\maketitle
+
+\section{if}
+
+\subsection{IRL}
+
+\begin{frame}[fragile]
+\frametitle{Om}
+	
+	\lstinline{if}-satser, eller villkorsuttryck, är något av det mest grundläggande begreppen inom programmering. Ofta vill man bara göra något om något kriterium är uppfyllt.
+	
+	Till exempel:
+	
+	\begin{verbatim}
+Jag vaknar.
+Om klockan är mycket går jag upp.
+	\end{verbatim} \pause
+	
+	Eller:
+	
+	\begin{verbatim}
+Telefonen plingar..
+Om jag INTE är på lektion svarar jag.
+	\end{verbatim}
+
+\end{frame}
+
+\subsection{Kod}
+
+\begin{frame}[fragile]
+	\frametitle{I kod}
+	
+	I Python löser man den här typen av problem med \lstinline{if}-satser.
+	
+	\begin{lstlisting}
+namn = input("Vad heter du? ")
+if namn == "Calle":
+    print("Det är ett coolt namn!")
+	\end{lstlisting}
+	
+	\pause
+	
+	\begin{lstlisting}
+a = input("Hur många Pokémon finns det? ")
+a = int(a)
+if a > 151:
+    print("Njae. Några av dem måste vara påhittade.")
+if a < 151:
+    print("Du saknar några.")
+if a == 151:
+    print("På pricken!")
+	\end{lstlisting}
+
+\end{frame}
+
+\subsection{Operatorer}
+
+\begin{frame}
+\frametitle{Jämförelseoperatorer}
+
+	\begin{center}
+		\begin{tabular}{| c | l |}
+			\hline
+			Symbol 			& Betydelse\\ \hline
+			\lstinline{==}		& Lika med\\
+			\lstinline{!=}		& Inte lika med\\
+			\lstinline{>}		& Större än\\
+			\lstinline{<}		& Mindre än\\
+			\lstinline{>=}		& Större eller lika med\\
+			\lstinline{<=}		& Mindre eller lika med\\
+			\hline
+		\end{tabular}
+	\end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Exempel}
+
+	\begin{lstlisting}
+x = input("x = ")
+y = input("y = ")
+
+x, y = int(x), int(y)
+
+if x > y:
+    print("x är större än y")
+if x < y:
+    print("y är större än x")
+if x > y*2:
+    print("x är mer än dubbelt så stort som y")
+	\end{lstlisting}
+
+\end{frame}
+
+\subsection{Format}
+
+\begin{frame}[fragile]
+	\frametitle{Format}
+	
+	Som regel kan man säga att en \lstinline{if}-sats är uppbyggd så här:
+	
+	\begin{lstlisting}
+if villkor:
+    # Gör saker 
+\end{lstlisting}
+
+Om villkoret är sant så händer det som står undertill. Python markerar vad som hör ihop i samma ''block'' med hjälp av indentering. Det är det som både är skrivet under och är indraget som körs.
+
+\end{frame}
+
+\subsection{Bool}
+
+\begin{frame}[fragile]
+	\frametitle{Bool}
+	
+	
+	\begin{itemize}
+		\item Ibland vill man lagra om ett villkor högre upp i programmet har uppfyllts. Då kan man göra det med en variabel som kallas \lstinline{bool}
+		\item En \lstinline{bool} kan bara ha två olika värden:
+			\begin{enumerate}
+				\item \texttt{True} (Sant)
+				\item \texttt{False} (Falskt)
+			\end{enumerate}
+		\item Det finns en hel gren inom matematik som berör bools (eller booleans) som kallas för boolesk algebra
+	\end{itemize}
+	
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Exempel}
+	
+	\begin{lstlisting}
+primtal = True
+tal = int(input("Skriv ett tal: "))
+i = 2
+while i < tal:
+    if tal%i == 0: # Kolal om det gick att dela emd något
+        primtal = False
+if primtal == True:
+    print(tal, "är ett primtal")
+if primtal == False:
+    print(tal, "är inte ett primtal")
+	\end{lstlisting}
+
+\end{frame}
+
+\section{NOT, AND och OR}
+
+\subsection{NOT}
+
+\begin{frame}[fragile]
+	\frametitle{Exempel}
+	
+	Man kan också skriva om något är falskt:
+	
+	\begin{lstlisting}
+namn = input ("Skriv namn här\n")
+if not namn == "Calle":
+    print("Vem är du ens?")
+if namn != "Calle":
+    print("Detta är samma som ovan")
+flagga = False
+if flagga == False:
+    print("Detta är ett nonsens program")
+	\end{lstlisting}
+
+\end{frame}
+
+\subsection{AND}
+
+\begin{frame}[fragile]
+	\frametitle{AND}
+	
+	\begin{itemize}
+		\item Ibland vill man att flera saker ska vara sanna samtidigt för att något ska hända. Till exempel kan man bara gå på en date om båda vill. Om någon av de två inte vill så blir det ingen date.
+	\end{itemize}
+	
+	\begin{lstlisting}
+if villig1 and villig2:
+    date(person1, person2)
+	\end{lstlisting}
+	\pause
+	
+	Det finns så klart matematiska exempel med.
+	
+	\begin{lstlisting}
+tal_1 = input("Skriv ett tal: ")
+tal_2 = input("Skriv ett till tal: ")
+tal_1, tal_2 = int(tal_1), int(tal_2)
+if tal_1 == 3 and tal_2 == 3:
+    print("Båda talen är tre")
+	\end{lstlisting}
+\end{frame}
+
+\subsection{OR}
+
+\begin{frame}[fragile]
+	\frametitle{OR}
+	
+	Ibland vill man att något av alla villkor ska vara sant, exempelvis om hus A eller hus B brinner så ska man ringa brandkåren. Brinner båda husen ringer vi också. Brinner inget av husen behöver vi inte göra något.
+	\pause
+	Matten finns här igen och kan ge oss ett konkret exempel:
+	\begin{lstlisting}
+tal = int(input())
+if tal == 2 or tal == 3:
+    print("Ditt tal är superbra!")
+	\end{lstlisting} \pause
+	
+	I ett rum med flera lampknappar. Vill man ha \texttt{AND} eller \texttt{OR}?
+
+\end{frame}
+
+\subsection{X-OR}
+
+\begin{frame}[fragile]
+	\frametitle{X-OR}
+	
+	X-OR, som används i belysning, är inte särskilt vanligt i Python och har inte någon annan inbyggt operator än \^\, . Men förstår man \texttt{X-OR} så förstår man troligtvis \texttt{AND} och \texttt{OR}.
+	
+	XOR betyder Exclusive OR och returnerar bara sant om bara den ena av två är sanna.
+	
+	\begin{verbatim}
+Om lampknapp1 av och lampknapp2 av:
+    släckt
+Om lampknapp1 på och lampknapp2 av:
+    tänt
+Om lampknapp1 på och lampknapp2 på:
+    släckt
+Om lampknapp1 av och lampknapp2 på:
+    tänt
+	\end{verbatim}
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+\frametitle{Övningar}
+
+Utgå från filen \texttt{if1.py} på Classroom.
+
+\begin{enumerate}
+	\item Gör om koden så att programmet tar emot vilka tal som helst som \lstinline{x}, \lstinline{y} och \lstinline{z} av användaren.
+	\item Få programmet att kontrollera om två av talen är lika.
+	\item Få programmet att kolla om alla tre talen är lika.
+	\item Skriv ett program som tar emot ett namn och kollar om det är "Julius Caesar".
+	\item Justera ditt program så att det inte spelar någon roll om man skriver med små eller stora bokstäver.
+	\item Implementera en \texttt{X-OR}-metod, alltså ett program som tar emot två variabler, som är 1 eller 0, och skriver ut Sant om bara en är 1.
+	\item Gör samma sak med bara en \lstinline{if}-sats.
+\end{enumerate}
+
+\end{frame}
+
+
+
+\end{document}

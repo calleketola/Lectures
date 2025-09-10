@@ -1,0 +1,42 @@
+Bestäm antalet spelare
+
+Blanda kortleken
+
+Lägg tre nedvända kort framför varje spelare
+Lägg tre uppåtvända kort framför varje spelare
+
+Dela ut tre kort till varje spelare
+
+(Vi skippar fasen med att man får justera sina uppåtvända kort just nu)
+
+Lägg ett uppåtvänt kort på bordet
+
+MEDAN ingen spelare har vunnit
+
+	OM Aktiv spelare har kort på handen
+		Aktiv spelare väljer ett kort på handen
+	
+	ANNARS OM det finns uppåtvända kort framför aktiv spelare
+		Aktiv spelare väljer ett av de uppåtvända korten framför sig
+	ANNARS
+		Aktiv spelare väljer ett av de nedåtvända korten
+
+	Aktiv spelare lägger det valda kortet på det uppåtvända kortet
+
+	OM det spelade kortet är en tia:
+		Släng högen med spelade kort
+		OM det finns kort kvar att dra
+			Aktiv spelare drar ett nytt kort
+	ANNARS OM det spelade kortet är en tvåa:
+		OM det finns kort kvar att dra
+			Aktiv spelare drar ett nytt kort
+	ANNARS OM det spelade kortet är lägre än det översta kortet i högen:
+		Aktiv spelare får plocka upp hela högen med spelade kort
+	ANNARS
+		OM det finns kort kvar att dra
+			Aktiv spelare drar ett nytt kort
+
+	OM aktiv spelare inte har några kort på handen eller framför sig
+		Aktiv spelare vinner
+	ANNARS OM det spelade kortet inte är en tia
+		Nästa spelare blir aktiv spelare

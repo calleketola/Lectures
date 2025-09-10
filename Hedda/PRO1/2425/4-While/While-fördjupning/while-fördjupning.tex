@@ -1,0 +1,243 @@
+\documentclass{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+\lstset{language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{orange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4
+    %frame=L
+}
+\lstset{language=Python} 
+
+\usefonttheme{serif}
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\title{While-fördjupning}
+\date{ht 20}
+\author{Programmering 1}
+
+\maketitle
+
+\begin{frame}[fragile]
+\frametitle{While}
+\framesubtitle{Medan något gör något}
+
+\begin{itemize}
+\item Medan glaset inte fullt $\Rightarrow$ häll i vatten
+\item Medan hungrig $\Rightarrow$ ät
+\item Medan lov $\Rightarrow$ njut
+\item Medan ej i mål $\Rightarrow$ fortsätt spring
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{While}
+\framesubtitle{Exempel}
+
+\begin{lstlisting}
+i = 0
+while i < 10:
+    print(i)
+    i += 1
+\end{lstlisting}
+
+\pause
+
+\begin{lstlisting}
+svar = ""
+while svar.lower() != "kattastrof":
+    svar = input("Vad kallas det när en katt gör fel? ")
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+
+Man kan ha flera villkor i en \texttt{while}-loop:
+
+\begin{lstlisting}
+a = 1
+b = 1
+while a < 10 and b < 10:
+    print(a,b)
+    a+=1
+    b*=a
+\end{lstlisting}
+\pause
+\begin{lstlisting}
+a = 1
+b = 1
+while a < 10 or b < 10:
+    print(a,b)
+    a+=1
+    b*=a
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{While}
+\framesubtitle{Break}
+
+Ibland vill man avbryta en loop om något särskilt händer. Då kan man använda sig utav kommandot \texttt{break} som avbryter loopen.
+
+\begin{lstlisting}
+a = 1
+while a <= 100:
+    print(a)
+    a += 5
+    if a%13==0:
+        break
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{While}
+\framesubtitle{Break}
+
+\texttt{break} anses av somliga vara onödigt och att det bör undvikas i största möjliga mån.
+
+\begin{lstlisting}
+a = 1
+while a <= 100 and a%13!=0:
+    print(a)
+    a += 5
+\end{lstlisting}
+
+Den här kodsnutten har samma resultat som den övre.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{While}
+\framesubtitle{Else}
+
+\begin{lstlisting}
+i = 0
+while i < 10:
+  print(i)
+  i += 1
+else:
+ print(i, "elsad")
+\end{lstlisting}
+
+Här kan vår \texttt{else} verka helt onödig. Men om vi kombinerar den med \texttt{break}.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{While}
+\framesubtitle{Else}
+
+\begin{lstlisting}
+i = 0
+while i < 10:
+  print(i)
+  i += 1
+  if input("Sluta? ") == "j":
+    break
+else:
+ print(i, "elsad")
+\end{lstlisting}
+
+Om man avbryter loopen nu innan \texttt{i = 10} så kommer \texttt{else} inte att hända.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{While}
+\framesubtitle{Else}
+
+\texttt{break} anses av somliga vara onödigt och att det bör undvikas i största möjliga mån. Men det finns fall där det är särskilt användbart att använda.
+
+\lstinputlisting{while-else.py}
+
+\pause
+
+Detta är en möjlighet eftersom \texttt{while} egentligen är en tillkonstlad \texttt{if}-sats.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{While}
+\framesubtitle{Else}
+
+Följande kod har samma resultat som den förra:
+
+\begin{lstlisting}
+variabel = ""
+försök = 0
+while variabel.lower() != "chokladbollar":
+    variabel = input("Bästa sortens bollar? ")
+    if variabel.lower() == "fotboll":
+        print("Lägg av.")
+        break
+    försök += 1 
+    if variabel.lower() == "chokladbollar":
+        print("Få saker slår chokladbollar.")
+print("Du svarade", försök, "gång(er).")
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Övningar}
+\framesubtitle{While-loopar}
+
+Utgå från filen \texttt{while-fördjupning.py} på vklass.
+
+\begin{enumerate}
+\item Justera programmet så att om \texttt{i} är jämnt så ska \texttt{i} öka med 3 istället för 1.
+\item De två \texttt{while}-looparna skiljer sig en aning. Varför blir den ena loopen oändlig?
+\item Skriv ett program som frågar efter din ålder och säger att det är fel om du inte svarar med ett heltal och sen frågar igen tills det blir rätt.
+\item Skriv ett program som skriver ut alla Fibonacci-tal upp till 100. (1, 1, 2, 3, 5, 8, 13 ...)
+\item Skriv ett program som skriver ut alla bokstäver i alfabetet med en loop. (Tips kolla upp \href{https://docs.python.org/2/library/functions.html#chr}{chr()})
+\item Skriv ett program som loopar och tar emot ett ord och kollar om det är exakt ''admin''. Om det är fel ord ska det fråga igen. Om det är rätt ord, eller om man bara klickar enter så ska programmet svara: ''Lösenordet accepterat'' respektive ''Inloggning avbruten''.
+\end{enumerate}
+
+\end{frame}
+
+\end{document}

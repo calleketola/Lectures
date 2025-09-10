@@ -1,0 +1,282 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=LundaHimmel, fg=StabilaLila}
+\setbeamercolor{palette quaternary}{bg=LundaGroen, fg=MagnoliaRosa}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+    
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+    	\tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{Sortering}
+\date{vt 23}
+\author{Programmering 1}
+
+\maketitle
+
+\section{Sorteringsalgroritmer}
+
+\begin{frame}
+	\frametitle{Vad är en sorteringsalgoritm?}
+	
+	\begin{itemize}
+		\item En sorteringsalgoritm är ett system för att sortera element
+		\item Varierande komplexitet
+		\item Varierande hastighet
+		\item Varierande minnesanvändning
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Varför ska vi lära oss det här?}
+	
+	\begin{itemize}
+		\item Det finns färdiga funktioner. Så varför?
+		\pause
+		\item Förståelse: det krävs mycket kunskap för att genomföra
+		\item Utmanande: många algoritmer är tekniskt svåra
+	\end{itemize}
+	
+\end{frame}
+
+\section{Aktivitet}
+
+\begin{frame}
+	\frametitle{Aktivitet}
+	\framesubtitle{Sortera kort}
+	
+	\begin{itemize}
+		\item Du kommer att få tretton kort, Ess--Kung (1--13)
+		\item Blanda korten
+		\item Sortera korten i storleksordning
+		\item Hur gjorde du?
+		\item Varför gjorde du så?
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Min gissning på er algoritm}
+	\framesubtitle{Insertion sort}
+	
+	\begin{enumerate}
+		\item Första kortet är ''rätt''
+		\item lägg på rätt sida om första
+		\item stoppa in på rätt plats, bland de ordnade
+		\item stoppa in på rätt plats, bland de ordnade
+		\item ...
+	\end{enumerate}	
+	
+\end{frame}
+
+\section{Komplexitet}
+
+\begin{frame}
+	\frametitle{Komplexitet}
+	
+	\begin{itemize}
+		\item Tidskomplexitet handlar förenklat om hur många jämförelser som behöver göras
+		\item Om du loopar igenom en lista \(n\)-gånger är tidskompexiteten \(O(n)\)
+		\item Har du en loop i en loop och loopar igenom \(n\) gånger för varje element i listan är tidskompexiteten \(O(n^2)\)
+		\item Minneskomplexitet är hur mycket datorminne som går åt.
+		\item Man brukar mäta två två sätt:
+		\begin{enumerate}
+			\item Total minnesåtgång
+			\item Extra minnesåtgång
+		\end{enumerate}
+		\item Här nedan kommer exemplena bara vara med extra åtgång.
+		\item Skapar man ingen extra lista för att sortera så är komplexiteten \(O(1)\)
+	\end{itemize}
+	
+\end{frame}
+
+\section{Sorteringsalgoritmer}
+
+\begin{frame}
+	\frametitle{Olika sorteringsalgoritmer}
+	
+	\begin{itemize}
+		\item Bubble Sort
+		\item Insertion Sort
+		\item Selection Sort
+		\item Quick Sort
+	\end{itemize}
+	
+\end{frame}
+
+\subsection{Bubble Sort}
+
+\begin{frame}
+	\frametitle{Bubble Sort}
+	
+	\begin{itemize}
+		\item Intuitiv algoritm
+		\item Lätt att implementera
+		\item Tidskomplexitet: \(O(n^2)\) (väldigt långsam)
+		\item Minneskomplexitet: \(O(1)\) (minneseffektiv)
+	\end{itemize}
+	
+	\begin{enumerate}
+		\item Jämför första elementet med sin granne till höger
+		\item Ordna de två elementen i storleksordning
+		\item Jämför nästa två element o.s.v.
+		\item Upprepa för alla element i listan
+	\end{enumerate}
+	
+\end{frame}
+
+\subsection{Insertion Sort}
+
+\begin{frame}
+	\frametitle{Insertion Sort}
+	
+	\begin{itemize}
+		\item Intuitiv algoritm
+		\item Tidskomplexitet: \(O(n^2)\) (väldigt långsam)
+		\item Minneskomplexitet: \(O(1)\) (minneseffektiv)
+	\end{itemize}
+	
+	\begin{enumerate}
+		\item Anta att första elementet är rätt
+		\item Bubble sorta de två första elementen
+		\item Bubble sorta tills det tredje är på rätt plats 
+		\item Upprepa för alla element i listan
+	\end{enumerate}
+	
+\end{frame}
+
+\subsection{Selection Sort}
+
+\begin{frame}
+	\frametitle{Selection Sort}
+	
+	\begin{itemize}
+		\item Intuitiv algoritm
+		\item Tidskomplexitet: \(O(n^2)\) (väldigt långsam)
+		\item Minneskomplexitet: \(O(1)\) (minneseffektiv)
+	\end{itemize}
+	
+	\begin{enumerate}
+		\item Hitta det största elementet i listan
+		\item Placera det sist
+		\item Hitta näst största elementet och placera näst sist
+		\item Upprepa för alla element i listan
+	\end{enumerate}
+
+\end{frame}
+
+\subsection{Quick Sort}
+
+\begin{frame}
+	\frametitle{Quick Sort}
+	
+	\begin{itemize}
+		\item Rekursiv algoritm
+		\item Tidskomplexitet: \(nO(n)\) (väldigt långsam)
+		\item Minneskomplexitet: \(O(1)\) (minneseffektiv)
+	\end{itemize}
+	
+	\begin{enumerate}
+		\item Välj ett element i listan
+		\item Placera alla element mindre än det valda före och alla större efter
+		\item Välj ett element ur den nedre halvan och upprepa
+		\item Välj ett element ur övre halvan och upprepa
+	\end{enumerate}
+
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+	\frametitle{Övningar}
+	
+	\begin{enumerate}
+		\item Implementera Bubble Sort
+		\item Implementera Insertion Sort
+		\item Implementera Selection Sort
+		\item Implementera Quick Sort
+		\item Implementera Stalin Sort
+	\end{enumerate}
+
+\end{frame}
+
+
+\end{document}

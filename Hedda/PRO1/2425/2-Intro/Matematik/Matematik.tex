@@ -1,0 +1,517 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+	\begin{multicols}{2}
+    		\tableofcontents[currentsection]
+	\end{multicols}
+\end{frame}
+}
+
+\title{Matematik i Python}
+\date{2024/2025}
+
+\maketitle
+
+\section{Tal}
+
+\subsection{int \& float}
+
+\begin{frame}
+\frametitle{Tal}
+\framesubtitle{Två sorters tal}
+
+Python har två grundläggande sätt att spara ner tal på:
+\begin{enumerate}
+	\item Heltal, \texttt{int}
+	\item Flyttal, \texttt{float}
+\end{enumerate}
+
+\end{frame}
+
+\subsection{Basen 2}
+
+\begin{frame}
+\frametitle{Basen 2}
+\framesubtitle{Heltal}
+
+Datorn jobbar i ettor och nollor --- alltså basen 2. Det går fin fint att beskriva alla heltal i bas 2:
+\[ \begin{aligned}
+1_{10} &= 1_2\\
+2_{10} &= 10_2\\
+3_{10} &= 11_2\\
+4_{10} &= 100_2
+\end{aligned}
+\]
+\pause
+\[
+\underbrace{207_{10}}_{2\cdot10^2+7\cdot10^0} = \underbrace{1100111_2}_{2^7+2^6+2^3+2^2+2^1+2^0}
+\]
+\end{frame}
+
+\subsection{Decimaltal}
+
+\begin{frame}
+\frametitle{Basen 2}
+\framesubtitle{Decimaltal}
+
+Precis som heltal beskrivs i bas 10 med \( 27_{10} = 2\cdot 10^1+7\cdot 10^0\) så beskrivs decimaltal likadant:
+\[ \begin{aligned}
+	0.1_{10} & = \dfrac{1}{10^1} = 10^{-1}\\
+	0.27_{10} & = 2\cdot\dfrac{1}{10^1} + 7\cdot\dfrac{1}{10^2} = 2\cdot 10^{-1}+7\cdot10^{-2}
+\end{aligned}
+\] \pause
+I bas 2:
+\[ \begin{aligned}
+	0.1_2 	& = 2^{-1} = \dfrac{1}{2}\\
+	0.101_2 	& = 2^{-1}+2^{-3} = \dfrac{1}{2}+\dfrac{1}{2^3} = \dfrac{5}{8} = 0.625_{10}
+\end{aligned} \]
+
+\end{frame}
+
+\subsection{Bråk}
+
+\begin{frame}
+\frametitle{Problematik}
+\framesubtitle{Bråkiga bråk}
+
+Bas 10 klarar inte av att representera alla bråk vi kan föreställa oss. Ett typexempel är:
+\[ \frac{1}{3} = 0.333333333... \] \pause
+I bas 3 är tredjedelar en baggis:
+\[ \frac{1}{3} = 0.1_3, \frac{5}{3} = 1.2_3 \]
+
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Problematik}
+	\framesubtitle{Bråkiga bråk}
+	
+	Bas 10 har problem med bråk som inte innehåller nämnarna 2 eller 5.\\
+	På samma sätt har bas 2 problem med alla bråk som inte har nämnaren 2. Till exempel går det inte att beskriva \( 0.1_{10}=\dfrac{1}{10} \) som ett bråk i bas 2. Skulle vi försöka skulle det bli något så här:
+	\[
+		\begin{aligned}
+		 0.1_{10} 	& = \dfrac{1}{2^4}+ \dfrac{1}{2^5}+\dfrac{1}{2^8}+\dfrac{1}{2^9}+\dfrac{1}{2^{12}}... 
+		  		& = 0.000110011001_2...
+		 \end{aligned}
+	 \]
+\end{frame}
+ 
+\subsection{Avrundningsfel}
+ 
+\begin{frame}[fragile]
+	\frametitle{Problematik}
+	\framesubtitle{Talet \(0.1_{10}\) }
+	
+	Detta kan leda till en del avrundningsfel.
+	
+	\begin{lstlisting}
+tal = 0
+a = 0
+while a <10:
+    tal += 0.1
+    a   += 1
+print(tal)
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+0.9999999999999999
+	\end{lstlisting}
+	Men det borde ha blivit 1.
+\end{frame}
+
+\section{Att räkna}
+
+\begin{frame}
+\frametitle{Matematiska beräkningar}
+\framesubtitle{Det fyra räknesätten}
+
+När vi jobbar med \texttt{int} och \texttt{float} vill vi ibland använda oss utav vanlig matte:
+
+	\begin{center}
+		\begin{tabular}{| rl |}
+			\hline
+			Addition: 		& \texttt{+}\\
+			Subtraktion:	& \texttt{-}\\
+			Multiplikation:	& \texttt{*}\\
+			Division:		& \texttt{/}\\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	De här kommandona följer de vanliga prioriteringsreglerna:
+	\begin{enumerate}
+		\item Paranteser
+		\item Potenser
+		\item Multiplikation \& division
+		\item Addition \& subtraktion
+	\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Matematiska beräkningar}
+	\framesubtitle{De fyra räknesätten}
+	
+	\begin{lstlisting}
+>>> 6+2
+8
+>>> 6-2
+4
+>>> 6*2
+12
+>>> 6/2
+3
+	\end{lstlisting}
+
+\end{frame}
+
+\subsection{Prioritering}
+
+\begin{frame}[fragile]
+	\frametitle{Matematiska beräkningar}
+	\framesubtitle{Prioritering}
+
+	\begin{lstlisting}
+>>> 5*(3+2)-6/3+1
+24.0
+	\end{lstlisting} \pause
+	
+	\[ \begin{aligned}
+			& 5\cdot(3+2)-\frac{6}{3}+1 = \\
+		= 	& 5 \cdot 5- \frac{6}{3}+1 = \\
+		=	& 25-2+1 = \\
+		= & 24
+	\end{aligned} \]
+
+\end{frame}
+
+\subsection{Division}
+
+\begin{frame}[fragile]
+	\frametitle{Matematiska beräkningar}
+	\framesubtitle{Division}
+	
+	Division i Python generar som regel en \texttt{float}. Vill man undvika detta och tvinga resultatet att bli ett heltal finns det två sätt:
+	\begin{lstlisting}
+>>> int(8/3)
+2
+>>> 8//3 # Detta kallas för floor-division
+2
+	\end{lstlisting}
+	
+	Värt att notera är att Python stryker alla decimaler och inte avrundar. Om man vill avrunda uppåt kan man \pause lägga till en halv:
+	
+	\begin{lstlisting}
+>>> int(8/3+0.5)
+3
+	\end{lstlisting}
+
+\end{frame}
+
+\subsection{Rest vid division}
+
+\begin{frame}[fragile]
+	\frametitle{Matematiska beräkningar}
+	\framesubtitle{Rest vid division}
+	
+	I vissa sammanhang är man mest intresesrad av resten när man dividerar:
+	
+	\begin{lstlisting}
+>>> 4%3
+1
+>>> 9%3
+0
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Matematiska beräkningar}
+	\framesubtitle{Potenser}
+	
+	Potenser skrivs i Python med \lstinline{**}:
+	
+	\begin{lstlisting}
+>>> 2**3
+8
+>>> 25**(1/2)
+5.0
+>>> 2**(-2)
+0.25
+\end{lstlisting} \pause
+Använder man \^{} istället för \lstinline{**} händer följande:
+	\begin{lstlisting}
+>>> 2^5
+7
+>>> 9^10
+3
+	\end{lstlisting}
+
+\end{frame}
+
+\subsection{Bitwise XOR}
+
+\begin{frame}
+	\frametitle{Potenser}
+	\framesubtitle{\^{}-kommandot}
+	Det som händer när man skriver 2\^{}7 är att Python jämför de båda talens binära representation bit för bit.
+	\[ \begin{aligned}
+		2_{10}  & = 010_2\\
+		7_{10}  & = 111_2 \pause \\
+		\textcolor{blue}{0}10 & \text{\hspace{1em}De är olika}\\
+		\textcolor{blue}{1}11 & \rightarrow \textcolor{blue}{1}\\ \pause
+		0\textcolor{blue}{1}0 & \text{\hspace{1em}De är lika}\\
+		1\textcolor{blue}{1}1 & \rightarrow 1\textcolor{blue}{0} \\ \pause
+		01\textcolor{blue}{0} & \text{\hspace{1em}De är olika}\\
+		11\textcolor{blue}{1} & \rightarrow 10\textcolor{blue}{1} \\
+		101_2 & =5_{10}
+	\end{aligned} \]
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Potenser}
+	\framesubtitle{Bitwise X-OR}
+	
+	\begin{lstlisting}
+>>> 2^7
+5
+	\end{lstlisting}
+	
+	Detta kallas för en ''bitwise x-or'', (exclusive or). XOR innebär att BARA den ena parten ska vara sann. Ett vardagsexempel är att lampor med flera lampknappar. Vi pratade om detta när vi pratade om \texttt{if}-satser.
+	
+	En bitwise operator jämför två objekt, i det här fallet tal, en bit i taget.
+
+\end{frame}
+
+\section{Matematik bibliotek}
+
+\subsection{math}
+
+\begin{frame}[fragile]
+	\frametitle{Math}
+	
+	Vill man ha lite större matematiska muskler i Python kan man importera bilbioteket \lstinline{Math} som följer med när man installerar Python.
+	
+	\begin{lstlisting}
+import math	# Laddar biblioteket
+print(math.pi) # Skriver ut en approximation på pi
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+3.141592653589793
+	\end{lstlisting}
+	
+	Saknar man de komplexa talen kan man importera \lstinline{cmath} istället
+
+\end{frame}
+
+\subsection{Scipy \& Numpy}
+
+\begin{frame}[fragile]
+	\frametitle{Scipy \& Numpy}
+	
+	Utöver \lstinline{math} och \lstinline{cmath} så är de två biblioteken \lstinline{scipy} och \lstinline{numpy} populära. Namnen står för ''Scientific Python'' och ''Numerical Python'' och används bland annat på Lunds universitet i matematikforskningen.
+
+	\begin{itemize}
+		\item Numpy: är tänkt att innehålla arrayer och allt som är nödvändigt för dessa
+		\item Scipy: är tänkt att innehålla matematiska funktioner
+	\end{itemize}
+
+\end{frame}
+
+\section{Funktioner}
+
+\subsection{Funktion i matematik}
+
+\begin{frame}
+	\frametitle{Funktioner}
+	\framesubtitle{Matematisk funktion}
+	
+	\begin{equation*}
+		\begin{aligned}
+			f(x) = & 5x^2+3\\
+			g(x) = & 2x-1
+		\end{aligned}
+	\end{equation*}
+	\pause
+	\begin{equation*}
+		\begin{aligned}
+			f(0) = & 5\cdot 0^2 +3 = 3\\ \pause
+			g(4) = & 2\cdot 4 - 1 = 8 - 1 = 7\\ \pause
+			f(g(x)) = & 5\cdot g(x)^2+3 = 5\cdot (2x-1)^2+3
+		\end{aligned}
+	\end{equation*}
+	
+\end{frame}
+
+\subsection{Funktioner i Python}
+
+\begin{frame}[fragile]
+	\frametitle{Funktioner}
+	\framesubtitle{Funktioner i Python}
+	
+	För att skapa en funktion i Python skriver vi:
+	
+	\begin{lstlisting}
+def f(x):
+    return 5*x**2+3
+
+def g(x):
+    return 2*x-1
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Funktioner}
+	\framesubtitle{Använda funktioner}
+	
+	\begin{lstlisting}
+def dubbla(a):
+    return 2*a
+    
+ålder = input("Hur gammal är du? ")
+ålder = int(ålder)
+
+d_ålder = dubbla(ålder)
+print(d_ålder, "är dubbelt så gammalt")
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Funktion i en funktion}
+
+\begin{frame}[fragile]
+	\frametitle{Derivering}
+
+	\[g(x)=x^2+3x+4\]
+	
+	\begin{lstlisting}
+def g(x):
+  return x**2+3*x+4
+  
+def derivata(f, x):
+  h = 2**(-10)
+  return (f(x+h)-f(x))/h
+	\end{lstlisting}
+	
+	Varför skriver jag \(h=2^{-10}\) istället för \(h=0.001\)?
+
+\end{frame}
+
+\section{Övningar}
+
+\subsection{Del A}
+
+\begin{frame}
+	\frametitle{Övningar}
+	\framesubtitle{Del A}
+	
+	Utgå från filen \lstinline{Matematik.py}
+	
+	\begin{enumerate}
+		\item Justera programmet så att det tar emot två decimaltal och räknar ut medelvärdet av dem.
+		\item Utveckla programmet så att det också delar \lstinline{tal1} med \lstinline{tal2}.
+		\item Låt programmet nu ta medelvärdet upphöjt till det delade talet (\lstinline{tal1/tal2}).
+		\item Kom ihåg 0.1+0.1... Vart uppstår det första synliga avrundningsfelet? När blir det rätt igen?
+		\item Skriv ett program som konverterar ett heltal i bas tio till bas 2.
+	\end{enumerate}
+
+\end{frame}
+
+\subsection{Del B}
+
+\begin{frame}
+	\frametitle{Övningar}
+	\framesubtitle{Del B}
+	
+	\begin{enumerate}
+		\setcounter{enumi}{5}
+		\item Använd funktionen omkrets och skriv kod som tar emot en radie från användaren och skriver ut omkretsen
+		\item Skapa en funktion som tar emot ett heltal och returnerar resten när man delar med tre.
+		\item Skapa en funktion som tar emot två tal och skriver ut resten när man delar första talet med det andra talet.
+	\end{enumerate}
+
+\end{frame}
+
+\end{document}

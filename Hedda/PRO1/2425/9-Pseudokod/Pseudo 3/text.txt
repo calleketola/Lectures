@@ -1,0 +1,26 @@
+Ma1c
+
+3417 (Funktioner)
+Den ideala pulsen P hjärtslag / min för en person som joggar beräknas enligt en modell genom att subtrahera 176, med fyra femtedelar av joggarens ålder, x år.
+
+a) Skriv formeln för P
+b) Vilken är den ideala pulsen för en joggande 25-åring?
+c) För vilken ålder är den joggarens idealapuls 120 slag/min?
+d) Peter påstår att en 50-åring har 15 % lägre ideal puls än en 20-åring enligt modellen. Visa att han har rätt.
+
+
+
+3420 (Ränta och amortering)
+Ett bostadslån på 250 000 kr har räntan 7,20 %. Ränta och amortering ska betalas en gång per år. Lånet ska avbetalas med lika stora amorteringar i 20 år.
+a) Hur stort belopp ska betalas in vid den fjärde amorteringen?
+b) Skriv en formel som visar det belopp som ska betalas in vid amortering nummer x.
+[c) Hur mycket kommer att betalas totalt i ränta?]
+
+
+Bertil kastar boll och kastar ALLTID lika högt. När han kastar bollen så kan man beskriva dens höjd över marken (mätt i meter) efter x sekunder med följande formel:
+2.2+0.57x-0.09x^2.
+a) Vilken är bollens högsta höjd?
+b) När är den som högst?
+c) När slår den i marken?
+
+

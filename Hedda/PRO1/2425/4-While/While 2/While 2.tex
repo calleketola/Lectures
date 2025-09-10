@@ -1,0 +1,235 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+    	\tableofcontents[currentsection]
+\end{frame}
+}
+
+
+\title{While-loopar}
+\date{2024/25}
+\author{Programmering 1}
+
+\maketitle
+
+\section{While}
+
+\subsection{While}
+
+\begin{frame}[fragile]
+	\frametitle{While-loopen}
+	
+	While loopen består av ett villkor och ett block.
+	
+	\begin{lstlisting}
+a = 0
+while a < 10:
+    print(a)
+    a += 1
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{break}
+
+\begin{frame}[fragile]
+	\frametitle{break}
+	
+	Om man vill avbryta en loop i förtid kan man använda kommandot \code{break}
+	
+	\begin{lstlisting}
+while True:
+    tal1 = input("Skriv ett tal: ")
+    tal2 = input("Skriv ett till tal: ")
+    tal1 = float(tal1)
+    tal2 = float(tal2)
+    
+    if tal2 == 0:
+        print("Åh nej")
+        break
+    print(tal1/tal2)
+    
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{turtle}
+
+\subsection{Förflyttning}
+
+\begin{frame}
+	\frametitle{Kommandon}
+	\framesubtitle{Förflyttning}
+	
+	Här är en lista med kommandon som flyttar på paddan:
+	
+	\begin{tabular}{ll}
+		\code{forward(x)} & Går x steg framåt\\
+		\code{back(x)} & Går x steg bakåt\\
+		\code{right(x)} & Roterar x grader medurs\\
+		\code{left(x)} & Roterar x grader moturs\\
+		\code{setposition((x,y))} & Placerar paddan i position (x,y)\\
+		\code{setheading(x)} & Roterar paddan till x grader
+	\end{tabular}
+	
+\end{frame}
+
+\subsection{Andra kommandon}
+
+\begin{frame}
+	\frametitle{Kommandon}
+	\framesubtitle{Andra kommandon}
+	
+	\begin{tabular}{ll}
+		\code{penup()} & Slutar rita\\
+		\code{pendown()} & Börjar rita\\
+		\code{color(''färg'')} & Ändrar färgen\\
+		\code{begin_fill()} & \\
+		\code{end_fill()} & \\
+		\code{fillcolor('färg')} & Ändrar den inre färgen\\
+		\code{shape('turtle')} & Ändrar formen till en padda\\
+		\code{clear()} & Tömmer skärmen
+	\end{tabular}
+	
+\end{frame}
+
+\subsection{Exempel}
+
+\begin{frame}[fragile]
+	\frametitle{Turtle}
+	\framesubtitle{Kort exempel}
+	
+	\begin{lstlisting}
+from turtle import *
+
+# Kod som ritar en triangel
+hörn = 0
+while hörn < 3: 
+    forward(100)
+    left(120)
+    hörn += 1
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+\frametitle{Övningar 1}
+
+	\begin{enumerate}
+		\item Rita en kvadrat
+		\item Rita en sexhörning
+		\item Rita fem sexhörningar på rad
+		\item Rita en femuddig stjärna i hörnet på varje sexhörning
+		\item Utgå från Fibbonacci-serien och rita en spiral
+		\item Skriv en kod som skriver ut alla primtal upp till 1000.
+		\item I bordsrollspelet Eon kastar man flera sexsidiga tärningar för att se om en handling lyckas. Varje gång man slår en sexa så plockar man bort den tärningen och kastar två nya. Skulle någon av de nya tärningarna visa en sexa så upprepar man proceduren. Skriv ett program som frågar efter hur många tärningar användaren vill kasta och som sen kastar tärningarna, enligt reglerna ovan, och räknar ut det totala resultatet.
+	\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Övningar 2}
+	
+	\begin{enumerate}
+		\setcounter{enumi}{7}
+		\item För att hitta nollstället till en funktion kan man använda sig utav derivatan. Om funktionens värde i ett \(x\) är positivt och derivatan i den punkten är negativ så vet du att du antingen har ett nollställe eller en extrempunkt till höger. På samma sätt, om derivatan är positivt så finns nollstället eller extrempunkten till vänster. Motsvarande resonemang kan användas för negativa värden på funktionen. Implementera \textit{Eulers metod} för att hitta ett nollställe till funktionen \(y=f(x)=0.125 x^4-0.5 x^3+2 x^2-2 x^1-5\)
+		
+		Formeln för derivatan är: \[\lim_{h\rightarrow0}\dfrac{f(x+h)-f(x)}{h}\]
+		
+		\item Hitta funktionens minsta värde
+	\end{enumerate}
+	
+\end{frame}
+
+
+
+\end{document}

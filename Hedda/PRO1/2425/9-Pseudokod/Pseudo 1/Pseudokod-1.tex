@@ -1,0 +1,300 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=LundaHimmel, fg=StabilaLila}
+\setbeamercolor{palette quaternary}{bg=LundaGroen, fg=MagnoliaRosa}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+    
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+    	\tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{Pseudokod}
+\date{vt 25}
+\author{Programmering 1}
+
+\maketitle
+
+\section{Pseudokod}
+
+\begin{frame}
+Pseudokod är lite förenklat kod som en människa kan läsa.
+
+Eftersom olika programmeringsspråk struktureras lite olika så finns det inget bestämt sätt att skriva pseudokod.
+\end{frame}
+
+\begin{frame}
+Det finns lite olika idéer om hur pseudokod ska skrivas. Somliga vill ha det väldigt nära språket man programmerar i medan andra vill ha det lite mer frånkopplat och allmänt.
+\end{frame}
+
+\subsection{Ett exempel}
+
+\begin{frame}[fragile]
+
+\begin{lstlisting}
+a = 1
+for i in range(10):
+  a = a*i
+\end{lstlisting}
+
+\begin{lstlisting}
+a <- 1
+repeat x10:
+  a <- a*i
+\end{lstlisting}
+
+Från pseudokoden kan vi inte säga om det är en \code{while}-loop eller en \code{for}-loop
+
+\end{frame}
+
+\subsection{Hitta längsta ordet}
+
+\begin{frame}[fragile]
+	\frametitle{Hitta längsta ordet}
+	\framesubtitle{Pseudokod}
+
+	Följande algoritm hittar det längsta ordet i en lista med text.
+
+	\begin{lstlisting}[language=TeX]
+Ta emot en lista
+Skapa variabeln "längst" och sätt till första ordet i listan
+Skapa variabeln "i" och sätt till 1
+Upprepa så länge "i" är mindre än längden på listan
+    Om längden av ordet på plats i är större än längden av "längst"
+        Sätt "längst" till ordet på plats "i"
+    Öka variabeln "i" med 1
+Skriv ut variabeln "längst"
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Hitta längsta ordet}
+	\framesubtitle{Strukturerad engelska}
+
+	Strukturerad engelska är ett mellanting mellan Pseudokod och vanlig engelska:
+
+	\begin{lstlisting}[language=TeX]
+GET lista
+SET längst TO first element
+SET i TO 1
+DO WHILE i LESS THAN length of lista
+    IF length of lista at position i MORE THAN length of längst
+        THEN SET längst TO lista at position i
+    END IF
+    ADD 1 TO i
+PRINT längst
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Hitta längsta ordet}
+	\framesubtitle{Tolkning}
+
+	Här är en tolkning av de två Pseudokoderna tidigare
+
+	\begin{lstlisting}
+lista = [...] # Vi antar att vi får en lista med ord
+längst = lista[0] # Längden av första ordet
+i = 1
+while i < len(lista):
+    if len(lista[i]) > len(längst):
+        längst = lista[i]
+    i += 1
+print(längst) # Skriver ut längsta ordet
+	\end{lstlisting}
+
+\end{frame}
+
+\subsection{Bubble Sort}
+
+\begin{frame}[fragile]
+\frametitle{Bubblesort, steg 1}
+\framesubtitle{Pseudokod}
+
+Följande algoritm beskriver det första steget i algoritmen Bubble Sort:
+
+\begin{lstlisting}[language=TeX]
+Ta emot en lista
+Skapa variabeln i och sätt till 0
+Upprepa så länge i är mindre än längden på listan minus 1:
+  Om listan plats i är större än listan plats i+1:
+    Byt plats på listan plats i med listan plats i+1
+  Öka i med 1
+\end{lstlisting}
+
+\end{frame}
+
+\section{Strukturerad engelska}
+
+\begin{frame}[fragile]
+	\frametitle{Bubblesort, steg 1}
+	\framesubtitle{Strukturerad engelska}
+
+Strukturerad engelska är ett mellanting mellan Pseudokod och vanlig engelska:
+
+\begin{lstlisting}[language=TeX]
+BUBBLE SORT STEP 1
+GET lista
+SET i TO 0
+DO WHILE i LESS THAN length of lista minus 1
+	IF lista position i is greater than lista position i+1
+		THEN swap lista position i with lista position i+1 
+	END IF
+	ADD 1 TO i
+END WHILE
+\end{lstlisting}
+
+\end{frame}
+
+\section{Tolkningen}
+
+\begin{frame}[fragile]
+	\frametitle{Bubblesort, steg 1}
+	\framesubtitle{Pythonkod}
+
+\begin{lstlisting}
+def BubbleSort(lista):
+  i = 0
+  while i < len(lista)-1:
+    if lista[i] > lista[i+1]:
+      lista[i], lista[i+1] = lista[i+1], lista[i]
+    i += 1
+\end{lstlisting}
+
+\end{frame}
+
+\section{Strukturerad engelska}
+
+\begin{frame}[fragile]
+	\frametitle{Bubblesort, hela}
+	\framesubtitle{Strukturerad engelska}
+
+\begin{lstlisting}[language=TeX]
+BUBBLE SORT HELA
+GET lista
+SET j TO 0
+DO WHILE j LESS than length of lista minus 1
+    SET i TO 0
+    DO WHILE i LESS than length of lista minus 1
+	    IF lista position i is greater than lista position i+1
+		    THEN swap lista position i with lista position i+1 
+	    END IF
+	    ADD 1 to i
+    END WHILE
+    ADD 1 to j
+END WHILE
+\end{lstlisting}
+
+\end{frame}
+
+\section{Tolkningen}
+
+\begin{frame}[fragile]
+	\frametitle{Bubblesort, hela}
+	\framesubtitle{Pythonkod}
+
+\begin{lstlisting}
+def BubbleSort(lista):
+    j = 0
+    while i < len(lista)-1:
+        i = 0
+        while i < len(lista)-1:
+            if lista[i] > lista[i+1]:
+                lista[i], lista[i+1] = lista[i+1], lista[i]
+            i += 1
+        j += 1
+\end{lstlisting}
+
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+	\frametitle{Övningar}
+	
+	\begin{itemize}
+		\item Utgå från filen \texttt{pseudokod-1.py} på Classroom
+	\end{itemize}	
+
+\end{frame}
+
+
+\end{document}

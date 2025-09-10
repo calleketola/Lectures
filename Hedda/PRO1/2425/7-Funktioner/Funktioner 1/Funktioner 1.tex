@@ -1,0 +1,338 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=LundaHimmel, fg=StabilaLila}
+\setbeamercolor{palette quaternary}{bg=LundaGroen, fg=MagnoliaRosa}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+    
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+    	\tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{Funktioner}
+\date{24/25}
+\author{Programmering 1}
+
+\maketitle
+
+\section{Funktioner}
+
+\subsection{Inbyggda funktioner}
+
+\begin{frame}[fragile]
+	\frametitle{Inbyggda funktioner}
+	\framesubtitle{Exempel}
+
+	I Python finns det en hel del inbyggda funktioner, exempelvis:
+	
+	\begin{lstlisting}
+max(x)
+min(x)
+len(x)
+print(x)
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Funktioner}
+	\framesubtitle{Exempel}
+
+	\begin{lstlisting}
+import random
+# Den här koden skapar en slumpad lista och skriver ut saker om den
+min_lista = [random.randint(0,99) for i in range(10)]
+print(min_lista)
+print(f"Största värdet är {max(min_lista)} i listan")
+print(f"Minsta värdet är {min(min_lista)} i listan")
+print(f"Längden på listan är {len(min_lista)} element")
+	\end{lstlisting}
+
+\end{frame}
+
+\subsection{Argument}
+
+\begin{frame}[fragile]
+	\frametitle{Argument}
+	\framesubtitle{}
+	
+	De flesta funktionerna tar emot variabler som \textit{argument}, även kallat \textit{parametrar}. En funktion kan ta emot flera argument, exempelvis:
+	
+	\begin{lstlisting}
+range(start,slut,steg)
+max(a,b,c,d,e,f)
+	\end{lstlisting}
+	
+	Eller inga argument:
+
+	\begin{lstlisting}
+print()
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{Skapa egna funktioner}
+
+\begin{frame}[fragile]
+	\frametitle{Skapa egna funktioner}
+	\framesubtitle{def}
+	
+	I Python kan du skapa dina egna funktioner så här:
+
+	\begin{lstlisting}
+def min_funktion():
+  # Här skriver du kod du vill ska hända
+	\end{lstlisting}
+
+När du har skapat en funktion kan du anropa den själv, som om den vore inbyggd: 
+
+	\begin{lstlisting}
+min_funktion()
+	\end{lstlisting}
+
+\end{frame}
+
+\subsection{Argument}
+
+\begin{frame}[fragile]
+	\frametitle{Skapa egna funktioner}
+	\framesubtitle{Argument}
+Vill du skapa funktionen så att den tar emot argument och gör något med dem kan 
+du skriva så här: 
+
+	\begin{lstlisting}
+def dubbla(x): 
+  return 2*x
+	\end{lstlisting}
+Och nu kan du anropa funktionen så här: 
+
+	\begin{lstlisting}
+dubbla(5)
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{return}
+
+\begin{frame}[fragile]
+	\frametitle{Skapa egna funktioner}
+	\framesubtitle{return}
+	
+	Om du har en funktion där du vill att den ska göra något med värdet du skickar 
+in och sen ger dig en möjlighet att spara det nya värdet så behöver du använda dig utav \lstinline{return}:
+
+	\begin{lstlisting}
+def dubbla(x):
+  return 2*x
+
+a = dubbla(5)
+print(a)
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Exempel}
+
+\begin{frame}[fragile]
+	\frametitle{Skapa egna funktioner}
+	\framesubtitle{Exempel}
+	En funktion kan också vara mycket mer komplicerad än de som visats i exemplen hittills:
+	
+	\begin{lstlisting}
+def bubble_sort(lista):
+    for i in range(len(lista)): # Vi kommer att behöva gå igenom listan n gånger
+        for j in range(1,len(lista)-i): # Gå igenom varje tal
+            if lista[j-1] > lista[j]:  # Kolla om två grannar  är i fel ordning
+                # Byt plats på talen
+                temp = lista[j]
+                lista[j] = lista[j-1]
+                lista[j-1] = temp
+  return lista # Skickar tillbaka en sorterad lista
+	\end{lstlisting}
+\end{frame}
+
+\section{Scope}
+
+\subsection{Global vs. Local}
+
+\begin{frame}[fragile]
+	\frametitle{Scope}
+	\frametitle{Global vs. Local}
+	
+	När man skapar en variabel inuti en funktion så existerar den bara inuti den funktionen.
+
+	\begin{lstlisting}
+def skriv_ut_tal_till_10():
+  x = 1
+  while x <= 10:
+    print(x)
+    x += 1
+	\end{lstlisting}
+
+Nu finns variabeln \lstinline{x} bara inuti funktionen \lstinline{skriv_ut_tal_till_10}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Scope}
+	\framesubtitle{}
+	
+	Skulle vi däremot skapa en variabel utanför funktionen så kan man komma åt den i funktionen:
+	
+	\begin{lstlisting}
+def min_funktion():
+  a = 3+x
+  return a
+
+x = 5
+print(min_funktion())
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Scope}
+	\framesubtitle{}
+	
+	Vi kan däremot inte göra följande:
+	
+	\begin{lstlisting}
+def min_andra_funktion():
+  x += 3
+  return x
+
+x = 5
+print(min_andra_funktion())
+	\end{lstlisting}
+	
+	Kör vi den koden så får vi felmeddelandet \lstinline{UnboundLocalError: local variable 'x' referenced before assignment}. Lite förenklat kan man säga att man får se men inte röra.
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Scope}
+	
+	Dessutom så kan vi inte ändra på något som ligger utanför funktionen:
+	
+	\begin{lstlisting}
+def foo():
+  x = 1
+  return x
+
+x = 3
+print("x:", foo()
+print("x:", x)
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Scope}
+	\framesubtitle{Listor}
+	
+	Här är däremot listor ett stort undantag. Med listor kan man göra så som du inte kunde göra ovanför, och det behöver du akta dig för.
+	
+	\begin{lstlisting}
+def bar(a):
+  a.append(3)
+
+lista = [1,2]
+bar(lista)
+print(lista)
+	\end{lstlisting}
+
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+	\frametitle{Övningar}
+	
+	\begin{enumerate}
+ 		\item Skriv en egen funktion som tar emot två tal och räknar ut talet mitt mellan de båda talen (medelvärdet)
+ 		\item Skriv en egen funktion som tar emot en lista med tal och räknar ut medelvärdet av talen.
+  		\item Skriv en egen funktion som tar emot en textsträng och räknar ut hur många \lstinline{'a'} det finns i den.
+  		\item Utveckla funktionen så att den räknar ut hur många det finns av valfri bokstav.
+		\item Skriv en egen funktion som tar emot en lista med tal och skickar tillbaka det största talet i listan. (Använd inte \lstinline{max()})
+	\end{enumerate}
+	
+\end{frame}
+
+	
+\end{document}

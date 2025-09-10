@@ -1,0 +1,195 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+\lstset{language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{orange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4
+    %frame=L
+}
+\lstset{language=Python} 
+\lstset{backgroundcolor=\color{white}}
+
+\newcounter{uppgifter}
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\lstset{escapeinside={(*@}{@*)}}
+
+% NEW COMMANDS
+\AtBeginSection[ ]
+{
+\begin{frame}{Outline}
+\setbeamercolor{section in toc shaded}{fg=LundaGroen}
+\setbeamercolor{subsection in toc shaded}{fg=black}
+    \tableofcontents[currentsection]
+
+\end{frame}
+}
+
+
+\title{Programmering 1}
+\date{2024/2025}
+
+\maketitle
+
+\section{Lärare}
+
+\begin{frame}
+\frametitle{Programmering 1}
+\framesubtitle{Lärare}
+
+\begin{tabular}{ll}
+Lärare 1:& Calle Ketola\\
+		& calle.ketola@lund.se \\
+Lärare 2:& Enrique Zuloaga Hormazabal\\
+		& enrique.zuloagahormazabal@lund.se\\
+Plats: 	& C1111
+\end{tabular}
+
+\end{frame}
+
+\section{Om kursen}
+
+\subsection{Innehåll}
+
+\begin{frame}
+\frametitle{Programmering 1}
+\framesubtitle{Vad är det för kurs?}
+
+Vad har ni för förväntningar?\\ \pause
+Vad vi ska lära oss:\\
+\begin{itemize}
+\item if-satser
+\item loopar
+\item funktioner
+\item pseudokod
+\item program
+\end{itemize}
+
+Vi kommer att använda Python.
+
+\end{frame}
+
+\section{Installera Python}
+
+\begin{frame}
+	\frametitle{Programmering 1}
+	\framesubtitle{Installera Python}
+	
+	Hemsida: \url{http://www.python.org/}\\
+	Download \textbf{Python 3.12.5}\\
+	Följ instruktionerna och klicka i följande:\\
+	\begin{enumerate}
+		\item Install pip
+		\item Add to PATH
+	\end{enumerate}
+	
+	Det gör vårterminen mycket enklare.
+
+\end{frame}
+
+\section{Starta Python}
+
+\subsection{Skapa en ny fil}
+
+\begin{frame}
+
+\frametitle{Programmering 1}
+\framesubtitle{Komma igång}
+Olika sätt att skapa en fil:\\
+1. Win$\rightarrow$Python$\rightarrow$IDLE$\rightarrow$File$\rightarrow$New File\\
+2. Win$\rightarrow$IDLE$\rightarrow$File$\rightarrow$New File\\
+3. Skapa ett nytt textdokument $\rightarrow$ byt filändelsen till .py $\rightarrow$ Edit with IDLE
+
+\end{frame}
+
+\subsection{Öppna en Pythonfil}
+
+\begin{frame}
+	\frametitle{Programmering 1}
+	\framesubtitle{Öppna en fil}
+	
+	Om man vill öppna en Python-fil är det lättast att högerklicka och välja ''Edit with IDLE''
+	
+\end{frame}
+
+\subsection{Köra en Pythonfil}
+
+\begin{frame}
+	\frametitle{Programmering 1}
+	\framesubtitle{Köra en fil}
+	
+	Det finns tre sätt at köra en Python-fil i Windows:
+	
+	\begin{enumerate}
+		\item Öppna filen i IDLE och klicka \texttt{run}
+		\item Dubbelklicka på filen i Windows
+		\item Genom kommandotolken
+	\end{enumerate}
+	
+\end{frame}
+
+\end{document}
+
+

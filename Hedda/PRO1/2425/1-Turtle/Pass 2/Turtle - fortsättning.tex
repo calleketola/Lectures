@@ -1,0 +1,332 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{Sköldpaddsprogrammering}
+\date{2024/2025}
+
+\maketitle
+
+\section{Kommandon}
+
+\subsection{Förflyttning}
+
+\begin{frame}
+	\frametitle{Kommandon}
+	\framesubtitle{Förflyttning}
+	
+	Här är en lista med kommandon som flyttar på paddan:
+	
+	\begin{tabular}{ll}
+		\code{forward(x)} & Går x steg framåt\\
+		\code{back(x)} & Går x steg bakåt\\
+		\code{right(x)} & Roterar x grader medurs\\
+		\code{left(x)} & Roterar x grader moturs\\
+		\code{setposition((x,y))} & Placerar paddan i position (x,y)\\
+		\code{setheading(x)} & Roterar paddan till x grader
+	\end{tabular}
+	
+\end{frame}
+
+\subsection{Andra kommandon}
+
+\begin{frame}
+	\frametitle{Kommandon}
+	\framesubtitle{Andra kommandon}
+	
+	\begin{tabular}{ll}
+		\code{penup()} & Slutar rita\\
+		\code{pendown()} & Börjar rita\\
+		\code{color("färg")} & Ändrar färgen\\
+		\code{begin_fill()} & \\
+		\code{end_fill()} & \\
+		\code{fillcolor('färg')} & Ändrar den inre färgen\\
+		\code{shape('turtle')} & Ändrar formen till en padda\\
+		\code{clear()} & Tömmer skärmen
+	\end{tabular}
+	
+\end{frame}
+
+\section{Loopar}
+
+\begin{frame}[fragile]
+	\frametitle{Upprepningar}
+	
+	Om man vill rita en femhörning kan man göra så här:
+	
+	\begin{lstlisting}
+from turtle import * # Laddar turtle
+
+forward(100) # Gå framåt
+right(72) # Sväng höger
+forward(100)
+right(72)
+forward(100)
+right(72)
+forward(100)
+right(72)
+forward(100)
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Matten bakom siffrorna}
+
+\begin{frame}
+	\frametitle{Upprepningar}
+	\framesubtitle{Var kom 72 från?}
+
+\begin{equation*}
+	\begin{aligned}
+		\text{Vinkelsumma: } & 180\cdot(\text{hörn}-2)=\\
+		& 180\cdot(5-2)=\\
+		& 180\cdot3=540\\
+		\text{Innervinkel: } & \dfrac{540}{5}=108\\
+		\text{Yttervinkel: } & 180-108=72\\
+		\text{Alternativt: } & \dfrac{360}{5}=72
+	\end{aligned}
+\end{equation*}
+
+\end{frame}
+
+\subsection{Loop}
+
+\begin{frame}[fragile]
+	\frametitle{Upprepningar}
+	\framesubtitle{while}
+	
+	Vi kan förkorta förra slidens tio rader kod till sex rader och resultatet blir det samma:
+	
+	\begin{lstlisting}
+from turtle import * # Laddar turtle
+
+sidor = 0 # 
+
+while sidor < 5: 
+    forward(100) # Gå framåt
+    right(72) # Sväng höger
+    sidor = sidor + 1 #
+	\end{lstlisting}
+	
+Vad står \texttt{hörn} för?
+
+\end{frame}
+
+\subsection{while}
+
+\begin{frame}[fragile]
+	\frametitle{While}
+	
+	\begin{lstlisting}
+sidor = 0
+while sidor < 5:
+    sidor = sidor + 1
+	\end{lstlisting}
+	
+	En \lstinline{while}-loop körs så länge som villkoret högst upp är uppfyllt --- i det här fallet så länge som antalet ritade sidor är mindre än fem.
+	
+	\pause
+	
+	Vad hade hänt om man tog bort den sista raden?
+	
+\end{frame}
+
+\section{Smart programmering}
+
+\subsection{Startpunkt}
+
+\begin{frame}[fragile]
+	\frametitle{Smart programmering}
+	\framesubtitle{Här är vi}
+	
+	
+	\begin{lstlisting}
+from turtle import * # Laddar turtle
+
+sidor = 0 # 
+
+while sidor < 5: 
+    forward(100) # Gå framåt
+    right(72) # Sväng höger
+    sidor = sidor + 1 #
+	\end{lstlisting}
+	
+	Hur ska vi göra för att ändra till en sex-hörning (hexagon)?
+
+\end{frame}
+
+\subsection{Hexagon}
+
+\begin{frame}[fragile]
+	\frametitle{Smart programmering}
+	\framesubtitle{Hexagon}
+	
+	\begin{lstlisting}
+from turtle import * # Laddar turtle
+
+hörn = 0 # 
+
+while sidor < 6: 
+    forward(100) # Gå framåt
+    right(60) # Sväng höger
+    sidor = sidor + 1 #
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item Hur ska vi göra för att ändra till en åtta-hörning (octagon)?
+		\item Hur ska vi göra för att ändra till en \(n\)-hörning?
+	\end{itemize}
+
+\end{frame}
+
+\subsection{\(n\)-hörning}
+
+\begin{frame}[fragile]
+	\frametitle{\(n\)-hörning}
+	
+	\begin{center}
+	\includegraphics[width=.5\textwidth]{unicorn.jpg}
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Smart programmering}
+	\framesubtitle{\(n\)-hörning}
+	
+	\begin{lstlisting}
+from turtle import * # Laddar turtle
+
+sidor = 0 # Ritade sidor
+totala_sidor = 5 # sidor på figuren
+
+vinkel = 180-180*(totala_sidor-2)/totala_sidor
+
+while sidor < totala_sidor: # Så länge vi inte ritat alla sidor
+    forward(100) # Gå framåt
+    right(vinkel) # Sväng höger
+    sidor = sidor + 1 # Öka antalet ritade sidor
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{Övningar}
+
+\subsection{Blad 1}
+
+\begin{frame}
+	\frametitle{Övningar}
+	\framesubtitle{Blad 1}
+	
+	\begin{enumerate}
+		\item Ladda ner filen \texttt{turtle2.py} från Classroom
+		\item Justera den så att den kan rita ut n-hörningar
+		\item Justera den så att den kan rita ut n-uddiga stjärnor
+		\item Justera din kod så att den ritar ut en stjärna i mitten av din polygon
+		\item Justera din kod så att den ritar ut n-uddiga stjärnor i varje hörn på din polygon
+		\item Justera din kod så att den gör ett spiralmönster med stjärnor som får fler och fler uddar.
+	\end{enumerate}
+
+\end{frame}
+
+\subsection{Blad 2}
+
+\begin{frame}
+	\frametitle{Övningar}
+	\framesubtitle{Blad 2}
+	
+	\begin{enumerate}
+		\item Rita en spiral av kvadrater
+		\item Rita en von Koch-kurva
+	\end{enumerate}
+
+\end{frame}
+
+
+
+
+\end{document}
+
+

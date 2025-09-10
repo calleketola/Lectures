@@ -1,0 +1,235 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage[T1]{fontenc}
+\usepackage[swedish]{babel}
+
+\usepackage{graphicx} % support the \includegraphics command and options
+\usepackage{xcolor}
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+\usepackage{listings}
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+\usepackage{courier}
+
+\lstset{language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False, if, function, return, for, if, print, while, else, input},
+    keywordstyle=\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    %frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	%backgroundcolor=\color{white}
+    %frame=L
+}
+
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{Luffarschack}
+\author{Programmering 1}
+\date{2023/2024} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+
+\maketitle
+
+\section{Beskrivning}
+
+Luffarschack är ett spel som spelas av två personer på ett bräde med nio rutor --- tre rader och tre kolumner --- se figur \ref{b1}. Båda spelarna har var sin uppsättning brickor, ofta antingen \textbf{o} eller \textbf{x}, och målet med spelet är att få tre av sina egna brickor i rad. Under spelets gång turas spelarna om med att lägga ut sina brickor antingen tills någon har vunnit eller tills spelplanen är full.
+
+En spelare har vunnit när tre av dennes brickor formar en rät linje. Det kan vara tre i rad horizontellt, vertikalt eller diagonalt. Se figur \ref{b2} för ett exempel där spelare \textbf{x} har vunnit.
+
+\begin{figure}[ht!]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		 ~ &  ~ & ~\\ \hline
+		 ~ &  ~ & ~\\ \hline
+		 ~ &  ~ & ~\\ \hline
+	\end{tabular}
+	\caption{Ett $3\times 3$ bräde}
+	\label{b1}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		 X &  ~ & O\\ \hline
+		 O &  X & ~\\ \hline
+		 O &  X & X\\ \hline
+	\end{tabular}
+	\caption{Ett exempel där \textbf{X} har vunnit}
+	\label{b2}
+\end{figure}
+
+\subsection{Varianter}
+
+Det finns i alla fall två till varianter på spelet. I både de andra varianterna av spelet så har de båda spelarna bara vars tre brickor de får lägga ut. I den första varianten så får man --- efter att ha lagt ut alla sina tre brickor --- plocka upp valfri av ens egna brickor för att lägga på en ny position. I den andra varianten så måsta man plocka upp den bricka som legat på brädet längst. Båda varianterna slutar först när någon har vunnit.
+
+
+
+\section{Uppgiften}
+
+Din uppgift är att programmera spelet \textit{Luffarschack} med hjälp av den pseudokod som är angiven längre ner. Du kommer att ha fram till och med vecka 4 på dig att lösa uppgiften.
+
+Utöver att implementera pseudokoden kommer du att behöva kommentera \textit{varje} rad med kod i ditt program.
+
+\subsection{Syfte}
+
+Syftet med uppgiften är att vänja sig vid större projekt. Det här kommer att bli ett program på 86 rader kod, och framtida inlämningar kommer att vara minst så här stora. Det är även en övning i att hantera två-dimensionella listor, vilket också kommer att dyka upp i senare projekt, att kommentera sin kod är också ett viktigt steg för att förstå vad koden faktiskt gör. Ytterligare ett syfte med projektet är att öva på struktur och god programmeringssed. En strukturerad kod är väldigt användbar när du gör större projekt.
+
+\section{Pseudokod}
+
+\begin{lstlisting}
+function draw_board(board):
+    print " ___"
+    for row in board:
+        print "|"+row[0]+ row[1]+row[2]+"|"
+    print " ---"
+
+function check_victory(board, player):
+    for i := 0 to 3:
+        if row_victory(board, player, i):
+            return True
+        if col_victory(board, player, i):
+            return True
+    if dia_victory_1(board, player):
+        return True
+    if dia_victory_2(board, player):
+        return True
+    return False
+    
+function row_victory(board, player, row):
+    return board[row][0] = board[row][1] = board[row][2] = player
+    
+function col_victory(board, player, col):
+    return board[0][col] = board[1][col] = board[2][col] = player
+    
+function dia_victory_1(board, player):
+    return board[0][0] = board[1][1] = board[2][2] = player
+
+function dia_victory_2(board, player):
+    return board[2][0] = board[1][1] = board[0][2] = player
+
+function create_board():
+	board := []
+	for i := 0 to 3:
+	    board append []
+	    for j := 0 to 3:
+	        board append " "
+    return board
+    
+function take_position():
+    valid := False
+    while not valid:
+        print "Choose row: "
+        row := input
+        if row is integer and 1 <= row < 4:
+            valid := True
+    valid := False
+    while not valid:
+        print "Choose column: "
+        col := input
+        if col is integer and 1 <= col < 4:
+            valid := True
+    return (row-1, col-1)
+    
+board := create_board()
+player := "X"
+playing := True
+turn := 0
+draw := False
+
+while playing:
+    turn := turn + 1
+    draw_board(board)
+    print "Player "+player+"'s turn"
+    row, col := take_position()
+    while board[row][col] != " ":
+        print "Position taken, choose again"
+        row, col := take_position()
+    board[row][col] := player
+    if check_victory(board, player):
+        playing := False
+    else:
+        if player = "X":
+            player := "O"
+        else:
+            player := "X"
+    if turn = 9:
+        draw := True
+        playing := False
+
+draw_board(board)
+if not draw:
+    print "Player "+player+" has won!"
+else:
+    print("It's a draw")
+
+input 
+\end{lstlisting}
+
+\end{document}

@@ -1,0 +1,350 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+}
+
+
+\title{While-loopar}
+\date{2024/25}
+\author{Programmering 1}
+
+\maketitle
+
+\section{Upprepa}
+
+\subsection{if-satsen}
+
+\begin{frame}[fragile]
+	\frametitle{Upprepa}
+	\framesubtitle{If-satsen}
+	
+	Vi har tidigare kollat på \code{if}-satser: Om något, gör något. Typ:
+	
+	\begin{lstlisting}
+tal = input("Skriv ett tal: ")
+tal = int(tal)
+
+if tal > 10:
+    print("Ditt tal är skitstort!")
+	\end{lstlisting}
+	
+	Det vi ska kolla på idag är: ''Så länge något, gör något''
+
+\end{frame}
+
+
+\subsection{while}
+
+\begin{frame}[fragile]
+	\frametitle{Upprepa}
+	\framesubtitle{Så länge något}
+	
+	Tänk att vi har kodsnutten:
+	
+	\begin{lstlisting}
+tal = input("Skriv ett heltal: ")
+tal = int(tal)
+
+if tal != 0:
+    dubbel = tal*2
+    print(dubbel, "är dubbelt så mycket som", tal)
+	\end{lstlisting}
+	
+	Och så vill vi att programmet ska fortsätta att fråga tills vi är nöjda (och skriver 0).
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Upprepa}
+	\framesubtitle{Så länge något}
+	
+	\begin{lstlisting}
+tal = input("Skriv ett heltal: ")
+tal = int(tal) # Konverterar till heltal
+
+while tal != 0:
+    dubbel = tal*2 # Dubblar talet
+    print(dubbel, "är dubbelt så mycket som", tal)
+    tal = input("Skriv ett heltal: ")
+    tal = int(tal)
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Upprepa}
+	\framesubtitle{while}
+	
+	Vi kan också ha en kod som ska vi redan innan vet hur många gånger den ska upprepa. Då behöver vi en räknare, eller en \textit{iterator}. Det vanligaste är att man döper den variabeln till \code{i}.
+	
+	\begin{lstlisting}
+i = 0
+
+while i < 10:
+    print(i)
+    i += 1 # Jätteviktigt
+	\end{lstlisting}
+	
+	När man gör en \code{while}-loop är det viktigt att man uppdaterar någon av variablerna i villkoret. Annars fastnar man i en oändlig loop.
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Upprepa}
+	\framesubtitle{Antal iterationer}
+	
+	Vi kan låta användaren bestämma antalet iterationer:
+	
+	\begin{lstlisting}
+antal = input("Hur många tal vill du ha? ")
+antal = int(antal)
+i = 0
+
+while i < antal:
+    print(2**i)
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Loop i en loop}
+
+\begin{frame}[fragile]
+	\frametitle{Upprepa}
+	\frametitle{Loopa i en loop}
+	
+	\begin{lstlisting}
+i = 1
+while i < 11:
+    j = 1
+    while j < 11:
+        print(i, j, i*j, end=" | ") # !!
+        j += 1
+    i += 1
+    print()
+	\end{lstlisting}
+	
+	Vad händer på rad 5?
+
+\end{frame}
+
+\section{Speciella kommandon}
+
+\begin{frame}
+	\frametitle{Speciella kommandon}
+	
+	Det finns tre speciella kommandon som är kopplade till loopar i Python:
+	
+	\begin{enumerate}
+		\item \code{pass}
+		\item \code{continue}
+		\item \code{break}
+	\end{enumerate}
+	
+\end{frame}
+
+\subsection{Pass}
+
+\begin{frame}[fragile]
+	\frametitle{Speciella kommandon}
+	\framesubtitle{Pass}
+	
+	Kommandot \code{pass} används mest under tiden man bygger sitt program och vill testköra utan att behöva göra klart alla delar.
+	
+	\begin{lstlisting}
+i = 0
+while i < 10:
+    if i%2==0:
+        pass
+    i+=1
+	\end{lstlisting}
+	
+	Här vill vi att något särskilt ska hända när \code{i} är delbart med två, men vi har inte börjat skriva den delen än. Då kan vi använda \code{pass} direkt efter \code{if}-satsen för att förhindra ett \code{error}.
+	
+\end{frame}
+
+\subsection{Continue}
+
+\begin{frame}[fragile]
+	\frametitle{Speciella kommandon}
+	\framesubtitle{Continue}
+	
+	Kommandot \code{continue} kan användas för att få loopen att fortsätta med nästa iteration direkt. Detta är vanligare att använda i \code{for}-loopar som kommer senare.
+	
+	\begin{lstlisting}
+tal = int(input("Skriv: "))
+while tal != -1:
+    if tal == 0:
+        tal = int(input("Skriv inte 0: "))
+        continue
+    print(1/tal)
+    tal = int(input(tal))
+	\end{lstlisting}
+
+	Eftersom vi inte får dela med noll så behöver vi ta hand om det fallet. Här hade det också funnits andra lösningar.
+	
+\end{frame}
+
+
+\subsection{Break}
+
+\begin{frame}[fragile]
+	\frametitle{Speciella kommandon}
+	\framesubtitle{Break}
+	
+	Kommandot \code{break} kan användas för att avsluta loopen under en iteration.
+	
+	\begin{lstlisting}
+tal = int(input("Skriv: "))
+while tal != -1:
+    if tal == 0:
+        break
+    print(1/tal)
+    tal = int(input(tal))
+	\end{lstlisting}
+
+	Helst ska man försöka undvika att använda \code{break} för att avsluta en loop.
+	
+\end{frame}
+
+
+\section{Övningar}
+
+\subsection{Blad 1}
+
+\begin{frame}
+	\frametitle{Övningar}
+	\framesubtitle{Blad 1}
+	
+	\begin{enumerate}
+		\item Skriv en kod som skriver ut alla tal från 0 till 100
+		\item Skriv en kod som skriver ut talen 0.1, 0.2, 0.3 ... 1.0
+		\item Skriv en kod som skriver ut varannat tal från 10 till -10.
+		\item Skriv ut ettan till tolvans gångertabell.
+		\item Skriv en bit kod som skriver ut Fibonacci-serien upp till det hundrade talet (1, 1, 2, 3, 5, 8, 13...)
+		\item Skriv en loop som skriver ut A--Z (tips kolla upp \href{https://docs.python.org/3/library/functions.html\#chr}{\code{chr()}})
+		\item Skriv ett program som frågar efter ett lösenord. Om användaren skriver \texttt{admin} ska det svara \texttt{Lösenord accepterat} annars ska det fråga efter lösenordet på nytt.
+	\end{enumerate}
+
+\end{frame}
+
+\subsection{Blad 2}
+
+\begin{frame}[fragile]
+	\frametitle{Övningar}
+	\framesubtitle{Blad 2}
+	
+	Skriv ett program som frågar efter:
+	
+	\begin{itemize}
+		\item Lånebelopp
+		\item Räntesats
+		\item Amortering/år
+	\end{itemize}
+	
+	Och som sen skriver ut:
+	
+	\begin{itemize}
+		\item Tid för att betala tillbaka lånet
+		\item Totalt betalad ränta
+	\end{itemize}
+	
+	Ex:
+	
+	\begin{lstlisting}
+Hur mycket ska du låna? 2500000
+Vad är räntesatsen (i %)?  2
+Hur mycket ska du amortera? 60000
+Det kommer att ta dig 42 år att betala tillbaka lånet
+Du kommer att ha betalat 1066800 kr i ränta
+	\end{lstlisting}
+	
+	
+\end{frame}
+
+
+
+
+
+\end{document}

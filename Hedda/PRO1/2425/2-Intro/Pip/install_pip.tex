@@ -1,0 +1,120 @@
+\documentclass{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\begin{document}
+
+\begin{frame}
+\frametitle{Att använda Pip}
+\framesubtitle{Vad är Pip?}
+
+Pip är ett paketverktyg som hjälper en att installera och avinstallera olika bibliotek till Python. Pip kommer numera tillsammans med nya versioner av Python.
+\pause
+För att använda pip skriver man följande i kommandotolken:
+
+\texttt{pip install pygame}
+
+Vilket förhoppningsvis påbörjar nedhämtning och installation av pygame.
+\pause
+Det finns en risk att man får följande felmeddelande:
+
+\texttt{'pip' is not recognized as an internal or external command, operable program or batch file.}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Att använda pip}
+\framesubtitle{Lägga till python och pip i path}
+
+\texttt{Start->Kör}
+
+Skriv in \textit{sysdm.cpl} och sedan enter. \pause
+
+Gå till fliken \textit{Avancerat} och klicka på \textit{Miljövariabler...}
+
+I den nedre rutan, \textit{Systemvariabler} markera \texttt{Path} och välj \textit{Redigera}. \pause
+
+Tryck på \textit{Ny}. Skriv sedan in adressen till python och pip exempelvis:
+
+\texttt{C:\char`\\Users\char`\\Calle\char`\\AppData\char`\\Roaming\char`\\Programs\char`\\}
+\texttt{Python\char`\\Python37-32}
+
+för att kunna köra python direkt från konsolen. \pause Den här adressen varierar från dator till dator och ligger där Python är installerat. För att få pip att fungera på samma sätt lägger vi till:
+
+\texttt{C:\char`\\Users\char`\\Calle\char`\\AppData\char`\\Roaming\char`\\Programs\char`\\}
+\texttt{Python\char`\\Python37-32\char`\\Scripts}
+
+Tryck sen på \textit{Ok}.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Att använda pip}
+\framesubtitle{Hitta Python och pip}
+
+I Windows10 kan det vara svårt att hitta Pythons filväg så för att göra det kan man göra på följande vis:
+
+\begin{enumerate}
+\item Start
+\item Skriv Python
+\item Högerklicka på Python 3.7
+\item Öppna filsökväg
+\item Högerklicka och öppna filsökväg igen
+\item Markera adressfälten och kopiera adressen
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Att använda pip}
+\framesubtitle{Lägga till python och pip i path}
+
+\texttt{Start->Kör}
+
+Skriv in \textit{sysdm.cpl} och sedan enter. \pause
+
+Gå till fliken \textit{Avancerat} och klicka på \textit{Miljövariabler...}
+
+I den nedre rutan, \textit{Systemvariabler} markera \texttt{Path} och välj \textit{Redigera}. \pause
+
+Tryck på \textit{Ny}. Skriv sedan in adressen till python och pip exempelvis:
+
+\texttt{C:\char`\\Users\char`\\Calle\char`\\AppData\char`\\Roaming\char`\\Programs\char`\\}
+\texttt{Python\char`\\Python37-32}
+
+för att kunna köra python direkt från konsolen. \pause Den här adressen varierar från dator till dator och ligger där Python är installerat. För att få pip att fungera på samma sätt lägger vi till:
+
+\texttt{C:\char`\\Users\char`\\Calle\char`\\AppData\char`\\Roaming\char`\\Programs\char`\\}
+\texttt{Python\char`\\Python37-32\char`\\Scripts}
+
+Tryck sen på \textit{Ok}.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Att använda pip}
+\framesubtitle{Pip-kommandon}
+
+Från kommandotolken: (\texttt{Start->cmd})
+
+\begin{tabular}{ll}
+\textbf{Kommando} 	& \textbf{Användning}\\
+\texttt{pip install ''paket''} & installerar ''paket''\\
+\texttt{pip uninstall ''paket''} & avinstallerar ''paket''
+\end{tabular}
+
+\vspace{1cm}
+
+För mer: \url{https://pip.pypa.io/en/stable/}
+
+\end{frame}
+
+\end{document}

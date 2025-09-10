@@ -1,0 +1,479 @@
+\documentclass{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc} % For extended characters
+\usepackage[T1]{fontenc} % makes å,ä,ö etc. proper symbols
+\usepackage{amsmath} % More mathsymbols
+\usepackage{graphicx} % Better graphics
+\usepackage{xcolor} % Better colours
+\usepackage{listings} % Better verbatim
+\usepackage{multicol} % Better columns
+\usepackage{hyperref} % clickable links
+\hypersetup{colorlinks,linkcolor=}
+\usepackage[swedish]{babel} % Set language
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaHimmel}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+\lstset{language=Python,%C++,[LaTeX]Tex
+    morekeywords={PassOptionsToPackage,selectlanguage,assert,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{orange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4
+    %frame=L
+}
+%\lstset{language=Python} 
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\title{\texttt{if}, \texttt{elif}, \texttt{else}}
+
+\author{Programmering 1}
+
+\maketitle
+
+\section{Repetition}
+
+\subsection{if}
+
+\begin{frame}[fragile]
+\frametitle{Repetition}
+\framesubtitle{if}
+
+Om vi ville att något skulle hända enbart vid om ett specifikt villkor använder vi \texttt{if}-satser:
+
+\begin{lstlisting}
+tal = input("Skriv ett tal ")
+tal = int(tal)
+
+if tal == 3:
+    print("Bra tal")
+\end{lstlisting}
+
+
+\end{frame}
+
+\subsection{and}
+
+\begin{frame}[fragile]
+	\frametitle{Repetition}
+	\framesubtitle{and}
+	
+	Om man ville att flera villkor var uppfyllda kunde man skriva så här:
+	
+	\begin{lstlisting}
+namn = input("Ditt namn? ")
+födelseår = input("När är du född? ")
+födelseår = int(födelseår)
+
+if namn == "jesus" and födelseår == 0:
+    print("Säger du det?")
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{or}
+
+\begin{frame}[fragile]
+	\frametitle{Repetition}
+	\framesubtitle{or}
+	
+	Om man vill minst ett av flera villkor ska vara uppfyllda skriver man:
+	
+	\begin{lstlisting}
+år = input("Vilket år är det?")
+år = int(år)
+
+if år >= 1769 or år <= 1821:
+    print("Då lever Napoleon.")
+	\end{lstlisting}
+	
+\end{frame}
+
+\section{Boolsk algebra}
+
+\subsection{1 och 0}
+
+\begin{frame}[fragile]
+	\frametitle{Boolsk algebra}
+	\framesubtitle{1 och 0}
+	
+	När vi har ett villkor kan två saker hända:
+	
+	\begin{enumerate}
+		\item Villkoret är uppfyllt, 1
+		\item Villkoret är inte uppfyllt, 0
+	\end{enumerate}
+	
+	\pause
+	
+	Det är likadant i datorn, men Python visar det det som \texttt{True} och \texttt{False}:
+	
+	\begin{lstlisting}
+a = input("Tal? ")
+b = input("Tal? ")
+a = int(a)
+b = int(b)
+c = a < b
+print(c)
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Komplicerade villkor}
+
+\begin{frame}[fragile]
+	\frametitle{Boolsk algebra}
+	\framesubtitle{Komplicerade villkor}
+	
+	Om du har ett komplicerat villkor:
+	
+	\begin{lstlisting}
+if år < 1800 and år%3 == 0 or år > 1000 and år < 1800:
+    print("?") 
+	\end{lstlisting}
+	
+	Vi kan se att för att villkoret ska vara sant så måste \texttt{år} vara mindre än 1800, sen kan det antingen vara större än 1000 eller jämnt delbart på 3.
+	
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Boolsk algebra}
+	\framesubtitle{Komplicerade villkor}
+	
+	\[
+	A = \text{år}<1800, B = \text{år}\% 3 == 0, C = \text{år} > 1000
+	\]
+	
+	\[
+	A \_ B \_ C \_  A
+	\]
+	
+	Hela uttrycket ska bli antingen 1 eller 0. Vad kan vi sätta på strecken?
+	
+	\pause
+	
+	Vi kan översätta \texttt{and} till multiplikation och \texttt{or} till addition!
+	
+\end{frame}
+	
+\begin{frame}[fragile]
+	\frametitle{Boolsk algebra}
+	\framesubtitle{Komplicerade villkor}
+	
+	\[
+	A \cdot B + C \cdot A  
+	\]
+	
+	Det uttrycket kan vi förenkla:
+	
+	\[
+	A \cdot \left( B+C\right)
+	\]
+	
+	Det uttrycket kan vi översätta till kod:
+	
+	\begin{lstlisting}
+if år < 1800 and (år%3 == 0 or år > 1000):
+    print("?")
+	\end{lstlisting}
+
+\end{frame}
+
+\subsection{Räkna fram ett villkor}
+
+\begin{frame}[fragile]
+	\frametitle{Boolsk algebra}
+	\framesubtitle{Räkna fram ett villkor}
+	
+	Om vi har ett långt villkor:
+	
+	\begin{lstlisting}
+if x == y and x < z or y == z and (x == z or x == y) or x < z:
+    print("JA!")
+	\end{lstlisting}
+	
+	Så kan vi räkna ut om talen \(x=3, y=3, z=6\) uppfyller kravet:
+	
+	\[
+		\begin{split}
+			x == y: 1\\
+			x < z: 1\\
+			y == z: 0\\
+			x == z: 0
+		\end{split}
+	\]
+	
+	\texttt{1 and 1 or 0 and (0 or 1) or 1}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Boolsk algebra}
+	\framesubtitle{Räkna fram ett villkor}
+	
+	\texttt{1 and 1 or 0 and (0 or 1) or 1}
+	
+	Vi översätter till addition och multiplikation:
+	
+	\[
+		1\cdot 1 + 0\cdot(0+1)+1
+	\]
+	\[
+		1\cdot1+0\cdot1+1
+	\]
+	\[
+		1+0+1
+	\]\pause
+	\[
+		= 1
+	\]
+	
+	Villkoret är alltså uppfyllt och vi skriver ut \texttt{JA!}
+
+\end{frame}
+
+{
+
+\setbeamercolor{background canvas}{bg=white}
+\section{else}
+
+\begin{frame}
+	\frametitle{Else}
+	\framesubtitle{Else}
+	
+	\begin{center}
+	\includegraphics[width=.45\textwidth]{sucks.jpeg}
+	\end{center}
+
+\end{frame}
+}
+
+\subsection{else}
+
+\begin{frame}[fragile]
+	\frametitle{Else}
+	\framesubtitle{Annars}
+	
+	Än så länge har vi pratat om vad som händer om ett villkor är uppfyllt.
+	
+	Men om vi vill göra något särskilt när det inte är uppfyllt, hur gör vi då?
+	
+	\pause
+	
+	\begin{lstlisting}
+tal = input("Skriv en trea: ")
+tal = int(tal)
+
+if tal == 3:
+    print("Bra")
+if tal != 3:
+    print("Dåligt")
+
+print("Visst har vi roligt?")
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Else}
+	\framesubtitle{Else}
+	
+	Ett snyggare sätt att skriva är genom att använda \texttt{else}
+	
+	\begin{lstlisting}
+tal = input("Skriv en trea: ")
+tal = int(tal)
+
+if tal == 3:
+    print("Bra")
+else:
+    print("Dåligt")
+    
+print("Visst har vi roligt?")
+	\end{lstlisting}
+
+	\texttt{else} tar hand om ALLA fall när villkoret över inte är uppfyllt.
+	
+\end{frame}
+
+\subsection{else if}
+
+\begin{frame}[fragile]
+	\frametitle{else}
+	\framesubtitle{else if}
+	
+	\begin{lstlisting}
+	if tal < 10:
+    print("Ental")
+if tal >= 10 and tal < 100:
+    print("Tiotal")
+if tal >= 100 and tal < 1000:
+    print("Hundratal")
+	\end{lstlisting}
+ 	\pause
+	\begin{lstlisting}
+if tal < 10:
+    print("Ental")
+else:
+    if tal < 100:
+        print("Tiotal")
+    else:
+        if tal < 1000:
+            print("Hundratal")
+	\end{lstlisting}
+	
+
+\end{frame}
+
+\section{elif}
+
+\subsection{else if}
+
+\begin{frame}[fragile]
+	\frametitle{elif}
+	\framesubtitle{else if}
+	
+	\begin{lstlisting}
+if tal < 10:
+    print("Ental")
+else:
+    if tal < 100:
+        print("Tiotal")
+    else:
+        if tal < 1000:
+            print("Hundratal")
+	\end{lstlisting}
+	\pause
+	\begin{lstlisting}
+if tal < 10:
+    print("Ental")
+elif tal < 100:
+    print("Tiotal")
+elif tal < 1000:
+    print("Hundratal")
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{elif}
+	\framesubtitle{else if}
+	
+	\begin{lstlisting}
+if tal < 10:
+    print("Ental")
+elif tal < 100:
+    print("Tiotal")
+elif tal < 1000:
+    print("Hundratal")
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item Här kommer den först att kolla om det första villkoret är uppfyllt.
+		\item Är det inte uppfyllt kollar det om \texttt{tal < 100}
+		\item Och om det inte är uppfyllt kollar det om \texttt{tal < 1000}
+	\end{itemize}
+	
+	Säg att \texttt{tal} är 5. Då är alla villkor uppfyllda, men programmet kommet bara att gå in i den första \texttt{if}-satsen 		
+	
+\end{frame}
+
+\section{Övningar}
+
+\subsection{Blad 1}
+
+\begin{frame}
+	\frametitle{Övningar}
+	\framesubtitle{Blad 1}
+
+Utgå från filen \texttt{if-else.py} i vklass.
+
+\begin{enumerate}
+\item Det finns en logisk bugg i raderna 12--15	. Rätta till den.
+\item ''Tripp trapp trull'' sekvensen visar hur det hade sett ut utan \texttt{elif}. Ändra den så att den fungerar likadant fast med \texttt{elif}.
+\item Skriv ett program som kollar om ett ord är skrivet med bara versaler, gemener eller om det är blandat.
+\item Skriv ett program som tar emot ett årtal (efter 1753) och returnerar om det var ett skottår eller ej. Tänk på att år jämnt delbara med 100 inte är skottår, men att år delbara med 400 är fortfarande skottår. (1800 och 1900 ej skottår men 2000 och 2400 skottår.)
+\end{enumerate}
+
+\end{frame}
+
+\subsection{Saxade övningar 1}
+
+\begin{frame}
+	\frametitle{Övningar}
+	\framesubtitle{Saxade övningar 1}
+	
+	En operatörför mobiltelefoni erbjuder tre olika abonnemang: \textit{Kontant}, \textit{Normal} och \textit{Plus}. Om man jämför villkoren för abonnemangen visar det sig att \textit{Kontant} är billigast om man ringer högst 33 minuter per månad, \textit{Normal} lönar sig bäst om man ringer mellan 33 och 36 minuter per månad och \textit{Plus} är mest förmånligt om man ringer ännu mer. Skriv ett program som läser in antalet minuter man uppskattar att man kommer att ringa per månad. Programmet ska tala om vilket abonnemang man bör välja.
+	
+\end{frame}
+
+\subsection{Saxade övningar 2}
+
+\begin{frame}[fragile]
+	\frametitle{Övningar}
+	\framesubtitle{Saxade övningar 2}
+	
+	I en triangel kan man beteckna sidorna med \(a\), \(b\) och \(c\). Om man känner till längderna för sidorna \(a\) och \(b\) samt vinkeln \(\alpha\) mellan dessa sidor så kan man räkna ut längden av sidan \(c\) med formeln:
+	
+	\[
+		c = \sqrt{a^2+b^2-2ab\cos (\alpha)}.
+	\] 
+	
+	Skriv ett program som läser in längdenerna på två sidor i en triangel och vinkeln mellan sidorna. Programmet ska avgöra om triangeln är \textit{liksidig} (alla sidor lika), \textit{likbent} (två sidor lika) eller \textit{oliksidig} (inga sidor lika).
+	
+	Python jobbar i radianer:\( \alpha \text{ grader} \Rightarrow \dfrac{\pi}{180}\cdot \alpha\- \text{ radianer}\)
+	
+\end{frame}
+
+
+\end{document}
