@@ -1,0 +1,351 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[os=win]{menukeys} % Lägger till tangenter
+
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Outline}
+	\begin{multicols}{2}
+		\tableofcontents[currentsection]
+	\end{multicols}
+\end{frame}
+}
+
+\lstset{escapeinside={(*@}{@*)}}
+
+\title{Felhantering}
+\date{2024/25}
+\author{Programmering 2}
+
+\maketitle{}
+
+\section{Try \& Except}
+
+\subsection{Repetition}
+
+\begin{frame}[fragile]
+	\frametitle{Try \& Except}
+	\framesubtitle{Repetition}
+	
+	\begin{lstlisting}
+while True:
+    tal = int(input("Ange ett heltal: "))
+    svar = tal**2
+    print("Kvadraten på " + str(tal) + " är " + str(svar))
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Try \& Except}
+	\framesubtitle{Repetition}
+	
+	\begin{lstlisting}
+while True:
+    try:
+        tal = int(input("Ange ett heltal: "))
+        svar = tal**2
+        print("Kvadraten på " + str(tal) + " är " + str(svar))
+    except(EOFError):
+        print("Programmet avbröts")
+        quit()
+    except(KeyboardInterrupt):
+        print("Du försökte döda programmet")
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Try \& Except}
+	\framesubtitle{Repetition}
+	
+	Vi har garderat oss mot två \textit{undantag} (fel). Vilka fler kan vi räkna med?
+	
+	\begin{itemize}
+		\item \texttt{EOFError}, End Of File
+		\item \texttt{KeyboardInterrupt}, ctrl+c
+		\item<2-> \texttt{ValueError}, värdefel
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Try \& Except}
+	\framesubtitle{ValueError}
+	
+	\begin{lstlisting}
+while True:
+    try:
+        tal = int(input("Ange ett heltal: "))
+        svar = tal**2
+        print("Kvadraten på " + str(tal) + " är " + str(svar))
+    except(EOFError):
+        print("Programmet avbröts")
+        quit()
+    except(KeyboardInterrupt):
+        print("Du försökte döda programmet")
+    except(ValueError):
+        print("Du måste skriva in ett heltal")
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Exceptions}
+
+\begin{frame}
+	\frametitle{Try \& Except}
+	\framesubtitle{Exceptions}
+	
+	Vilka \textit{Exceptions} finns det?
+	
+	\begin{itemize}
+		\item \texttt{EOFError}
+		\item \texttt{KeyboardInterrupt}
+		\item \texttt{ValueError}
+		\item<2-> \texttt{ZeroDivisionError}
+		\item<2-> \texttt{TypeError}
+		\item<2-> \texttt{IndexError}
+		\item<2-> \texttt{NameError}
+		\item<2-> \texttt{UnboundLocalError}
+	\end{itemize}
+	
+	\onslide<3->För att hitta alla inbyggda exceptions kan du klicka \href{https://docs.python.org/3/library/exceptions.html}{här}.
+	
+\end{frame}
+
+\section{raise exception}
+\subsection{Ett exempel}
+
+\begin{frame}[fragile]
+	\frametitle{Raise exception}
+	\framesubtitle{Exempel}
+	
+	\begin{lstlisting}
+def dela(a,b):
+    return a/b
+    
+while True:
+    tal = input("Skriv två heltal: ")
+    tal = tal.split()
+    svar = dela(int(tal[0]),int(tal[1]))
+    print("Kvoten mellan "+ tal[0] + " och " + tal[1] +  " är " + str(svar))
+	\end{lstlisting}
+	
+	Om vi stoppar in talen 5 och 0 får vi \texttt{ZeroDivisionError}.
+	
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Assert}
+	\framesubtitle{Exempel}
+	
+	Eftersom vi vet att funktionen inte fungerar om vi skickar med en nolla kan vi förebygga ett fel på två sätt:
+
+	\begin{lstlisting}
+def dela(a,b):
+    assert b != 0, "Du får inte dela med noll"
+    return a/b
+    
+while True:
+    tal = input("Skriv två heltal: ")
+    tal = tal.split()
+    svar = dela(int(tal[0]),int(tal[1]))
+    print("Kvoten mellan "+ tal[0] + " och " + tal[1] +  " är " + str(svar))
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{raise}
+	\framesubtitle{Exempel}
+	
+	Eftersom vi vet att funktionen inte fungerar om vi skickar med en nolla kan vi förebygga ett fel på två sätt:
+
+	\begin{lstlisting}
+def dela(a,b):
+    if b == 0:
+        raise ZeroDivisionError("Du får inte dela med noll")
+    return a/b
+    
+while True:
+    tal = input("Skriv två heltal: ")
+    tal = tal.split()
+    svar = dela(int(tal[0]),int(tal[1]))
+    print("Kvoten mellan "+ tal[0] + " och " + tal[1] +  " är " + str(svar))
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{assert vs. raise}
+
+\begin{frame}[fragile]
+	\frametitle{raise}
+	\framesubtitle{assert vs. raise}
+	
+	\texttt{assert} ska användas för att kontrollera koden \textit{under utveckling}. Den ska hitta fel som utvecklaren gör. Om ett fel kan uppstå på grund av en slarvig användare så ska det istället täckas av \texttt{raise exception}. En anledning till detta är att när man skeppar en färdig produkt så stänger man av \textit{debug}-läget som skriver ut errors.
+	
+	Testa skillnaden med ett program med \texttt{assert} i kommandotolken
+	
+	\begin{lstlisting}
+python "mitt program.py"
+python -O "mitt program.py"
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Använda raise exception}
+
+\begin{frame}[fragile]
+	\frametitle{raise}
+	\framesubtitle{Förutse fel}
+	
+	I exemplet från tidigare:
+	
+	\begin{lstlisting}
+def dela(a,b):
+    if b == 0:
+        raise ZeroDivisionError("Du får inte dela med noll")
+    return a/b
+    \end{lstlisting}
+    
+    Så är vi förutseende. Vi förutser att användaren kommer att göra fel och vi tar upp det \textbf{innan} det kan leda till problem längre ner i koden. Säg att vi har en stor funktion där divisionen med noll hade kommit sent, då är det fortfarande god sed att \textit{fånga} den direkt. Varför?
+	
+\end{frame}
+
+\subsection{Fel som inte är fel men ändå fel}
+
+\begin{frame}
+	\frametitle{raise}
+	\framesubtitle{Fel som inte är fel men ändå fel}
+	
+	Ibland täcker inte de undantag som finns något som händer i ens kod.
+	
+	Exempelvis i Sänka skepp, om man skrev ett negativt tal.
+	
+	Eller så har man ett program där man tar emot input där första tecknet måste vara en \#.
+	
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{raise}
+	\framesubtitle{Fel som inte är fel men ändå fel}
+
+	Sänka skepp:
+	
+	\begin{lstlisting}
+def fråga_rad():
+rad = input("Skriv en rad: ")
+    rad = int(rad)
+    if rad < 1 or rad > 11:
+        raise ValueError("Ett tal måste vara mellan 1 och 10")
+    return rad
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{raise}
+	\framesubtitle{Fel som inte är fel men ändå fel}
+	
+	\begin{lstlisting}
+färgkod = input("Skriv en färgkod: ")
+if färgkod[0] != "#":
+    raise ValueError("Alla färgkoder börjar med #")
+    \end{lstlisting}
+	
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+\frametitle{Övningar}
+
+Utgå från filen \texttt{felhantering 2.py}
+
+\begin{enumerate}
+	\item Kontrollera att du förstår vad koden gör i varje steg.
+	\item Se till att funktionen \texttt{dela} inte kraschar
+	\item Se till att inget i filen gör att den kraschar
+	\item Se till att funktionen \texttt{list\_delare} inte accepterar listor som har färre än två element
+	\item Se till att funktionen \texttt{färgväljare} lyfter ett felmeddelande när man anger en annan än de åtta färgerna som finns inprogrammerade
+\end{enumerate}
+
+\end{frame}
+
+\end{document}

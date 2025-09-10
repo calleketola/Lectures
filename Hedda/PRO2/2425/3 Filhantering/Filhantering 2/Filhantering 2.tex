@@ -1,0 +1,228 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[os=win]{menukeys} % Lägger till tangenter
+
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    	morekeywords={PassOptionsToPackage,selectlanguage,True,False,with},
+    	keywordstyle=\color{blue},%\bfseries,
+    	basicstyle=\small\ttfamily,
+    	%identifierstyle=\color{red},
+    	commentstyle=\color{red}\ttfamily,
+    	stringstyle=\color{VarmOrange},
+    	numbers=left,%
+    	numberstyle=\scriptsize,%\tiny
+    	stepnumber=1,
+    	numbersep=8pt,
+    	showstringspaces=false,
+    	breaklines=true,
+    	%frameround=ftff,
+    	frame=single,
+    	belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\lstset{escapeinside={(*@}{@*)}}
+
+% NEW COMMANDS
+\newcommand{\fortt}{\texttt{for}}
+\newcommand{\whilett}{\texttt{while}}
+\newcommand{\iftt}{\texttt{if}}
+
+\title{Filhantering}
+\date{2023/24}
+\author{Programmering 2}
+
+\maketitle
+
+\section{Repetition}
+
+	\subsection{Öppna filer}
+
+	\begin{frame}[fragile]
+		\frametitle{Öppna fil}
+		\framesubtitle{open() \& close()}
+		
+		\begin{itemize}
+			\item Vill vi öppna en fil i Python använder vi kommandona \texttt{open()} och \texttt{close()}
+		\end{itemize}
+		
+		\begin{lstlisting}
+with open("filnamn") as f:
+	# Gör saker
+		\end{lstlisting}
+		
+		\begin{itemize}
+			\item Alla filer vi öppnar måste vi stänga. Med \code{with}-blocket stängs filen automatiskt.
+			\item Tänk på att filnamnet inkluderar filändelsen.
+		\end{itemize}
+		
+	\end{frame}
+	
+	\subsection{Läsa in från fil}
+	
+	\begin{frame}[fragile]
+		\frametitle{Läsa fil}
+		\framesubtitle{read(), readline(), readlines()}
+		
+		\begin{itemize}
+			\item Om vi vill läsa in innehållet i filen:
+		\end{itemize}
+		
+		\begin{lstlisting}
+with open("filnamn") as f:
+	text = f.read() # Läser in hela
+		\end{lstlisting}
+		
+		\begin{lstlisting}
+with open("filnamn") as f:
+	text = f.readline() # Läser in en rad
+		\end{lstlisting}
+		
+		\begin{lstlisting}
+with open("filnamn") as f:
+	text = f.readlines() # Läser in alla rader
+		\end{lstlisting}
+		
+	\end{frame}
+
+	\subsection{Skriva till fil}
+	
+	\begin{frame}[fragile]
+		\frametitle{Skriva till fil}
+		\framesubtitle{write()}
+		
+		\begin{itemize}
+			\item Om vi vill skriva till en fil måste vi öppna den på rätt sätt:
+		\end{itemize}
+		
+		\begin{lstlisting}
+with open("filnamn", 'w') as f:# w står för write
+	f.write("Hejsan") # Skriver in Hejsan i filen
+		\end{lstlisting}
+		
+		\begin{itemize}
+			\item När man använder \code{write} får man vara försiktig eftersom det skriver över filen.
+			\item Vill man lägga till i slutet av filen får man istället ange \code{'a'}:
+		\end{itemize}
+		
+		\begin{lstlisting}
+with open("filnamn", 'a') as f: # a står för append
+	f.write("Hejsan") # Skriver in Hejsan i filen
+		\end{lstlisting}
+	
+	\end{frame}
+	
+	\subsection{Read and Write}
+	
+	\begin{frame}[fragile]
+		\frametitle{Läsa och skriva}
+		\framesubtitle{r+, w+}
+		
+		\begin{itemize}
+			\item Om man vill kunna både läsa och skriva till en fil får man ange \code{'r+'} eller \code{'w+'} som mode:
+		\end{itemize}
+		
+		\begin{lstlisting}
+with open("filnamn", 'r+') as f:
+	# Do stuff
+		\end{lstlisting}
+		
+	\end{frame}
+
+\section{Specialgrejor}
+
+	\subsection{Encoding}
+	
+	\begin{frame}[fragile]
+		\frametitle{Encoding}
+		\framesubtitle{utf-8}
+		
+		\begin{itemize}
+			\item Vill man vara säker på att trevliga symboler som å, ä och ö kan läsas in korrekt så behöver man ange att filen är encodad i utf-8 (eller motsvarande).
+		\end{itemize}
+		
+		\begin{lstlisting}
+with open("filnamn", 'r', encoding="utf-8") as f:
+	text = f.read() # Vi kan få med å, ä, ö nu :)
+		\end{lstlisting}
+	
+	\end{frame}
+	
+
+\section{Övningar}
+
+\begin{frame}
+\frametitle{Övningar}
+
+Utgå från filen \texttt{filhantering 2.py}
+
+\begin{enumerate}
+	\item Läs in datan från filen ''filhantering2.csv''
+	\item Filen innehåller elevers resultat på ett prov. Betygsgränserna för godkända betyg var: 50 (Acceptable), 70 (Exceed Expectations) och 90 (Outstanding). Skriv ut alla med godkända betyg och vad de fick.
+	\item Alla under 50 har fått underkänt. Där gick gränserna på allt under 20 (Troll), 40 (Dreadful), 50 (Poor). Skriv ut vilka som fick vilka underkända betyg.
+	\item Få ditt program att skriva ut den som hade högst poäng.
+	\item Beräkna medelvärdet av deras resultat.
+	\item Vad är medianen?
+	\item Skriv ut hur många som fick varje betyg.
+\end{enumerate}
+
+\end{frame}
+
+\end{document}

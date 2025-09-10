@@ -1,0 +1,237 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[os=win]{menukeys} % Lägger till tangenter
+
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Outline}
+	\begin{multicols}{2}
+		\tableofcontents[currentsection]
+	\end{multicols}
+\end{frame}
+}
+
+\lstset{escapeinside={(*@}{@*)}}
+
+\title{Filhantering}
+\date{2023/24}
+\author{Programmering 2}
+
+\maketitle{}
+
+\section{Läsa från fil}
+
+\subsection{Öppna filer sätt 1 (osäker)}
+
+\begin{frame}[fragile]
+	\frametitle{Öppna filer osäkert}
+
+	\begin{lstlisting}
+f = open("filnamn")
+f.close() 
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item Standardläget är att filen bara ska läsas
+		\item Om man vill försäkra sig om att den bara ska läsas kan man ange \code{'r'}
+	\end{itemize}
+	
+	\begin{lstlisting}
+f = open('filnamn', 'r')
+f.close()
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Öppna filer sätt 2 (säker)}
+
+\begin{frame}[fragile]
+	\frametitle{Öppna filer säkert}
+	
+	\begin{itemize}
+		\item Skulle programmet av någon anledning inte nå till raden för att stänga filen riskerar den att hållas öppen
+		\item Det kan leda till att den ockuperar en plats i minnet
+		\item Det kan också leda till att den hålls låst för andra program
+	\end{itemize}
+	
+	\begin{lstlisting}
+with open('filnamn') as f:
+    # Kod
+# Nu är filen stängd
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item \code{with} stänger automatiskt filen, även om något dumt skulle hända
+	\end{itemize}
+	
+\end{frame}
+
+\subsection{Läsa filen}
+
+\begin{frame}[fragile]
+	\frametitle{Läsa filen}
+	
+	\begin{itemize}
+		\item Det finns tre sätt att läsa filen
+	\end{itemize}
+	
+	\begin{enumerate}
+		\item \code{f.read()} läser hela filen
+		\item \code{f.readline()} läser in nästa rad
+		\item \code{f.readlines()} läser in alla rader och sparar i en lista
+	\end{enumerate}
+	
+	\begin{itemize}
+		\item I fall ett och tre så är filen ''färdigläst'' och går inte att läsa igen om man inte öppnar filen på nytt.
+		\item I fall två så hoppar du ner till nästa rad, och som i de två tidigare fallen så kan du inte backa igen utan att läsa in filen på nytt.
+	\end{itemize}	
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Läsa filen}
+	
+	\begin{itemize}
+		\item Tänk på att allt du läser in tolkas som strängar, precis som \code{input}
+		\item Om en rad innehåller flera datapunkter så särskiljer du dem med \code{var.split()}
+		\item En del filer särskiljer data med mellanslag och andra med kommatecken eller semikolon
+		\item \code{var.split(',')} och \code{var.split(';')} delar upp på komma, respektive semikolon
+	\end{itemize}
+	
+\end{frame}
+
+\subsection{Övningar 1}
+
+\begin{frame}
+	\frametitle{Övningar 1}
+	
+	\begin{enumerate}
+		\item Ladda ner filen \texttt{sonnet-xviii.txt} och skriv ut innehållet av filen.
+	\end{enumerate}
+	
+\end{frame}
+
+\section{Skriva till fil}
+
+\subsection{Skriva över}
+
+\begin{frame}[fragile]
+	\frametitle{Skriva till fil}
+	
+	\begin{itemize}
+		\item När du vill skriva till en fil behöver du ange antingen \code{'w'} eller \code{'a'}
+		\item Anger du \code{'w'} så kommer du att skriva över hela filen
+		\item Anger du \code{'a'} så lägger du till i slutet av filen
+		\item Om en fil inte finns och du anger \code{'w'} så kommer filen att skapas
+	\end{itemize}
+	
+\end{frame}
+
+\subsection{Övningar}
+
+\begin{frame}
+	\frametitle{Övningar 2}
+		
+	\begin{enumerate}
+		\setcounter{enumi}{1}
+		\item Ladda ner filen \texttt{teknik.txt}. Använd Python för att lägga till den lärare som saknas.
+	\end{enumerate}
+	
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+	
+	\begin{enumerate}
+		\setcounter{enumi}{2}
+		\item Ladda ner filen \texttt{text-1.txt}. Varje rad innehåller ett ord. 
+		\item Hur många rader har filen?
+		\item Plocka ut det ordet som är längst .
+		\item Hur många gånger förekommer bokstaven ''i''?
+		\item Vilken är den vanligast förekommande startbokstaven bland alla ord?
+		\item Ladda ner filen \texttt{data-1.csv} multiplicera de tre talen på rad och summera de tio produkterna.
+	\end{enumerate}
+	
+\end{frame}
+
+
+
+\end{document}

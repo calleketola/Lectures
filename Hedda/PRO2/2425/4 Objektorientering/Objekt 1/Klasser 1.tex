@@ -1,0 +1,314 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+\lstset{language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{orange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4
+    %frame=L
+}
+\lstset{language=Python} 
+\lstset{backgroundcolor=\color{white}}
+
+\newcounter{uppgifter}
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\lstset{escapeinside={(*@}{@*)}}
+
+% NEW COMMANDS
+\AtBeginSection[ ]
+{
+\begin{frame}{Outline}
+\setbeamercolor{section in toc shaded}{fg=LundaGroen}
+\setbeamercolor{subsection in toc shaded}{fg=black}
+    \tableofcontents[currentsection]
+
+\end{frame}
+}
+\title{Objektorientering}
+\date{vt 25}
+
+\maketitle
+
+\section{Objektorientering}
+
+\subsection{Abstraktion av verkligheten}
+
+\begin{frame}
+	\frametitle{Abstraktion av verkligheten}
+	
+	\begin{itemize}
+		\item Mycket i verkligheten kan delas upp i olika egenskaper.
+		\item En person kan ha en ålder, längd och ett namn
+		\item En bil har ett märke, modellnamn, topphastighet, ägare m.m.
+		\item I programmering kan vi \textit{modellera} detta med klasser
+	\end{itemize}
+	
+\end{frame}
+
+\subsection{En klass}
+
+\begin{frame}[fragile]
+	\frametitle{En klass}
+	
+	\begin{itemize}
+		\item Här är en representation av en person
+	\end{itemize}
+	
+	\begin{lstlisting}
+class Person():
+    def __init__(self, name, age, length):
+        self.name = name
+        self.age = age
+        self.length = length
+        
+    def greet(self):
+        print(f"Hello my my is {self.name}")
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Klassen person}
+	
+	\begin{itemize}
+		\item Vi kan nu skapa \textit{instanser} av klassen \texttt{Person}
+	\end{itemize}
+	
+	\begin{lstlisting}
+calle = Person("Calle", 32, 181)
+enrique = Person("Enrique", 57, 175)
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item Båda kan nu också hälsa
+	\end{itemize}
+	
+	\begin{lstlisting}
+calle.greet()
+enrique.greet()
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Klassen person}
+	
+	\begin{itemize}
+		\item Vi kan komma åt deras egenskaper, eller klassvariabler
+	\end{itemize}
+	
+	\begin{lstlisting}
+calle.name
+enrique.age
+calle.length
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item Notera att när vi använde \texttt{greet()} så har vi paranteser, medan \texttt{name} är utan
+		\item Vi kallar \texttt{greet()} för en metod.
+	\end{itemize}
+	
+\end{frame}
+
+\section{class Car}
+
+\subsection{Skapa en klass}
+
+\begin{frame}[fragile]
+	\frametitle{Klassen Car}
+	\framesubtitle{}
+	
+	\begin{lstlisting}
+class Car():
+    def __init__(self, brand, year, color):
+        self.brand = brand
+        self.year = year
+        self.color = color
+    def drive(self):
+        print(self.brand + ": Kör framåt")
+    def honk(self):
+        print(self.brand + ": Tut tut!")
+    def breaking(self):
+        print(self.brand+ ": Bromsar...")
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Begrepp}
+
+\begin{frame}
+	\frametitle{Klassen Car}
+	\framesubtitle{Begrepp}
+	
+	\begin{itemize}
+		\item \texttt{class Car} är en ny \textit{datatyp} som vi har skapat
+		\item \texttt{\_\_init\_\_} är en \textit{konstruktor}
+		\item \texttt{def drive(self):} är en \textit{metod}
+		\item \texttt{self.brand} är en \textit{instansvariabel}
+	\end{itemize}
+\end{frame}
+
+\subsection{Skapa en instans}
+
+\begin{frame}[fragile]
+	\frametitle{Klassen Car}
+	\framesubtitle{Skapa en instans}
+	
+	\begin{lstlisting}
+bil1 = Car("Volvo", 2018, "Vit")
+bil2 = Car("BMW", 2005, "Black")
+
+bil1.honk()
+bil2.drive()
+	\end{lstlisting}
+	
+	\begin{verbatim}
+Volvo: Tut tut!
+BMW: Kör framåt
+	\end{verbatim}
+
+\end{frame}
+
+\subsection{Klassdiagram}
+
+\begin{frame}
+	\frametitle{Klassen Car}
+	\framesubtitle{Klassdiagram}
+	
+	\centering
+	\begin{tabular}{|l|}
+		\hline
+		\multicolumn{1}{|c|}{\textbf{Car}} \\
+		\hline
+		brand : str\\
+		year : int\\
+		color : str\\ \hline
+		drive() \\
+		honk() \\
+		breaking() \\ \hline
+	\end{tabular}
+
+\end{frame}
+
+\subsection{self}
+
+\begin{frame}[fragile]
+	\frametitle{Klassen Car}
+	\framesubtitle{self}
+	
+	Som du märkt inleds varje \textit{metod} med parametern \texttt{self}. Exempelvis \texttt{honk(self)}
+	
+	\begin{lstlisting}
+    def honk(self):
+        print(self.brand+": Tut tut!")
+	\end{lstlisting}
+	
+	Men \texttt{self} dyker inte upp i \textit{metodanropet} senare.
+	
+	\begin{lstlisting}
+bil1.honk() # Inget mellan paranteserna
+	\end{lstlisting}
+	
+	Det är för att Python skickar med en \textit{referens} till \textit{instansen} varje gång man anropar en \textit{metod}.
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Klassen Car}
+	\framesubtitle{self}
+	
+	Som du säkert också har märkt så står det \texttt{self.} framför alla \textit{instansvariabler}.
+	
+	\begin{lstlisting}
+    def honk(self):
+        print(self.brand+": Tut tut!")
+	\end{lstlisting}
+
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+	\frametitle{Övningar}
+
+	\begin{itemize}
+		\item Ladda ner filen \texttt{Klasser 1.py} från classroom.
+	\end{itemize}
+
+	\begin{enumerate}
+		\item Skapa en ny instans av klassen \texttt{Person} med ditt eget namn, ålder och längd.
+		\item Utveckla metoden \texttt{greet} så att den tar emot ett annat namn och skriver ut något i stil med: \texttt{''Hello, XXX, my name is Calle''}
+		\item Utveckla den ytterliggare så att den tar emot en annan instans av klassen \texttt{Person} och hälsar på samma sätt.
+		\item Skriv av klassen \texttt{Car}.
+		\item Lägg till att den har en variabel med namnet \texttt{distance = 0}
+		\item Lägg till att metoden \texttt{drive} ökar distance med en godtycklig distans.
+		\item Lägg till en metod som skriver ut hur långt bilen har kört.
+		\item Gör uppgifterna 13.1--13.3 i boken. s. 235--
+	\end{enumerate}
+\end{frame}
+
+
+\end{document}

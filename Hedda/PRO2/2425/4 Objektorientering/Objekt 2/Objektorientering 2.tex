@@ -1,0 +1,344 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=LundaHimmel, fg=StabilaLila}
+\setbeamercolor{palette quaternary}{bg=LundaGroen, fg=MagnoliaRosa}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+    
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+\lstset{
+	escapeinside={(*@}{@*)}
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+    	\tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{Objektorientering 2}
+\date{vt 25}
+
+\maketitle
+
+\section{class Car}
+
+\subsection{Skapa en klass}
+
+\begin{frame}[fragile]
+	\frametitle{Repetition}
+	\framesubtitle{Klassen Car}
+	
+	\begin{lstlisting}
+class Car():
+    def __init__(self, brand, year, color):
+        self.brand = brand
+        self.year = year
+        self.color = color
+    def drive(self):
+        print(self.brand + ": Kör framåt")
+    def honk(self):
+        print(self.brand + ": Tut tut!")
+    def breaking(self):
+        print(self.brand+ ": Bromsar...")
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Begrepp}
+
+\begin{frame}
+	\frametitle{Repetition}
+	\framesubtitle{Begrepp}
+	
+	\begin{itemize}
+		\item \texttt{class Car} är en ny \textit{datatyp} som vi har skapat
+		\item \texttt{\_\_init\_\_} är en \textit{konstruktor}
+		\item \texttt{def drive(self):} är en \textit{metod}
+		\item \texttt{self.brand} är en \textit{instansvariabel}
+	\end{itemize}
+\end{frame}
+
+\subsection{Skapa en instans}
+
+\begin{frame}[fragile]
+	\frametitle{Repetition}
+	\framesubtitle{Skapa en instans}
+	
+	\begin{lstlisting}
+bil1 = Car("Volvo", 2018, "Vit")
+bil2 = Car("BMW", 2005, "Black")
+
+bil1.honk()
+bil2.drive()
+	\end{lstlisting}
+	
+	\begin{verbatim}
+Volvo: Tut tut!
+BMW: Kör framåt
+	\end{verbatim}
+
+\end{frame}
+
+\subsection{Klassdiagram}
+
+\begin{frame}
+	\frametitle{Klassen Car}
+	\framesubtitle{Klassdiagram}
+	
+	\centering
+	\begin{tabular}{|l|}
+		\hline
+		\multicolumn{1}{|c|}{\textbf{Car}} \\
+		\hline
+		brand : str\\
+		year : int\\
+		color : str\\ \hline
+		drive() \\
+		honk() \\
+		breaking() \\ \hline
+	\end{tabular}
+
+\end{frame}
+
+\subsection{self}
+
+\begin{frame}[fragile]
+	\frametitle{Klassen Car}
+	\framesubtitle{self}
+	
+	Som du märkt inleds varje \textit{metod} med parametern \texttt{self}. Exempelvis \texttt{honk(self)}
+	
+	\begin{lstlisting}
+    def honk(self):
+        print(self.brand+": Tut tut!")
+	\end{lstlisting}
+	
+	Men \texttt{self} dyker inte upp i \textit{metodanropet} senare.
+	
+	\begin{lstlisting}
+bil1.honk() # Inget mellan paranteserna
+	\end{lstlisting}
+	
+	Det är för att Python skickar med en \textit{referens} till \textit{instansen} varje gång man anropar en \textit{metod}.
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Klassen Car}
+	\framesubtitle{self}
+	
+	Som du säkert också har märkt så står det \texttt{self.} framför alla \textit{instansvariabler}.
+	
+	\begin{lstlisting}
+    def honk(self):
+        print(self.brand+": Tut tut!")
+	\end{lstlisting}
+	
+	
+
+\end{frame}
+
+\section{Ändra i klasser}
+
+\subsection{Uppdatera värden}
+
+\begin{frame}[fragile]
+	\frametitle{Ändra i klasser}
+	\framesubtitle{Klassen bil}
+	
+	\begin{lstlisting}
+class Car():
+    def __init__(self, brand, year, color):
+        ...
+        (*@\textcolor{red}{self.speed = 0}@*) # Bilen står still
+    def drive(self):
+        print(self.brand+": kör "+str(self.speed)+" km/h framåt")
+    def honk(self):
+        print(self.brand+": Tut tut!")
+    def breaking(self):
+        (*@\textcolor{red}{self.speed = 0}@*)
+        print(self.brand+": Bromsar...")
+    (*@\textcolor{red}{def accelerate(self, a):}@*)
+        (*@\textcolor{red}{self.speed += a}@*)
+	\end{lstlisting}	
+	
+\end{frame}
+
+\subsection{Nytt klassdiagram}
+
+\begin{frame}
+	\frametitle{Ändra i klasser}
+	\framesubtitle{Klassdiagram}
+	
+	\centering
+	\begin{tabular}{|l|}
+		\hline
+		\multicolumn{1}{|c|}{\textbf{Car}} \\
+		\hline
+		brand : str\\
+		year : int\\
+		color : str\\
+		speed : int\\ \hline
+		drive() \\
+		honk() \\
+		breaking() \\
+		accelerate(a : int)\\ \hline
+	\end{tabular}
+
+\end{frame}
+
+\section{Klassdiagram}
+
+\begin{frame}
+	\frametitle{Klassdiagram}
+	
+	\begin{itemize}
+		\item För att beskriva vad en klass ska innehålla använder man av något som kallas för klassdiagram (UML).
+		\item I ett klassdiagram så har man tre rutor.
+		\item Den översta rutan innehåller klassens namn.
+		\item Den andra rutan innehåller klassens \textit{attribut} (variabler).
+		\item Den nedersta rutan innehåller alla klassens \textit{metoder}.
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Klassdiagram}
+	\framesubtitle{Attributen}
+	
+	\begin{itemize}
+		\item I diagramet anger man varje attributs datatyp, (int, float, str m.m.)
+		\item Det skrivs vanligtvis: \texttt{attribut: datatyp}
+	\end{itemize}
+	
+	\centering
+	\begin{tabular}{|l|}
+		\hline
+		\multicolumn{1}{|c|}{\textbf{Car}} \\
+		\hline
+		\textbf{brand : str}\\
+		\textbf{year : int}\\
+		\textbf{color : str}\\
+		\textbf{speed : int}\\ \hline
+		drive() \\
+		honk() \\
+		breaking() \\
+		accelerate(a : int)\\ \hline
+	\end{tabular}
+	
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Klassdiagram}
+	\framesubtitle{Metoderna}
+	
+	\begin{itemize}
+		\item I diagramet anger man vad varje metod tar emot och skickar tillbaka
+		\item Det skrivs vanligtvis: \texttt{metod(arg1: datayp, arg2: datatyp): datatyp}
+	\end{itemize}
+	
+	\centering
+	\begin{tabular}{|l|}
+		\hline
+		\multicolumn{1}{|c|}{\textbf{Car}} \\
+		\hline
+		brand : str\\
+		year : int\\
+		color : str\\
+		speed : int\\ \hline
+		\textbf{drive()} \\
+		\textbf{honk()} \\
+		\textbf{breaking()} \\
+		\textbf{accelerate(a : int)}\\ \hline
+	\end{tabular}
+	
+
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+\frametitle{Övningar}
+
+\begin{enumerate}
+	\item Skapa klasserna \texttt{Karaktär}, \texttt{Vapen} och \texttt{Sköld} enligt klassdiagramen i \texttt{oot2.py}
+	\item Följ resten av instruktionerna i filen.
+\end{enumerate}
+
+\end{frame}
+
+\end{document}

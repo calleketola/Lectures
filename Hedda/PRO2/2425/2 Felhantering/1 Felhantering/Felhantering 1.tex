@@ -1,0 +1,216 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[os=win]{menukeys} % Lägger till tangenter
+
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Outline}
+	\begin{multicols}{2}
+		\tableofcontents[currentsection]
+	\end{multicols}
+\end{frame}
+}
+
+
+\title{Felhantering 1}
+\date{2024/2025}
+
+\maketitle
+
+\section{Olika sorters fel}
+
+\subsection{Överblick}
+
+\begin{frame}[fragile]
+	\frametitle{Alla sorters fel}
+	
+	\begin{itemize}
+		\item Det finns många sätt för ett program att krascha
+		\item Minnet kan ta slut
+		\item En fil som ska läsas in saknas
+		\item Programmet saknar rättigheter för att skriva
+		\item Användaren matar in något fel
+	\end{itemize}
+	
+\end{frame}
+
+\subsection{Vad kan gå fel här?}
+
+\begin{frame}[fragile]
+	\frametitle{Vad kan gå fel här?}
+	
+	\begin{lstlisting}
+while True:
+    tal = input("Ange ett heltal: ")
+    tal = int(tal)
+    svar = tal**2
+    print("Kvadraten på", tal, "är", svar)
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item Skriv av programmet ovan
+		\item Kör programmet och försök att få det att krascha
+		\item Hur många olika felmeddelanden kan du generera?
+	\end{itemize}
+	
+\end{frame}
+
+\section{Att hantera fel}
+
+\subsection{Alla fel}
+
+\begin{frame}[fragile]
+	\frametitle{Alla fel}
+	\framesubtitle{Try Except}
+	
+	\begin{itemize}
+		\item Man kan stoppa programmet från att krascha helt och hållet med följande:
+	\end{itemize}
+	
+	\begin{lstlisting}
+try:
+    # Kod som kan krascha
+except:
+    # Vad som ska hända om koden i try kraschar
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item Finns det någon anledning att låta programmet få krascha?
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Try Except}
+	\framesubtitle{Exempel}
+	
+	\begin{lstlisting}
+while True:
+    try:
+        tal = input("Ange ett heltal: ")
+        tal = int(tal)
+        svar = tal**2
+        print("Kvadraten på", tal, "är", svar)
+    except:
+        continue
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{Specifika fel}
+
+\begin{frame}[fragile]
+	\frametitle{Try Except}
+	
+	\begin{itemize}
+		\item Ibland vill man att olika saker ska hända beroende på fel
+	\end{itemize}
+	
+	\begin{lstlisting}
+try:
+    tal  =input("Tal? ")
+    tal = int(tal)
+except ValueError:
+    print("Ange enbart siffror")
+except KeyboardInterrupt:
+    print("Försök inte avbryta programmet")
+	\end{lstlisting}
+
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+	\frametitle{Övningar}
+	
+	\begin{itemize}
+		\item Ladda ner filen \texttt{felhantering-1.py} och utgå från den
+	\end{itemize}
+	
+	\begin{enumerate}
+		\item Testkör programmet
+		\item Hur kan du få programmet att krascha?
+		\item Justera koden så att programmet bara avslutas om användaren skriver in \texttt{nej}
+	\end{enumerate}
+	
+\end{frame}
+
+
+\end{document}
+
+

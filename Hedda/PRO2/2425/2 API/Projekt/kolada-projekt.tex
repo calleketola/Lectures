@@ -1,0 +1,121 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+\usepackage{tabularx}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+\lstset{language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{orange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4
+    %frame=L
+}
+\lstset{language=Python} 
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+
+\title{API-projekt till Te21b}
+\date{HT 2023}
+\author{Programmering 2}
+
+\maketitle
+
+\rowcolors{2}{blue!5}{white}
+
+\begin{center}
+	\begin{tabular}{lll}
+		\rowcolor{blue!25}
+		\textbf{Efternamn} & \textbf{Förnamn} & \textbf{Projekt}\\
+		Abasi & Daniel & Pendling i Sjöbo\\
+		Al Haj Ali & Osamah & Månadsavlönade i Göteborg\\
+		Al-Murtadha & Tiyam & Rollatorer m.m. i Kiruna\\
+		Alhamid & Zayed & Utbildning i Malmö\\
+		Aljbouri & Abdulfattah & Lönesumma i Östersund\\
+		Dervisevic & Eddie & Medellivslängd i Lund\\
+		Hajdari & Zani & Tillgång till service i Karlskrona\\
+		Helander & Elliott & Utrikesfödda i Mariestad\\
+		Jansson & Lukas  & Valdeltagande i Stockholm\\
+		Larsson & Linus & Röster till parti 1 i Karlstad\\
+		Lindahl & Emil & Röster till parti 2 i Karlskrona\\
+		Mannit & Youssef & Röster till parti 3 i Kiruna\\
+		Mohamed & Hiba & Förekomst av cancer i Göteborg\\
+		Nilsson & Hugo & Andel heltidsanställda inom skola i Lund\\
+		Norrbohm & Truls & Skattesatser i Mariestad\\
+		Olsson & Hampus & ---\\
+		Paulsson & Herman & Standardkostnader i Karlskrona\\
+		Persson & Mattias & Anmälda brott i Karlstad\\
+		Rafehi & Esmail & VAB och föräldraförsäkring i Östersund\\
+		Schoug & Hugo & Invånare i Sjöbo\\
+		Svensson & Hampus & Invånare på ålder i Malmö\\
+		Towman & Lukas & Invånare andelar i Stockholm\\
+	\end{tabular}
+\end{center}
+
+\clearpage
+
+\input{elevinstruktioner/abasi.tex}
+\input{elevinstruktioner/alhajali.tex}
+\input{elevinstruktioner/almurtadha.tex}
+\input{elevinstruktioner/alhamid.tex}
+\input{elevinstruktioner/aljbouri.tex}
+\input{elevinstruktioner/dervisevic.tex}
+\input{elevinstruktioner/hajdari.tex}
+\input{elevinstruktioner/helander.tex}
+\input{elevinstruktioner/jansson.tex}
+\input{elevinstruktioner/larsson.tex}
+\input{elevinstruktioner/lindahl.tex}
+\input{elevinstruktioner/mannit.tex}
+\input{elevinstruktioner/mohamed.tex}
+\input{elevinstruktioner/nilsson.tex}
+\input{elevinstruktioner/norrbohm.tex}
+\input{elevinstruktioner/paulsson.tex}
+\input{elevinstruktioner/persson.tex}
+\input{elevinstruktioner/rafehi.tex}
+\input{elevinstruktioner/schoug.tex}
+\input{elevinstruktioner/svensson.tex}
+\input{elevinstruktioner/towman.tex}
+
+\end{document}

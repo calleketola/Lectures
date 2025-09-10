@@ -1,0 +1,67 @@
+[
+	{
+		"title": "The Phantom Menace",
+		"release": 1999,
+		"runtime": 136,
+		"year": -32,
+		"episode": 1
+	},
+	{
+		"title": "Attack of the Clones",
+		"release": 2002,
+		"runtime": 142,
+		"year": -22,
+		"episode": 2
+	},
+	{
+		"title": "Revenge of the Sith",
+		"release": 2005,
+		"runtime": 140,
+		"year": -19,
+		"episode": 3
+	},
+	{
+		"title": "A New Hope",
+		"release": 1977,
+		"runtime": 121,
+		"year": 0,
+		"episode": 4
+	},
+	{
+		"title": "The Empire Strikes back",
+		"release": 1980,
+		"runtime": 214,
+		"year": 3,
+		"episode": 5
+	},
+	{
+		"title": "Return of the Jedi",
+		"release": 1983,
+		"runtime": 132,
+		"year": 4,
+		"episode": 6
+	},
+	{
+		"title": "The Force Awakens",
+		"release": 2015,
+		"runtime": 135,
+		"year": 34,
+		"episode": 7
+	},
+	{
+		"title": "The Last Jedi",
+		"release": 2017,
+		"runtime": 152,
+		"year": 34,
+		"episode": 8
+	},
+	{
+		"title": "The Rise of Skywalker",
+		"release": 2019,
+		"runtime": 136,
+		"year": 35,
+		"episode": 9
+	}
+]
+	
+	

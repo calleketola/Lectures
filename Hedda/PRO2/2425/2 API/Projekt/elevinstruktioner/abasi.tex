@@ -1,0 +1,42 @@
+\section{Daniel Abasi}
+
+\subsection{Projektet}
+
+Du ska läsa in data från \textit{Kolada} --- en databas för kommuner och regioner --- och presentera denna med en graf. Du kommer att ha en vecka på dig att genomföra och lämna in projektet.
+
+\subsubsection{API-anrop}
+
+Du anropar Koladas API på följande sätt:
+
+\texttt{http://api.kolada.se/v2/data/municipality/KOMMUN/kpi/KPI}
+
+\noindent där du ersätter \texttt{KOMMUN} med kommunkoden och \texttt{KPI} med kpi-värdet från tabellen längre ner.
+
+\subsection{Bedömning}
+
+För att bedömmas som godkänt ska ditt program uppfylla följande krav:
+
+\begin{itemize}
+	\item Du hämtar in all data med API:et.
+	\item Du presenterar information i ett korrekt diagram.
+	\item Du löser uppgifterna.
+	\item Din kod är \textit{okommenterad}.
+	\item Du kan förklara din kod muntligt för mig.
+\end{itemize}
+
+\subsection{Data}
+
+Du ska presentera följande data från Sjöbo kommun (kommunkod 1265):
+
+\begin{center}
+	\begin{tabular}{ll}
+		\rowcolor{blue!25}
+		\textbf{Nyckeltal} & \textbf{KPI}\\
+		Inpendling, andel (\%)	& N00968\\
+		Utpendling, andel (\%) & N00920\\
+	\end{tabular}
+\end{center}
+
+Datan ska presenteras med ett linjediagram. Dessutom ska du plotta netto-inpendlingen i ett tredje linjediagram.
+
+\clearpage

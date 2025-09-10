@@ -1,0 +1,342 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=LundaHimmel, fg=StabilaLila}
+\setbeamercolor{palette quaternary}{bg=LundaGroen, fg=MagnoliaRosa}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+    
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+\lstset{
+	escapeinside={(*@}{@*)}
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+    	\tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{Arv 2}
+\date{vt 24}
+
+\maketitle
+
+\begin{frame}
+	\frametitle{Övning}
+	
+	\begin{itemize}
+		\item Skapa klasserna \texttt{Person, Teacher, Student} och \texttt{Course}
+		\item Klasserna \texttt{Teacher} och \texttt{Student} ska ärva från \texttt{Person}
+		\item Till din hjälp har du klassdiagram på följande sidor
+		\item Målet är att göra ett program som kan lägga till elever till kurser och ge dem beytg.
+		\item Man ska även kunna räkna ut elevernas merit
+		\item Sist i bland sidorna hittar du även hur olika utskrifter ska se ut
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	
+	
+	\begin{multicols}{2}
+		\begin{tabular}{|l|}
+			\hline
+			Person \\ \hline
+			name: str\\
+			birth\_year: int \\ \hline
+			\_\_str\_\_(): str\\
+			\_\_repr\_\_():str\\ \hline
+		\end{tabular}
+		
+		\begin{tabular}{|l|}
+			\hline
+			Course\\ \hline
+			name: str\\
+			points: int\\
+			students: [Student]\\
+			teachers: [Teachers]\\ \hline
+			add\_student(Student): void\\
+			add\_teacher(Teacher): void\\
+			set\_student\_grade(Student, str)\\
+			\_\_repr\_\_(): str\\ \hline
+		\end{tabular}
+		
+	\end{multicols}
+	
+\end{frame}
+
+\begin{frame}
+
+	\begin{multicols}{2}
+		
+		\begin{tabular}{|l|}
+			\hline
+			Teacher(Person) \\ \hline
+			name: str\\
+			birth\_year: int\\
+			school: str\\
+			subjects: [str]\\ \hline
+			\_\_str\_\_(): str \\ \hline
+		\end{tabular}
+		
+		\begin{tabular}{|l|}
+			\hline
+			Student(Person) \\ \hline
+			name: str\\
+			birth\_year: int\\
+			school: str\\
+			grades: \{[str,int]\}\\
+			group: str \\ \hline
+			calculate\_merit(): float\\
+			add\_grade(course: str, grade: str, points: int):  void\\
+			\_\_str\_\_(): str\\
+			\_\_repr\_\_():str\\ \hline
+		\end{tabular}
+			
+	\end{multicols}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Klassdiagram}
+	
+	\begin{multicols}{2}
+		\begin{tabular}{|l|}
+			\hline
+			School()\\ \hline
+			name: str\\
+			groups: [Group]\\
+			teachers: [Teacher]\\
+			courses: [Course]\\
+			principal: Person\\ \hline
+			count\_students(): int\\
+			\hline
+		\end{tabular}
+		
+		\begin{tabular}{|l|}
+			\hline
+			Group()\\ \hline
+			name: str\\
+			students: [Student]\\
+			mentorrs: [Teacher]\\ \hline
+			add\_student(Student): void\\
+			remove\_student(Student): void\\ \hline
+		\end{tabular}
+	\end{multicols}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Utskrifter}
+	
+	\begin{lstlisting}
+s = Student("Nisse", 2006, "Spyken", "Na3b")
+t = Teacher("Calle", 1991, "Hedda", ["Matematik", "Programmering"])
+c = Course("Programmering 1", 100)
+c.add_teacher(t)
+
+print(s)
+print(t)
+print(c)
+	\end{lstlisting}
+	\begin{lstlisting}
+Nisse 18 Spyken Na3b
+Calle 33 Hedda Matematik Programmering
+Programmering 1 100 (Calle)
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Pseudokod}
+	\framesubtitle{Person}
+	
+	\begin{lstlisting}
+class Person():
+    func __init__(self, name, year):
+        self.name := name
+        self.birth_year := year
+    func __str__(self):
+        return self.name + " " + (2024-self.birth_year)
+    func __repr__(self):
+        return str(self)
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Pseudokod}
+	\framesubtitle{Course}
+	
+	\begin{lstlisting}
+class Course():
+	def __init__(self, name, points):
+        self.name := name
+        self.points := points
+        self.students := []
+        self.teachers := []
+    def add_student(self, stud):
+        if stud not in self.students:
+            self.students.append(stud)
+    def add_teacher(self, teacher):
+        if teacher not in self.teachers:
+            self.teachers.append(teacher)
+	\end{lstlisting}
+	
+	Fortsätter på nästa slide
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Pseudokod}
+	\framesubtitle{Course fortsättning}
+	
+	\begin{lstlisting}
+    def set_student_grade(self, stud, grade):
+        for s in self.students:
+            if s = stud:
+                s.add_grade(self.name, [grade, self.points])
+
+    def __repr__(self):
+        out := self.name + " " + str(self.points) + "("
+        for t in self.teachers:
+            out := out + " "+t.name
+        return out +")"
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Pseudokod}
+	\framesubtitle{Teacher}
+	
+	\begin{lstlisting}
+class Teacher(Person):
+
+    def __init__(self, name, birth_year, school, subjects):
+        super().__init__(name, birth_year)
+        self.school := school
+        self.subjects := subjects
+
+    def __str__(self):
+        out := super().__str__()
+        for sub in self.subjects:
+            out := out + " "+sub
+        return out
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Pseudokod}
+	\framesubtitle{Student}
+
+	\begin{lstlisting}
+class Student(Person):
+
+    def __init__(self, name, birth_year, school, group):
+        super().__init__(name, birth_year)
+    
+        self.school = school
+        self.group = group
+
+        self.grades = {}
+
+    def add_grade(self, course, grade):
+        self.grades[course] = grade
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Pseudokod}
+	\framesubtitle{Student fortsättning}
+
+	\begin{lstlisting}
+    def calculate_merit(self):
+        system = {"A": 20, "B": 17.5, "C": 15, "D": 12.5, "E": 10, "F": 0}
+        point_sum = 2400
+        merit = 0
+        for course in self.grades:
+            if "Gymnasiearbete" not in course:
+                merit += (system[self.grades[course][0]]*self.grades[course][1])/point_sum
+        return merit
+    def __str__(self):
+        out = super().__str__() + " " + self.school + " " + self.group
+        return out
+	\end{lstlisting}
+
+\end{frame}
+
+\end{document}

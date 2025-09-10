@@ -1,0 +1,251 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+\lstset{language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{orange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4
+    %frame=L
+}
+\lstset{language=Python} 
+\lstset{backgroundcolor=\color{white}}
+
+\newcounter{uppgifter}
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\lstset{escapeinside={(*@}{@*)}}
+
+% NEW COMMANDS
+\AtBeginSection[ ]
+{
+\begin{frame}{Outline}
+\setbeamercolor{section in toc shaded}{fg=LundaGroen}
+\setbeamercolor{subsection in toc shaded}{fg=black}
+    \tableofcontents[currentsection]
+
+\end{frame}
+}
+
+\title{API}
+\date{ht 23}
+\author{Programmering 2}
+
+\maketitle
+
+\section{Vad är ett API}
+
+\subsection{Start}
+
+\begin{frame}
+\frametitle{Vad är API?}
+
+\begin{itemize}
+	\item API står för \textit{Application Programming Interface} och är ett sätt att kommunicera med andra tjänster. Oftast är det andra tjänster på internet.
+	\item Antingen vill man skicka information/instruktioner till en tjänst eller så vill man hämta information från en tjänst.
+\end{itemize}
+
+\end{frame}
+
+\subsection{Exempel på webbplatser med API}
+
+\begin{frame}
+\frametitle{Webbplatser med API}
+
+\begin{itemize}
+	\item YouTube
+	\item Spotify
+	\item Skatteverket
+	\item SMHI
+\end{itemize}
+
+För att använda en del API:er behöver man ha ett registrerat konto på webbplatsen. Vi kommer att gå igenom hur man gör med ''öppna'' API:er.
+
+\end{frame}
+
+\section{Requests}
+
+\subsection{Installera requests}
+
+\begin{frame}[fragile]
+\frametitle{Installera requests}
+
+\texttt{requests} är ett bibliotek som kan hämta och skicka data över nätet. Det är dock inte förinstallerat i Python så du behöver installera det med \texttt{pip}:
+
+Metod 1:
+\begin{lstlisting}
+pip install requests
+\end{lstlisting}
+
+Metod 2:
+\begin{lstlisting}
+python -m pip install requests
+\end{lstlisting}
+
+Metod 3:
+\begin{lstlisting}
+cd C:\Users\(*@\textcolor{red}{user}@*)\AppData\Local\Programs\Python\Python39\Scripts
+pip install requests
+\end{lstlisting}
+
+Tänk på att byta ut ''user'' till ditt användarnamn
+
+
+\end{frame}
+
+\subsection{Get}
+
+\begin{frame}[fragile]
+\frametitle{Hämta data}
+
+Grundläggande användning av \texttt{requests}
+
+\begin{lstlisting}
+import requests
+
+request = requests.get(url)
+\end{lstlisting}
+
+Nu har du laddat ner text-innehållet på platsen \texttt{url}. Vill du läsa den texten kan du skriva:
+
+\begin{lstlisting}
+print(request.text)
+\end{lstlisting}
+
+Vill du läsa mer om Web Scraping kan du klicka \href{https://realpython.com/python-web-scraping-practical-introduction/}{\textcolor{blue}{\underline{här}}}.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exempel}
+
+\begin{lstlisting}
+import requests
+
+request = requests.get('http://numbersapi.com/1337/trivia')
+print(request.text)
+\end{lstlisting}
+
+\begin{verbatim}
+'1337 is the number that spells "leet" in leetspeak.'
+\end{verbatim}
+
+\end{frame}
+
+\subsection{JSON}
+
+\begin{frame}[fragile]
+\frametitle{Hämta data}
+\framesubtitle{Hämta JSON data}
+
+Om du har en URL till en sida med ett JSON-objekt kan du läsa in den så här:
+
+\begin{lstlisting}
+import requests
+request = requests.get(url)
+data = request.json()
+\end{lstlisting}
+
+Nu har du läst in ett objekt från nätet och gjort om det till en dictionary.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exempel från Världsbanken}
+
+\begin{lstlisting}
+import requests
+request = requests.get('https://api.worldbank.org/v2/country/swe?format=json')
+data = request.json()
+for key in data[1][0]:
+  print(data[1][0][key])
+\end{lstlisting}
+
+Som du märker så måste man krångla lite med index här. Detta är för att Världsbanken skickar sitt JSON-objekt som en lista som innehåller flera JSON-objekt/dictionaries.
+
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+\frametitle{Övningar}
+
+\begin{enumerate}
+	\item Installera paketen \texttt{requests} och \texttt{matplotlib}
+	
+	\item Använd URL:en från exemplet ovan och skriv ut longitud och latitud för Sverige
+	\item Ändra URL:en så att du istället hämtar information om Danmark (dk)
+	
+	Utgå från filen \texttt{api 1.py}.
+	
+	\item Läs in följande URL som innehåller information om hushållens sopor: \href{https://api.kolada.se/v2/data/municipality/1281/kpi/U07801}{https://api.kolada.se/v2/data/municipality/1281/kpi/U07801}
+	\item Skriv ut värdena i formatet: ''årtal: värde''
+	\item Läs in motsvarande data från Helsingborg (1283).
+	\item Vilken kommun samlade in mest sopor per hushåll 2021?
+	\item Hur mycket sopor per hushåll borde samlas in år 2031?
+	\item Kan kommunerna följa sina trendkurvor i 50 år?
+\end{enumerate}
+
+\end{frame}
+
+\end{document}

@@ -1,0 +1,336 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{forest}
+\usetikzlibrary{shapes}
+
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+% NEW COMMANDS
+\newcommand{\fortt}{\texttt{for}}
+\newcommand{\whilett}{\texttt{while}}
+\newcommand{\iftt}{\texttt{if}}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{Binära träd}
+\date{vt 24}
+\author{Programmering 2}
+
+\maketitle
+
+\tableofcontents
+
+\section{Repetition}
+
+
+
+\begin{frame}
+	\frametitle{Binära träd}
+
+	\begin{itemize}
+		\item Ett binärt träd är ett träd där varje nod har högst två barn
+	\end{itemize}
+	
+	\centering
+	\begin{forest}
+		[8
+			[4
+				[2
+					[1]
+					[3]
+				]
+				[6
+					[5]
+					[7]
+				]
+			]
+			[12
+				[10
+					[9]
+					[11]
+				]
+				[14
+					[13]
+					[15]
+				]
+			]
+		]
+	\end{forest}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Binära träd}
+	\framesubtitle{Balanserade träd}
+	
+	\begin{itemize}
+		\item Träd kan vara balanserade, eller obalanserade
+	\end{itemize}
+	
+	\begin{center}
+		\begin{tabular}{cc}
+		\begin{forest}
+			[4
+				[2
+					[1]
+					[3]
+				]
+				[6
+					[5]
+					[7]
+				]
+			]
+		\end{forest}
+		&
+		\begin{forest}
+			[5
+				[2
+					[1]
+					[3
+						[4]
+					]
+				]
+				[6
+					[7]
+				]
+			]
+		\end{forest}
+		\end{tabular}
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Binära träd}
+	\framesubtitle{Att hitta i ett binärt träd}
+	
+	\begin{itemize}
+		\item När du ska hitta i ett binärt träd så börjar du med den översta noden.
+		\item Om det är elementet du letar efter är du klar
+		\item Annars går du letar efter ett större tal och till vänster om ditt tal är mindre
+		\item Den här processen upprepas tills du har hittat rätt.
+	\end{itemize}
+	
+	Tidskomplexitet för att hitta rätt plats i ett binärt träd är \(O(log_2{(n)})\) (i en länkad lista är tidskomplexiteten \(O(n)\)), du behöver alltså göra ungefär tre kontroller om det finns åtta element i listan (\(2^3=8\)) och bara tio kontroller om det finns 1000 element i listan (\(2^{10}=1024\)).
+	
+\end{frame}
+
+\section{Gå igenom ett träd}
+
+\begin{frame}
+	\frametitle{Gå igenom trädet}
+	
+	Det finns flera olika sätt att gå igenom ett träd och skriva ut värden. De tre vanligaste är:
+	
+	\begin{itemize}
+		\item in order traversal
+		\item pre order traversal
+		\item post order traversal
+	\end{itemize}
+	
+	Alla tre är så kallade \textit{depth first}.
+	
+\end{frame}
+
+\subsection{in order traversal}
+
+\begin{frame}[fragile]
+	\frametitle{In order traversal}
+	
+	\begin{itemize}
+		\item Säg att du har följande träd:
+	\end{itemize}
+	
+	\centering
+	\begin{forest}
+		[6
+			[4
+				[2
+					[1]
+					[3]
+				]
+				[5]
+			]
+			[10
+				[8
+					[7]
+					[9]
+				]	
+				[12
+					[11]
+					[13]
+				]
+			]
+		]
+	\end{forest}
+	
+	\begin{itemize}
+		\item \textit{In order traversal} hade skrivit ut talen i storleksordning: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 och 13
+	\end{itemize}
+
+\end{frame}
+
+\subsection{Pre order traversal}
+
+\begin{frame}[fragile]
+	\frametitle{Pre order traversal}
+
+	\centering
+	\begin{forest}
+		[6
+			[4
+				[2
+					[1]
+					[3]
+				]
+				[5]
+			]
+			[10
+				[8
+					[7]
+					[9]
+				]	
+				[12
+					[11]
+					[13]
+				]
+			]
+		]
+	\end{forest}
+	
+	\begin{itemize}
+		\item \textit{Pre order traversal} hade skrivit ut talen i följande ordning: 6, 4, 2, 1, 3, 5, 10, 8, 7, 9, 12, 11, 13
+		\item Detta är användbart om du vill kopiera ett träd. 
+	\end{itemize}
+
+\end{frame}
+
+\subsection{Post order traversal}
+
+\begin{frame}[fragile]
+	\frametitle{Post order traversal}
+	
+	\centering
+	\begin{forest}
+		[6
+			[4
+				[2
+					[1]
+					[3]
+				]
+				[5]
+			]
+			[10
+				[8
+					[7]
+					[9]
+				]	
+				[12
+					[11]
+					[13]
+				]
+			]
+		]
+	\end{forest}
+	
+	\begin{itemize}
+		\item \textit{Post order traversal} hade skrivit ut talen i följande ordning: 1, 3, 2, 5, 4, 7, 9, 8, 11, 13, 12, 10, 6
+		\item Detta är användbart om du vill radera alla värden i ett träd.
+	\end{itemize}
+
+\end{frame}
+
+\section{Övningar}
+
+\begin{frame}
+	\frametitle{Övningar}
+	
+	\begin{enumerate}
+		\item Utgå från koden från tidigare lektion och lägg till funktioner för att printa ut trädet
+		\item Skapa \texttt{show\_in\_order}
+		\item Skapa \texttt{show\_pre\_order}
+		\item Skapa \texttt{show\_post\_order}
+	\end{enumerate}
+	
+\end{frame}
+
+\end{document}

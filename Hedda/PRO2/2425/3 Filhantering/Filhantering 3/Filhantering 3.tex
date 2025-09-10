@@ -1,0 +1,148 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage[os=win]{menukeys} % Lägger till tangenter
+
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=VarmOrange}
+\setbeamercolor{palette quaternary}{bg=LundaGroen}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    	morekeywords={PassOptionsToPackage,selectlanguage,True,False,with},
+    	keywordstyle=\color{blue},%\bfseries,
+    	basicstyle=\small\ttfamily,
+    	%identifierstyle=\color{red},
+    	commentstyle=\color{red}\ttfamily,
+    	stringstyle=\color{VarmOrange},
+    	numbers=left,%
+    	numberstyle=\scriptsize,%\tiny
+    	stepnumber=1,
+    	numbersep=8pt,
+    	showstringspaces=false,
+    	breaklines=true,
+    	%frameround=ftff,
+    	frame=single,
+    	belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\lstset{escapeinside={(*@}{@*)}}
+
+% NEW COMMANDS
+\newcommand{\fortt}{\texttt{for}}
+\newcommand{\whilett}{\texttt{while}}
+\newcommand{\iftt}{\texttt{if}}
+
+\title{Filhantering}
+\date{2023/24}
+\author{Programmering 2}
+
+\maketitle
+
+
+\section{Övningar}
+
+\subsection{Blad 1}
+
+\begin{frame}
+	\frametitle{Övningar}
+	\framesubtitle{Blad 1}
+
+	\begin{enumerate}
+		\item Läs in filen \texttt{filhantering-3-a.txt}
+		\item Vilket är det största talet i filen?
+		\item Vilket tal är närmast noll?
+		\item Vad är medelvärdet av talen?
+		\item Vad är medianen?
+	\end{enumerate}
+
+\end{frame}
+
+\subsection{Blad 2}
+
+\begin{frame}
+	\frametitle{Övningar}
+	\framesubtitle{Blad 2}
+	
+	\begin{enumerate}
+		\setcounter{enumi}{5}
+		\item Läs in filen \texttt{filhantering-3-b.txt}
+		\item Skriv ut innehållet i filen.
+		\item Verket saknar fem verser. Lägg till dem (tillsammans med det du har) i en ny fil som du döper till \texttt{the-nomad.txt}.
+		\item Vilket ord är vanligast förekommande i hela texten?
+		\item Vilken rad i hela texten är längst?
+		\item Hur många rader slutar på bokstaven \texttt{n}?
+	\end{enumerate}
+
+\end{frame}
+
+\subsection{Blad 3}
+
+\begin{frame}[fragile]
+	\frametitle{Övningar}
+	\framesubtitle{Blad 3}
+	
+	\begin{enumerate}
+		\setcounter{enumi}{11}
+		\item Läs in filen \texttt{filhantering-3-c.txt}
+		\item Använd funktionen \code{least_square} för att hitta den linjära funktionen som bäst passar till datan
+		\item Vad är \(y\)-värdet då \(x\) är 461?
+		\item Vad borde \(y\)-värdet vara då \(x\) är 5?
+		\item Vad borde \(y\)-värdet vara då \(x\) är 6123?
+	\end{enumerate}
+	
+\end{frame}
+
+\end{document}

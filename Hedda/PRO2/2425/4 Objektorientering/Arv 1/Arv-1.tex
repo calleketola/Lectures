@@ -1,0 +1,240 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=LundaHimmel, fg=StabilaLila}
+\setbeamercolor{palette quaternary}{bg=LundaGroen, fg=MagnoliaRosa}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+    
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+\lstset{
+	escapeinside={(*@}{@*)}
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+    	\tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{Arv 1}
+\date{vt 25}
+
+\maketitle
+
+\section{Arv}
+
+\subsection{Repetition}
+
+\begin{frame}
+	\frametitle{Klasserna sen sist}
+	
+	\centering
+	\begin{multicols}{2}
+	
+	\begin{tabular}{|l|}
+		\hline
+		\multicolumn{1}{|c|}{Sköldpadda} \\ \hline
+		x: int \\
+		y: int \\
+		färg: str\\
+		hastighet: int \\
+		riktning: int\\ \hline
+		rita():\\
+		gå():\\
+		upp():\\
+		ner():\\
+		vänster():\\
+		höger():\\ \hline
+	\end{tabular}
+	
+	\begin{tabular}{|l|}
+		\hline
+		\multicolumn{1}{|c|}{Godis} \\ \hline
+		x: int \\
+		y: int \\
+		färg: str\\ \hline
+		rita():\\
+		ny\_position():\\ \hline
+	\end{tabular}
+	
+	\end{multicols}
+	
+	Notera att de har en del gemensamt
+	
+\end{frame}
+
+\subsection{Gemensamt}
+
+\begin{frame}
+	\frametitle{Gemensamt}
+	
+	\begin{itemize}
+		\item Båda klasserna har \textit{attributen} x, y och färg
+		\item Båda klasserna har \textit{metoden} rita()
+		\item Dessutom har båda klasserna en massa Turtle-specifik kod gemensam
+		\item Vi kan \textit{förenkla} våra klasser och \textit{bryta ut} de gemensamma delarna
+	\end{itemize}
+	
+\end{frame}
+
+\subsection{Arv}
+
+\begin{frame}
+	\frametitle{Klassen objekt}
+	\framesubtitle{Klassdiagram}
+	
+	\centering
+	\begin{tabular}{|l|}
+		\hline
+		\multicolumn{1}{|c|}{Objekt} \\ \hline
+		x: int \\
+		y: int \\ 
+		färg: str \\\hline
+		rita():\\ \hline
+	\end{tabular}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Klassen objekt}
+	\framesubtitle{Implementation}
+	
+	\begin{lstlisting}
+class Objekt():
+
+    def __init__(self, färg):
+        self.x = 0
+        self.y = 0
+        self.färg = färg
+        self.turtle = turtle.Turtle()
+        self.turtle.pu()
+        
+    def rita(self):
+        self.turtle.setpos((self.x, self.y))
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Sköldpadda som ärver objekt}
+	
+	Nu kan vi koppla samman klassen Sköldpadda med klassen Objekt.
+	
+	\begin{lstlisting}
+class Sköldpadda(Objekt):
+    def __init__(self):
+        super().__init__() # Kör init från Objekt
+        
+        self.turtle.shape('turtle') # Detta var inte gemensamt
+	\end{lstlisting}
+	
+	Nu kommer Sköldpadda ha samma attribut och metoder som klassen Objekt.
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Godis som ärver objekt}
+	
+	Vi kan också koppla klassen Godis till Objekt:
+	
+	\begin{lstlisting}
+class Godis(Objekt):
+    def __init__(self):
+        super().__init__() # Kör init från Objekt
+        
+        self.turtle.shape('square') # Detta var inte gemensamt
+	\end{lstlisting}
+
+\end{frame}
+
+\section{Övningar}
+
+
+\begin{frame}
+	\frametitle{Övningar}
+	
+	\begin{enumerate}
+		\item Implementera klassen Objekt
+		\item Uppdatera klasserna Sköldpadda och Godis så att de ärver av Objekt
+		\item Skapa en ny fil med namnet hus.py
+		\item Utgå från boken, s. 269--276, och gör uppgifterna 13.13 och 13.14 
+	\end{enumerate}
+	
+\end{frame}
+
+
+
+\end{document}

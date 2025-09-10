@@ -1,0 +1,215 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=LundaHimmel, fg=StabilaLila}
+\setbeamercolor{palette quaternary}{bg=LundaGroen, fg=MagnoliaRosa}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+    
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+\lstset{
+	escapeinside={(*@}{@*)}
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+    	\tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{Objektorientering 3}
+\date{vt 25}
+
+\maketitle
+
+\section{Klassen Block}
+
+\begin{frame}[fragile]
+	\frametitle{Lektionsmål}
+	
+	\begin{itemize}
+		\item Målet med dagens lektion är att få ut en utskrift i stil med denna:
+	\end{itemize}
+	\begin{center}
+		\begin{verbatim}
+..5.......
+.....8....
+..1.......
+6...0.47..
+..........
+2.........
+..........
+..........
+..........
+......3.9.
+		\end{verbatim}
+	\end{center}
+	
+\end{frame}
+
+\subsection{Klassdiagram}
+
+\begin{frame}
+	\frametitle{Klassdiagram}
+	\centering
+	\begin{tabular}{|l|}
+		\hline
+		\textbf{Block}\\ \hline
+		x:int\\
+		y:int\\
+		symbol:str\\ \hline
+		move\_x(int):void\\
+		move\_y(int):void\\ \hline	
+	\end{tabular}
+	
+\end{frame}
+
+\subsection{Metodbeskrivning}
+
+\begin{frame}
+	\frametitle{Metodbeskrivning}
+	
+	\begin{itemize}
+		\item move\_x(int):void
+		\begin{itemize}
+			\item Uppdatera instansvariabeln x med ett heltal
+			\item Kontrollera att x inte hamnar utanför rutnätet
+		\end{itemize}
+		\item move\_y(int):void
+		\begin{itemize}
+			\item Uppdatera instansvariabeln y med ett heltal
+			\item Kontrollera att y inte hamnar utanför rutnätet
+		\end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\section{Klassen Grid}
+
+\subsection{Klassdiagram}
+
+\begin{frame}
+	\frametitle{Klassdiagram}
+	
+	\centering
+	
+	\begin{tabular}{|l|}
+		\hline
+		Grid \\ \hline
+		width:int\\
+		height:int\\
+		positions:[[Block]]\\ \hline
+		insert\_block(Block):void\\
+		move\_block(Block, int, int):void\\\hline
+	\end{tabular}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Metodbeskrivning}
+	
+	\begin{itemize}
+		\item insert\_block(Block):void
+		\begin{itemize}
+			\item Uppdaterar positions[Block.y][Block.x] med Block 
+		\end{itemize}
+		\item move\_block(block, int, int):void
+		\begin{itemize}
+			\item Flyttar blocket block till en ny position
+		\end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Pseudokod för utskriften}
+	
+	\begin{lstlisting}
+function __repr__():
+    out <- ""
+    for every row in positions:
+        for every column in row:
+            if column exists:
+                out <- out + column
+            else:
+                out <- out + "."
+        out <- out + "\n"
+    return out
+	\end{lstlisting}
+	
+\end{frame}
+
+
+\end{document}

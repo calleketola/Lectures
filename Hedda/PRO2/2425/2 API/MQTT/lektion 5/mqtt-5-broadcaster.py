@@ -1,0 +1,59 @@
+import paho.mqtt.client as mqtt
+import time
+import random
+import json
+
+import math
+
+def on_connect(client, userdata, flags, reason_code, properties): # Called on connect
+    print("Connected with result code "+str(reason_code))
+
+
+def send_1():
+    # Send data to the broker
+
+    # Load the data
+    with open("data-1.json") as f:
+        data = json.load(f)
+    topic = "cake"
+    x = 0
+    print("Broadcasting to", topic)
+    while True:
+        time.sleep(0.1)
+        message = json.dumps(data[x])
+        client.publish(topic, message)
+        x += 1
+        if x >= len(data):
+            x = 0
+
+def send_2():
+    # Load the data
+    with open("data-2.json", encoding="utf8") as f:
+        data = json.load(f)
+    topic = "cake"
+    random.shuffle(data)
+    x = 0
+    print("Broadcasting to", topic, "task 2")
+    while True:
+        time.sleep(0.05)
+        message = json.dumps(data[x])
+        client.publish(topic, message)
+        x += 1
+        if x >= len(data):
+            x = 0
+        
+
+            
+# Define the client
+client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+client.on_connect = on_connect
+
+client.connect("broker.emqx.io", 1883)
+
+#send_1()
+send_2()
+
+
+
+
+

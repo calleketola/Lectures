@@ -1,0 +1,256 @@
+\documentclass[aspectratio=169]{beamer}
+
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	%makes å,ä,ö etc. proper symbols
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage[swedish]{babel}
+
+\definecolor{LundaGroen}{RGB}{00,68,71}
+\definecolor{StabilaLila}{RGB}{85,19,78}
+\definecolor{VarmOrange}{RGB}{237,104,63}
+
+\definecolor{MagnoliaRosa}{RGB}{251,214,209}
+\definecolor{LundaHimmel}{RGB}{204,225,225}
+\definecolor{LundaLjus}{RGB}{255,242,191}
+
+\usefonttheme{serif}
+\usetheme{malmoe}
+\setbeamercolor{palette primary}{bg=LundaHimmel, fg=StabilaLila}
+\setbeamercolor{palette quaternary}{bg=LundaGroen, fg=MagnoliaRosa}
+\setbeamercolor{background canvas}{bg=LundaLjus}
+\setbeamercolor{structure}{fg=LundaGroen}
+
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{cross}{blank,breakable,parbox=false,
+  overlay={\draw[red,line width=5pt] (interior.south west)--(interior.north east);
+    \draw[red,line width=5pt] (interior.north west)--(interior.south east);}}
+    
+\newcommand{\code}[1]{\colorbox{white}{\lstinline{#1}}}
+
+
+
+\lstset{language=Python} 
+\lstset{%language=[LaTeX]Tex,%C++,
+    morekeywords={PassOptionsToPackage,selectlanguage,True,False},
+    keywordstyle=\color{blue},%\bfseries,
+    basicstyle=\small\ttfamily,
+    %identifierstyle=\color{NavyBlue},
+    commentstyle=\color{red}\ttfamily,
+    stringstyle=\color{VarmOrange},
+    numbers=left,%
+    numberstyle=\scriptsize,%\tiny
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    %frameround=ftff,
+    frame=single,
+    belowcaptionskip=.75\baselineskip,
+	tabsize=4,
+	backgroundcolor=\color{white}
+    %frame=L
+}
+\lstset{
+	escapeinside={(*@}{@*)}
+}
+
+
+\begin{document}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{Innehåll}
+    	\tableofcontents[currentsection]
+\end{frame}
+}
+
+\title{Objektorientering 3}
+\date{vt 25}
+
+\maketitle
+
+\section{Klasser}
+
+\subsection{Repetition}
+
+\begin{frame}
+	\frametitle{Vad är en klass?}
+
+	\begin{itemize}
+		\item \textit{Klasser} i programmering är en sorts \textit{abstraktion}
+		\item Används för att \textit{modellera} verkligheten
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Objektifiering}
+	
+	Om vi skulle vilja modellera en sköldpadda så behöver vi bestämma vilka egenskaper en sköldpadda kan ha:
+	
+	\begin{itemize}
+		\item Attribut, så som färg, födelseår, namn m.m.
+		\item Förmågor, så som gå, äta m.m.
+	\end{itemize}
+
+\end{frame}
+
+\section{Övningen}
+
+\subsection{Mål}
+
+\begin{frame}
+	\frametitle{Dagens mål}
+	
+	\begin{itemize}
+		\item Under dagens pass ska vi skapa en sköldpadda som kan gå över skärmen och styras för att äta upp godisbitar
+		\item Vi kommer att behöva skapa två klasser för detta
+		\begin{enumerate}
+			\item Sköldpadda
+			\item Godis
+		\end{enumerate}
+		\item Båda klasserna har en del gemensamt:
+			\begin{itemize}
+				\item Position på skärmen
+				\item Förmåga att ritas ut
+			\end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\subsection{Klassdiagram}
+
+\begin{frame}
+	\frametitle{Klassen sköldpadda}
+	
+	\begin{itemize}
+		\item Klassen sköldpadda kommer att behöva innehålla följande:
+	\end{itemize}
+	\centering
+	\begin{tabular}{|l|}
+		\hline
+		\multicolumn{1}{|c|}{Sköldpadda} \\ \hline
+		x: int \\
+		y: int \\
+		hastighet: int \\
+		riktning: int\\ \hline
+		gå():\\
+		upp():\\
+		ner():\\
+		vänster():\\
+		höger():\\
+		rita():\\ \hline
+	\end{tabular}
+	
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Klassen godis}
+	
+	\begin{itemize}
+		\item Klassen godis kommer att behöva innehålla följande:
+	\end{itemize}
+	
+	\centering
+	
+	\begin{tabular}{|l|}
+		\hline
+		\multicolumn{1}{|c|}{Godis} \\ \hline
+		x: int \\
+		y: int \\ \hline
+		ny\_position():\\
+		rita():\\ \hline
+	\end{tabular}
+	
+\end{frame}
+
+\subsection{Turtle}
+
+\begin{frame}[fragile]
+	\frametitle{Turtle-specifikt}
+	
+	\begin{itemize}
+		\item För att rita ut på skärmen behöver våra två klasser några \texttt{Turtle}-specifika rader kod
+	\end{itemize}
+	
+	\begin{lstlisting}
+# Följande ska ligga i __init__
+self.turtle = turtle.Turtle() # Skapar något att ha på skärmen
+self.turtle.shape('turtle') # alternativt 'square' i godis
+self.turtle.pu() # Lyfter pennan såp att vi inte ritar streck
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+def rita(self):
+    self.turtle.seth(self.riktning*90) # Behövs inte i Godis
+    self.turtle.setpos((self.x, self.y)) # Uppdatera positionen på skärmen
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Turtle-specifikt}
+	
+	\begin{itemize}
+		\item Dessutom behöver vi ha lite mer kod för att programmet ska göra som vi vill
+	\end{itemize}
+	
+	\begin{lstlisting}
+import turtle
+import time
+window = turtle.Screen() # Skapar fönstret
+window.tracer(0) # Gör att saker händer direkt
+window.listen() # Lyssnar efter knapptryck
+window.onkey(sköldis.vänster, 'a') # Om man trycker på a...
+...
+while True:
+    time.sleep(0.2) # Gör att allt inte går för snabbt
+    window.update() # Uppdaterar fönstret
+    sköldis.move() # Flyttar sköldpaddan
+    sköldis.draw() # Ritar sköldpaddan
+    candy.draw() # Ritar godiset
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Övningar}
+	
+	\begin{enumerate}
+		\item Implementera klassen Sköldpadda
+		\item Implementera klassen Godis
+		\item Skapa en funktion som kollar om sköldpaddan nuddar godiset
+		\item Flytta på godiset efter att sköldpaddan ätit upp det.
+		\item Lägg till att man inte kan vända sig om 180 grader.
+		\item Lägg till en ruta som följer efter den första rutan när man ätit en godis.
+	\end{enumerate}
+	
+\end{frame}
+
+\end{document}
