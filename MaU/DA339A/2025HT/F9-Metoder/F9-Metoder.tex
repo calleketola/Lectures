@@ -31,9 +31,11 @@
 \begin{frame}
     \frametitle{Innehåll}
 
-    \begin{multicols}{2}
-        \tableofcontents
-    \end{multicols}
+    \textbox{
+        \begin{multicols}{2}
+            \tableofcontents
+        \end{multicols}
+    }
 
 \end{frame}
 
@@ -64,13 +66,13 @@
     \textbox{En liten kodsnutt som använder Pythagoras sats}
 
     \begin{lstlisting}
-public static void Main(String[] args):
+public static void Main(String[] args){
     // a^2+b^2=c^2 (Pythaghoras sats)
     double a = 3;
     double b = 4;
     double c = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
     System.out.println("Om kateterna är " + a + " och " + b + " är hypotenusan " + c);
-    \end{lstlisting}
+}   \end{lstlisting}
 
     \textbox{Här använder vi tre olika metoder: \lstinline!Math.sqrt()!, \lstinline!Math.pow()!, och \lstinline!System.out.println()!}
 
