@@ -166,12 +166,10 @@ for row in range(len(matrix)):
 \begin{frame}
     \frametitle{Vad är Java?}
 
-    \textbox{Innan vi går in på skillnader i syntax, så ska 
-    vi kolla lite på Java som språk.}
     \textbox{Java är ett kompilerat språk (där Python till 
     är ett interpreterat språk). Det innebär att Java behöver 
     översätta källkoden från text till byte-kod innan vi kan 
-    köra programmet. (Python gör detta medans programmet körs)}
+    köra programmet. (Python gör detta medan programmet körs)}
     \textbox{Du kan inte köra ditt program för ens efter att 
     det är kompilerat.}
     \textbox{Under kompileringen så görs en felsökning av koden
@@ -354,7 +352,7 @@ System.out.println(name + " " + age);
 Scanner input = new Scanner(System.in); // Skapar en läsare
 String text = input.nextLine(); // Tar emot en sträng
 int integer = input.nextInt(); // Tar emot en int
-double number = input.nextDouble(); Tar emot en double
+double number = input.nextDouble(); // Tar emot en double
     \end{lstlisting}
 
 \end{frame}
@@ -438,6 +436,25 @@ for (int i=0; i<10; i++){ // Start, Stop, Steg
 
 \end{frame}
 
+\subsection{Listor/arrayer}
+
+\begin{frame}[fragile]
+    \frametitle{Listor och arrayer}
+
+    \begin{lstlisting}[style=python]
+# Lista i Python
+myList = [3,1,4,1,5]
+print(myList[0])
+    \end{lstlisting}
+
+    \begin{lstlisting}[style=java]
+// Array i Java
+int[] myArray = {3,1,4,1,5};
+System.out.println(myArray[0]);
+    \end{lstlisting}
+
+\end{frame}
+
 \subsection{Funktioner \& Metoder}
 
 \begin{frame}[fragile]
@@ -467,7 +484,7 @@ def my_function(par1, par2):
 
     \begin{lstlisting}[style=java]
 // Metod i Java
-public double myFunction(double par1, double par2){
+public double myMethod(double par1, double par2){
     double result = par1+par2;
     return result;
 }
@@ -480,7 +497,7 @@ public double myFunction(double par1, double par2){
     \framesubtitle{Metodhuvudet}
 
     \begin{lstlisting}[style=java]
-public double myFunction(double par1, double par2){}
+public double myMethod(double par1, double par2){}
     \end{lstlisting}
 
     \textbox{\lstinline[style=java]!public! anger tillgänglighet}
@@ -496,23 +513,22 @@ public double myFunction(double par1, double par2){}
     \framesubtitle{Överskuggning}
 
     \textbox{I Python kunde man ange default-parametrar\\
-    I Java behöver vi \textit{överskugga} funktionerna}
+    I Java behöver vi \textit{överskugga} metoderna}
 
     \begin{lstlisting}[style=java]
-public double myFunction(){
+public double myMethod(){
     return 0.0;
 }
-public double myFunction(double a){
+public double myMethod(double a){
     return 5*a;
 }
-public double myFunction(double a, double b){
+public double myMethod(double a, double b){
     return 5*(a+b);
 }
     \end{lstlisting}
 
 \end{frame}
 
-\subsection{}
 
 \section{Sammanfattning}
 
@@ -529,14 +545,14 @@ public double myFunction(double a, double b){
 
     \textbox{I Java har vi parenteser runt villkor}
 
+    \textbox{I Java har arrayer bestämda storlekar och markeras med \{\}}
+
 \end{frame}
 
 \begin{frame}
     \frametitle{Rekommenderad läsning}
 
-    \textbox{Boken, sidorna XXX--YYY}
-
-    \textbox{Hemsida}
+    \textbox{Deitel \& Deitel, Kapitel 2--6, sidorna 89--297}
 
     \textbox{Oscar Wilde, \textit{The Picture of Dorian Gray}}
 
