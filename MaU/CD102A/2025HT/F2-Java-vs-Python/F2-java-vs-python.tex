@@ -529,6 +529,64 @@ public double myMethod(double a, double b){
 
 \end{frame}
 
+\section{Klasser}
+
+\subsection{Kort om klasser}
+
+\begin{frame}
+    \frametitle{Klasser}
+    \framesubtitle{Väldigt kort}
+
+    \textbox{I Java måste all kod ligga i klasser.}
+
+    \textbox{Varje fil får bara innehålla en klass.}
+
+    \textbox{Klassnamnet måste stämma överens med filnamnet.}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Klasser}
+    \framesubtitle{Skapa en klass}
+
+    \textbox{Klassnamnet bör börja med stor bokstav.}
+
+    \begin{lstlisting}[style=java]
+public class MyJavaFile{
+    public static void main(String[] args){
+        // Här börjar programmet
+    }
+}
+    \end{lstlisting}
+
+    \textbox{Den klass du kommer att köra ditt program ifrån
+    behöver innehålla \lstinline[style=java]!public static void main(String[] args)!}
+
+\end{frame}
+
+\subsection{Kompilera Java-kod}
+
+\begin{frame}[fragile]
+    \frametitle{Kompilera Java-kod}
+
+    \textbox{För att kompilera Java-kod i terminalen skriver du:}
+
+    \begin{lstlisting}
+javac MyJavaFile.java
+    \end{lstlisting}
+
+    \textbox{För att sedan köra ett Java-program i terminalen 
+    skriver du:}
+
+    \begin{lstlisting}
+java MyJavaFile
+    \end{lstlisting}
+
+    \textbox{Notera att du i det första fallet har med 
+    \texttt{.java}, medan i det andra fallet inte har det.}
+
+\end{frame}
+
 
 \section{Sammanfattning}
 

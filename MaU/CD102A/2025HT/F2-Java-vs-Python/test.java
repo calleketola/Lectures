@@ -73,3 +73,9 @@ public double myMethod(double a, double b){
     return 5*(a+b);
 }
 }
+
+public class MyJavaFile{
+    public static void main(String[] args){
+        // Här börjar programmet
+    }
+}
