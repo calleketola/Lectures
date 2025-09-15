@@ -59,10 +59,10 @@
 
 \setbeamercolor{normal text}{fg=black, bg=malmo-yellow-lighter}
 
-\newcommand{\textbox}[1]{
-    \begin{beamercolorbox}[wd=\textwidth, sep=0.75em]{normal text}
+\newcommand<>{\textbox}[1]{
+    \only#2{\begin{beamercolorbox}[wd=\textwidth, sep=0.75em]{normal text}
         #1
-    \end{beamercolorbox}
+    \end{beamercolorbox}}
 }
 
 % Lägg till separator under navigering
