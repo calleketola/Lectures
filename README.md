@@ -105,7 +105,8 @@ This is a course in object oriented programming (7.5 points). The language used 
 
 #### HT 25
 
-1. [F1 Java vs. Python](./MaU/CD102A/2025HT/F1-Java-vs-Python/F1-java-vs-python.pdf)
+1. [F2 Java vs. Python](./MaU/CD102A/2025HT/F2-Java-vs-Python/F2-java-vs-python.pdf)
+2. [F3 Objekt](./Mau/CD102A/2025HT/F3-Objekt/F3-Objekt.pdf)
 
 ### DA339A <a name="da339a"></a>
 
