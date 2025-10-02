@@ -18,7 +18,7 @@
 \lstset{style=java}
 
 
-\title{DA102A---F?: Klasser}
+\title{DA102A---F3: Klasser}
 \author{Malmö universitet}
 \date{2025--??--??}
 
@@ -41,31 +41,390 @@
 % Visa objekt vi stött på tidigare
 % Exempelvis Scanner
 % Allt vi kan sätta en punkt bakom
+\begin{frame}
+    \frametitle{Objekt sen tidigare}
+
+    \textbox{Vi har redan använt objekt tidigare, exempelvis \texttt{Scanner}}
+
+    \textbox{Andra objekt vi använt är \texttt{System.out} och eventuellt \texttt{Math}}
+
+    \textbox{I Java kan man lite förenklat säga att allt du kan sätta en punkt efter är ett objekt.}
+
+\end{frame}
 
 \subsection{Vad är ett objekt?}
 
+\begin{frame}
+    \frametitle{Vad är ett objekt?}
+
+    \textbox{Ett objekt är en \textit{instans} av en klass.}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Vad är en klass?}
+
+    \textbox{En klass är en mall för att skapa objekt.}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Ett exempel}
+
+    \textbox{Tänk dig en cykel. Begreppet cykel är en klass.}
+
+    \textbox{En specifik cykel är ett objekt. Till exempel min cykel.}
+
+    \textbox<2>{Alla cyklar har vissa egenskaper, exempelvis färg och antal växlar. Dessa kallas \textit{attribut}}
+
+    \textbox<2>{Alla cyklar har också saker de kan göra, exempelvis rulla och bromsa. Dessa kallas \textit{operationer}}
+
+\end{frame}
 
 \subsection{Varför använda objekt?}
 
+\begin{frame}
+    \frametitle{Varför använda objekt?}
 
-\subsection{}
+    \textbox{Objekt hjälper oss att strukturera och organisera vår kod.}
 
-\section{Klassdiagram}
+    \textbox{Objekt kan användas för att modellera verkliga saker och koncept.}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Varför använda objekt?}
+    \framesubtitle{Exempel}
+
+    \textbox{Tänk att vi ska skapa ett program för att hantera cyklar.}
+
+    \textbox{Vi hade då haft två alternativ:}
+
+    \textbox{\begin{enumerate}
+        \item Skapa variabler och funktioner för varje cykel
+        \item Skapa en klass \texttt{Cykel} och sedan skapa objekt av den klassen.
+    \end{enumerate}}
+
+\end{frame}
+
+\section{Skapa klasser}
+
+\subsection{Skapa klasser}
+
+\begin{frame}
+    \frametitle{Skapa klasser}
+
+    \textbox{I Java behöver varje klass ligga i sin egen fil.}
+
+    \textbox{Varje fil måste heta samma sak som klassen.}
+
+    \textbox{(Se tillbaka till tidigare genomgång.)}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Skapa klasser}
+
+    \begin{lstlisting}
+public class Bike{
+    private String colour; // Attribut
+    private int gears; // Attribut
+    public Bike(String colour, int gears){ // Konstruktor
+        this.colour = colour;
+        this.gears = gears;
+    }
+    public void roll(){ // Operation/metod
+        System.out.println("Cykeln rullar");
+    }
+    public void brake(){ // Operation/metod
+        System.out.println("Cykeln bromsar.");
+    }
+}
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Skapa objekt}
+
+    \begin{lstlisting}
+Bike myBike = new Bike("svart", 3); // Notera Bike i början
+Bike yourBike = new Bike("röd", 7); // Notera new
+
+myBike.roll();
+yourBike.brake();
+    \end{lstlisting}
+
+    \textbox{I koden ovan \textit{instansierar} vi 
+    två objekt av klassen \texttt{Bike}}
+
+    \textbox{Sen använder vi objekten genom att 
+    anropa deras operationer.}
+
+\end{frame}
+
+\subsection{Konstruktor}
+
+\begin{frame}[fragile]
+    \frametitle{Konstruktor}
+
+    \begin{lstlisting}
+public class Bike{
+    public Bike(String colour, int gears){
+        // Code goes here
+    }
+}
+    \end{lstlisting}
+
+    \textbox{En konstruktor är en metod som anropas när ett objekt skapas.}
+
+    \textbox{Konstruktorn har samma namn som klassen och saknar returtyp.}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Konstruktor}
+
+    \begin{lstlisting}
+public Bike(String colour, int gears){ // Vår konstruktor
+    this.colour = colour;
+    this.gears = gears;
+}
+    \end{lstlisting}
+
+    \textbox{I konstuktorn brukar vi sätta värden på objektets attribut.}
+
+    \textbox{Nyckelordet \lstinline!this! refererar till det aktuella objektet.}
+
+    \textbox{Om vi inte använder \lstinline!this! skulle vi referera till parametrarna. 
+    Ha för vana att alltid använda \lstinline!this! när du refererar till attribut.}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Konstruktor}
+    \framesubtitle{Flera konstruktorer}
+
+    \begin{lstlisting}
+public class Bike{
+    public Bike(){
+        this.colour = "svart";
+        this.gears = 1;
+    }
+    public Bike(String colour, int gears){
+        this.colour = colour;
+        this.gears = gears;
+    }
+}
+    \end{lstlisting}
+
+    \textbox{Precis som metoder kan vi ha flera konstruktorer med olika parametrar.}
+
+\end{frame}
 
 \subsection{Attribut}
 
+\begin{frame}[fragile]
+    \frametitle{Attribut}
+
+    \textbox{En variabel som är deklarerad i en klass kallas för ett attribut.}
+
+    \textbox{Attribut brukar deklareras överst i klassen.}
+
+    \begin{lstlisting}
+public class Bike{
+    private String colour; // Attribut
+    private int gears; // Attribut
+    public Bike(String colour, int gears){
+        // Code goes here
+    }
+}
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Attribut}
+    \framesubtitle{Åtkomstmodifierare}
+
+    \textbox{Kommandot \texttt{private} och \texttt{public} kallas åtkomstidentifierare.}
+
+    \textbox{Attribut bör nästan alltid vara \texttt{private}.}
+
+    \textbox{Ett \texttt{private} attribut kan endast nås inifrån klassen.}
+
+\end{frame}
+
 \subsection{Operationer}
 
-\subsection{Associationer}
+\begin{frame}[fragile]
+    \frametitle{Operationer}
+
+    \textbox{En metod som är deklarerad i en klass kallas för en operation.}
+
+    \begin{lstlisting}
+public class Bike{
+    public void roll(){ // Operation/metod
+        System.out.println("Cykeln rullar");
+    }
+    public void brake(){ // Operation/metod
+        System.out.println("Cykeln bromsar.");
+    }
+}
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Operationer}
+
+    \begin{lstlisting}
+Bike myBike = new Bike("svart", 3);
+myBike.roll();
+    \end{lstlisting}
+
+    \textbox{Precis som att vi skriver \lstinline!input.nextInt()! 
+    för att anropa metoden \texttt{nextInt} skriver vi \lstinline!myBike.roll()!
+    för att anropa metoden \texttt{roll}.}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Operationer}
+
+    \textbox{I övrigt fungerar operationer precis som vanliga metoder.}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Operationer}
+    \framesubtitle{Static}
+
+    \textbox{Vi har tidigare använt statiska metoder. Exempelvis \texttt{Math.sqrt()}}
+
+    \textbox{Jämför vi dem med vanliga metoder så är skillnaden att en 
+    statisk metod inte behöver komma från ett initialiserat objekt.}
+
+    \textbox{När vi använder \texttt{Math.sqrt()} så är det inte kopplat till något objekt.}
+
+    \textbox{När vi har använt \texttt{input.nextInt()} så är det kopplat till objektet 
+    \texttt{input} av klassen \texttt{Scanner}.}
+
+\end{frame}
+
+\subsection{Åtkomstidentifierare}
+
+\begin{frame}
+    \frametitle{Åtkomstidentifierare}
+    \framesubtitle{public och private}
+
+    \textbox{Ett attribut eller en operation med 
+    \texttt{public} åtkomstidentifierare kan nås 
+    från andra klasser.}
+
+    \textbox{Ett attribut eller en operation med 
+    \texttt{private} åtkomstidentifierare kan endast 
+    nås inom den egna klassen.}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Åtkomstidentifierare}
+    \framesubtitle{Exempel}
+
+    \begin{lstlisting}
+public class Bike{
+    public String colour; // Publikt attribut
+    private inte gears; // Privat attribut
+
+    public Bike(String colour, int gears){
+        this.colour = colour;
+        this.gears = gears;
+    }
+}
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Åtkomstidentifierare}
+    \framesubtitle{Exempel}
+
+    \begin{lstlisting}
+// Detta är en annan klass
+Bike myBike = new Bike("svart", 3);
+System.out.println(myBike.colour); // Fungerar
+System.out.println(myBike.gears); // Fungerar inte
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Åtkomstidentifierare}
+    \framesubtitle{Get och Set}
+
+    \textbox{En vanlig standard är att göra attribut
+    \texttt{private} och sedan skapa \texttt{public}
+    \texttt{get}- och \texttt{set}-metoder för att 
+    läsa och ändra värdet på attributen.}
+
+    \begin{lstlisting}
+public String getColour(){
+    return this.colour;
+}
+public void setColour(String colour){
+    this.colour = colour;
+}
+    \end{lstlisting}
+
+\end{frame}
 
 \section{Sammanfattning}
+
+\begin{frame}[fragile]
+    \frametitle{Sammanfattning}
+
+    \textbox{Klasser är mallar för att skapa \textit{objekt}.}
+
+    \textbox{Man kan skapa flera objekt av samma klass.}
+
+    \textbox{Objekt har \textit{attribut} (variabler) och 
+    \textit{operationer} (metoder).}
+
+    \textbox{Attribut och operationer kan vara 
+    \texttt{public} eller \texttt{private}.}
+
+    \textbox{Konstruktorn är en särskild metod som 
+    anropas när ett objekt skapas.}
+
+    \textbox{\lstinline!this! refererar till det 
+    aktuella objektet.}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sammanfattning}
+
+    \textbox{Objekt hjälper oss att strukturera och 
+    organisera vår kod.}
+
+    \textbox{Objekt kan användas för att modellera 
+    verkliga saker och koncept.}
+
+    \textbox{Vi kommer att kolla på hur vi kan använda 
+    flera klasser i samma program senare.}
+
+    \textbox{Det mesta som hjälper oss att läsa och 
+    strukturera vår kod är bra. Vi lägger mer tid på 
+    att titta på vår kod än att faktiskt skriva den.}
+
+\end{frame}
 
 \begin{frame}
     \frametitle{Rekommenderad läsning}
 
-    \textbox{Dietel \& Dietel, Kapitel 7, 298--}
-
-    \textbox{Hemsida}
+    \textbox{Dietel \& Dietel, Kapitel 7, 298--338}
 
     \textbox{Tove Janson, \textit{Det osynliga barnet}}
 
