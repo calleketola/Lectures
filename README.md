@@ -10,6 +10,7 @@ This is a collection of the lectures I have had over the years
 2. [Malmö University](#mau)
     1. [CD102A](#cd102a)
     2. [DA339A](#da339a)
+    3. [DA343A](#da343a)
 
 ## Hedda Anderssongymnasiet <a name="hedda-andersson"></a>
 
@@ -125,7 +126,7 @@ This is a course in object oriented programming (15 credits). The language used 
 
 1. [F9 Metoder](./MaU/DA339A/2025HT/F9-Metoder/DA339A_F9_HT25_Metoder.pdf)
 
-### DA343A Objektorienterad programutveckling, trådar och datakommunikation
+### DA343A Objektorienterad programutveckling, trådar och datakommunikation <a name="da343a"></a>
 
 This is a course in object oriented programing (7.5 credits). The language used is Java. Most lectures are made by other teachers. I have mainly held lectures about UML.
 
