@@ -96,23 +96,40 @@ These are my last lectures from Hedda Anderssongymnasiet in Lund. They were made
 
 These are my lectures from Malmö University. Starting from 2025.
 
-1. [CD102A](#cd102a)
-2. [DA339A](#da339a)
+1. [CD102A Objektorienterad programmering](#cd102a)
+2. [DA339A Objektorianterad programmering](#da339a)
+3. [DA343A Objektorienterad programutveckling, trådar och datakommunikation](#da343a)
 
-### CD102A <a name="cd102a"></a>
+### CD102A Objektorienterad programmering <a name="cd102a"></a>
 
-This is a course in object oriented programming (7.5 points). The language used is Java.
-
-#### HT 25
-
-1. [F2 Java vs. Python](./MaU/CD102A/2025HT/F2-Java-vs-Python/F2-java-vs-python.pdf)
-2. [F3 Objekt](./Mau/CD102A/2025HT/F3-Objekt/F3-Objekt.pdf)
-
-### DA339A <a name="da339a"></a>
-
-This is a course (15 points) in object oriented programming. The language used is Java.
+This is a course in object oriented programming (credits). The language used is Java.
 
 #### HT 25
 
-1. F9 Metoder
+1. [F1 Introduktion (made by other teacher)]
+2. [F2 Java vs. Python](./MaU/CD102A/2025HT/F2-Java-vs-Python/F2-java-vs-python.pdf)
+3. [F3 Objekt](./Mau/CD102A/2025HT/F3-Objekt/F3-Objekt.pdf)
+4. [F4 Klassdiagram](./MaU/CD102A/2025HT/F4-Klassdiagram/F4-klassdiagram.pdf)
+5. [F5 Mer om objekt](./MaU/CD102A/2025HT/F5-Mer-om-objekt/F5_Mer_om_objekt.pdf)
+6. [F6 Arv](./Mau/CD102A/2025HT/F6-Arv/F6_Arv.pdf)
+7. [F7 Polymorfism](./MaU/CD102A/2025HT/F7-Polymorfism/F7_polymorfism.pdf)
+8. F8 GUI (made by other teacher)
+9. F9 Felhantering (made by other teacher)
+10. [F10 Datastrukturer](./MaU/CD102A/2025HT/F10-Datastrukturer/F10_Datastrukturer.pdf)
 
+### DA339A Objektorienterad programmering <a name="da339a"></a>
+
+This is a course in object oriented programming (15 credits). The language used is Java.
+
+#### HT 25
+
+1. [F9 Metoder](./MaU/DA339A/2025HT/F9-Metoder/DA339A_F9_HT25_Metoder.pdf)
+
+### DA343A Objektorienterad programutveckling, trådar och datakommunikation
+
+This is a course in object oriented programing (7.5 credits). The language used is Java. Most lectures are made by other teachers. I have mainly held lectures about UML.
+
+#### VT 26
+
+1. [F4 Aktivitetsdiagram](./MaU/DA343A/2026VT/F4-Aktivitetsdiagram/DA343A_VT26_F4-Aktivitetsdiagram.pdf)
+2. [F5 Sekvensediagram](./MaU/DA343A/2026VT/F8-Sekvensdiagram/DA343A_VT26_F8-sekvensdiagram.pdf)

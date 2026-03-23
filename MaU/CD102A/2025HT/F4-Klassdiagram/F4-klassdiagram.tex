@@ -143,16 +143,129 @@ public class Person{
 
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}
     \frametitle{Klassdiagram}
     \framesubtitle{Större exempel}
 
     \centering
-    
+    \includegraphics[width=0.35\textwidth]{student.png}
 
 \end{frame}
 
+\begin{frame}[fragile]
+    \frametitle{Klassdiagram}
+    \framesubtitle{Större exempel}
+
+    \begin{lstlisting}
+public class Student{
+    private String name;
+    private int studentID;
+    private int[] grades;
+    private String[] courses;
+    public Student(String n, int sID){ /* Kod här */}
+    public void displayGrades(){ /* Kod här */ }
+    public void attendClass(String course){ /* Kod här */ }
+    public int takeTest(String course){ /* Kod här */ return 0;}
+} 
+    \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Klassdiagram}
+    \framesubtitle{Större exempel}
+
+    \textbox{För hela klassen se filen 
+    \texttt{Student.java} som ligger på Canvas.}
+\end{frame}
+
 \section{Relationer}
+
+\begin{frame}
+    \frametitle{Flera klasser i samma program}
+
+    \textbox{När du har flera klasser i samma program 
+    så är det ofta så att några objekt använder andra 
+    objekt av andra klasser.}
+
+    \textbox{Exempelvis kan en person använda en 
+    cykel.}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Exempel}
+
+    \centering
+    \includegraphics[]{Diagram/Exempel-1.jpg}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Kodexempel}
+    \framesubtitle{Kod för klassen Bike}
+
+    \begin{lstlisting}
+public class Bike{
+    private String colour, maker;
+    public Bike(String colour, String maker){
+        this.colour = colour;
+        this.maker = maker;
+    }
+    public String getColour(){return this.colour;}
+    public String getMaker(){return this.maker;}
+    public void setColour(String newColour){
+        this.colour = newColour;
+    }
+}
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Kodexempel}
+    \framesubtitle{Kod för klassen Person}
+
+    \begin{lstlisting}
+public class Person{
+    private Bike myBike;
+    public Person(){
+    }
+    public void addBike(Bike newBike){
+        this.myBike = newBike;
+    }
+    public void travel(double distance){
+        System.out.printf("Riding a %s %s %.2d km", 
+            this.myBike.getColour(), this.myBike.getMaker(), 
+            distance);    
+    }
+}
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Driverkod}
+
+    \begin{lstlisting}
+public class Main{
+    public static void main(String[] args){
+        Person peep1 = new Person();
+        Person peep2 = new Person();
+
+        Bike bike1 = new Bike("black", "Skeppshult");
+        peep1.addBike(bike1);
+        peep2.addBike(new Bike("green", "Monark"));
+
+        peep1.travel(4.4);
+        peep2.travel(7.13);
+    }
+}
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Större exempel}
+
+\end{frame}
 
 \section{Sammanfattning}
 
