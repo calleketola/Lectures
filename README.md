@@ -103,7 +103,7 @@ These are my lectures from Malmö University. Starting from 2025.
 
 ### CD102A Objektorienterad programmering <a name="cd102a"></a>
 
-This is a course in object oriented programming (credits). The language used is Java.
+This is a course in object oriented programming (7.5 credits). The language used is Java.
 
 #### HT 25
 
