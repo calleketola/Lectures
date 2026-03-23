@@ -106,7 +106,7 @@ This is a course in object oriented programming (credits). The language used is 
 
 #### HT 25
 
-1. [F1 Introduktion (made by other teacher)]
+1. F1 Introduktion (made by other teacher)
 2. [F2 Java vs. Python](./MaU/CD102A/2025HT/F2-Java-vs-Python/F2-java-vs-python.pdf)
 3. [F3 Objekt](./Mau/CD102A/2025HT/F3-Objekt/F3-Objekt.pdf)
 4. [F4 Klassdiagram](./MaU/CD102A/2025HT/F4-Klassdiagram/F4-klassdiagram.pdf)
